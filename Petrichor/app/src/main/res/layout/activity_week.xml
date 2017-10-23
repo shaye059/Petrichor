@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context="ca.weihu.petrichor.Week">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="week"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="70sp"
+        tools:layout_editor_absoluteY="4dp"
+        tools:layout_editor_absoluteX="98dp" />
 </android.support.constraint.ConstraintLayout>

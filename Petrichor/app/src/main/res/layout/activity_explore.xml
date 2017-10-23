@@ -6,4 +6,76 @@
     android:layout_height="match_parent"
     tools:context="ca.weihu.petrichor.Explore">
 
+    <TextView
+        android:id="@+id/explorePage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="explore"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="80sp"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="28dp" />
+
+    <LinearLayout
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="149dp">
+
+        <Button
+            android:id="@+id/weekButton"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="cursive"
+            android:text="week"
+            android:textColor="@android:color/black"
+            android:textSize="55sp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="190dp" />
+
+        <Button
+            android:id="@+id/monthButton"
+            android:layout_width="match_parent"
+            android:layout_height="89dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="cursive"
+            android:text="month"
+            android:textColor="@android:color/black"
+            android:textSize="55sp"
+            android:textStyle="italic"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <Button
+            android:id="@+id/yearButton"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="cursive"
+            android:text="year"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="55sp"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="207dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/randomButton"
+        android:layout_width="205dp"
+        android:layout_height="94dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="casual"
+        android:text="random"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="36sp"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="435dp" />
+
 </android.support.constraint.ConstraintLayout>
