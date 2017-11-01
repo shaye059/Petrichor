@@ -73,6 +73,19 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="0dp" />
 
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="0.16"
+            android:autoText="false"
+            android:fontFamily="casual"
+            android:onClick="onDeleteTagged"
+            android:text="delete tagged memories"
+            android:textSize="24sp" />
+
         app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="25"
     </LinearLayout>

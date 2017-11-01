@@ -18,4 +18,10 @@ public class Today extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), Submit.class);
         startActivityForResult (intent,0);
     }
+
+    public void onShare(View view) {
+//Application Context and Activity
+        Intent intent = new Intent(getApplicationContext(), Share.class);
+        startActivityForResult (intent,0);
+    }
 }
