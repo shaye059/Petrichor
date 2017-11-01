@@ -1,5 +1,6 @@
-<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<?xml version="1.0" encoding="utf-8"?><manifest
-xmlns:android="http://schemas.android.com/apk/res/android" package="ca.weihu.petrichor">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.weihu.petrichor">
 
 <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name"
     android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -12,34 +13,10 @@ xmlns:android="http://schemas.android.com/apk/res/android" package="ca.weihu.pet
         </intent-filter>
     </activity>
     <activity android:name=".Explore">
-        <action android:label="@string/page_name" />
+        <action android:label="explore" />
     </activity>
-</application>
-
-</manifest>=======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
-<application>
-    <activity android:name="ca.weihu.petrichor.week"></activity>
-</application>
-</manifest>>>>>>>> Added
-
-    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
-<application>
     <activity android:name="ca.weihu.petrichor.Week"></activity>
-</application>
-</manifest>>>>>>>> Added
-
-    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
-<application>
     <activity android:name="ca.weihu.petrichor.Month"></activity>
-</application>
-</manifest>>>>>>>> Added
-
-    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
-<application>
     <activity android:name="ca.weihu.petrichor.Year"></activity>
 </application>
-</manifest>>>>>>>> Added
+</manifest>
