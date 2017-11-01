@@ -10,7 +10,7 @@ public class Explore extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_explore);
+        setContentView(R.layout.activity_explore);
     }
 
     public void OnWeekClick(View view) {
@@ -28,6 +28,18 @@ public class Explore extends AppCompatActivity {
     public void OnYearClick(View view) {
 //Application Context and Activity
         Intent intent = new Intent(getApplicationContext(), Year.class);
+        startActivityForResult (intent,0);
+    }
+
+    public void OnRandomClick(View view) {
+//Application Context and Activity
+        Intent intent = new Intent(getApplicationContext(), Random.class);
+        startActivityForResult (intent,0);
+    }
+
+    public void onSameDayPastYearClick(View view) {
+//Application Context and Activity
+        Intent intent = new Intent(getApplicationContext(), SameDayPastYear.class);
         startActivityForResult (intent,0);
     }
 }

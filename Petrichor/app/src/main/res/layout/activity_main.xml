@@ -42,12 +42,28 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        android:layout_marginBottom="87dp"
+        android:layout_marginLeft="17dp"
         android:layout_marginStart="17dp"
-        tools:layout_constraintLeft_creator="1"
+        android:onClick="onToday"
+        android:text="today"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintLeft_toLeftOf="@+id/textView4"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="13dp"
-        app:layout_constraintLeft_toLeftOf="@+id/textView4" />
+        android:layout_marginStart="17dp"
+        android:text="Button"
+        android:onClick="onExplore"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintLeft_toLeftOf="@+id/textView4"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:text="explore" />
 
 </android.support.constraint.ConstraintLayout>

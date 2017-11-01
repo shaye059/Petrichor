@@ -100,6 +100,20 @@
             tools:layout_editor_absoluteX="64dp"
             tools:layout_editor_absoluteY="207dp" />
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="cursive"
+            android:onClick="OnYearClick"
+            android:text="same day in the past "
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="55sp"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="207dp" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -8,6 +8,6 @@ public class Year extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_year);
+        setContentView(R.layout.activity_year);
     }
 }
