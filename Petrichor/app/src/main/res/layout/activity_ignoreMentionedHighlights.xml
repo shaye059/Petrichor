@@ -22,7 +22,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <LinearLayout
         android:layout_width="376dp"
@@ -55,20 +56,6 @@
             android:gravity="center_vertical|center_horizontal"
             android:lineSpacingExtra="12sp"
             android:text="ignore srikar's memory"
-            android:textSize="22sp"
-            android:typeface="serif"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp" />
-
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="match_parent"
-            android:layout_height="81dp"
-            android:layout_weight="0.16"
-            android:fontFamily="casual"
-            android:gravity="center_vertical|center_horizontal"
-            android:lineSpacingExtra="12sp"
-            android:text="report spam"
             android:textSize="22sp"
             android:typeface="serif"
             tools:layout_editor_absoluteX="8dp"
