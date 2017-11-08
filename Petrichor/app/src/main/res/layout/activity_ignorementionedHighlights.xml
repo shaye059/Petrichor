@@ -22,7 +22,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <LinearLayout
 
@@ -61,6 +62,7 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="0dp" />
 
+<<<<<<< HEAD:Petrichor/app/src/main/res/layout/activity_ignorementionedHighlights.xml
         <TextView
             android:id="@+id/textView28"
             android:layout_width="match_parent"
@@ -77,6 +79,10 @@
 
             app:cardBackgroundColor="@color/colorAccent"
         </a>pp:cardCornerRadius="25"
+=======
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="25"
+>>>>>>> f179b4a5f389074dfa6e5cd5bdd6b36c7b919a3e:Petrichor/app/src/main/res/layout/activity_ignoreMentionedHighlights.xml
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
