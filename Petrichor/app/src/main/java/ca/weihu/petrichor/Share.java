@@ -10,7 +10,7 @@ public class Share extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends);
+        //setContentView(R.layout.activity_friends);
     }
 
     public void onTaggedMemories(View view) {

@@ -25,6 +25,7 @@
         tools:layout_constraintTop_creator="1" />
 
     <LinearLayout
+
         android:layout_width="376dp"
         android:layout_height="431dp"
         android:layout_marginTop="100dp"
@@ -74,8 +75,8 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="0dp" />
 
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="25"
+            app:cardBackgroundColor="@color/colorAccent"
+        </a>pp:cardCornerRadius="25"
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

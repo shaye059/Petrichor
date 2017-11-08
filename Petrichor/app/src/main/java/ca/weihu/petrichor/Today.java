@@ -10,7 +10,7 @@ public class Today extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_today);
+        //setContentView(R.layout.activity_today);
     }
 
     public void onSubmit(View view) {

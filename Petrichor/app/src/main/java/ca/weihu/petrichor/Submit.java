@@ -10,7 +10,7 @@ public class Submit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todaySubmitted);
+        //setContentView(R.layout.activity_todaySubmitted);
     }
 
     public void onSubmit(View view) {

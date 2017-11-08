@@ -10,7 +10,7 @@ public class Random extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_randomDay);
+        //setContentView(R.layout.activity_randomDay);
     }
 
 

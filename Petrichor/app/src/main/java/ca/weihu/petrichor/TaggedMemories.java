@@ -10,7 +10,7 @@ public class TaggedMemories extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mentionedHighlights);
+        //setContentView(R.layout.activity_mentionedHighlights);
     }
     public void onDeleteTaggedMemories(View view) {
 //Application Context and Activity

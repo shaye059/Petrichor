@@ -8,6 +8,6 @@ public class SameDayPastYear extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_PastYearSameDay);
+        //setContentView(R.layout.activity_PastYearSameDay);
     }
 }

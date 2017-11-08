@@ -8,7 +8,7 @@ public class DeleteTaggedMemories extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ignoreMentionedHighlights);
+        //setContentView(R.layout.activity_ignoreMentionedHighlights);
     }
     
 }
