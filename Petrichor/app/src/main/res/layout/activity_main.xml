@@ -7,29 +7,20 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DARE"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="98dp"
-        tools:ignore="HardcodedText,MissingConstraints" />
+        android:layout_width="236dp"
+        android:layout_height="249dp"
+        android:text="Today"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="100dp" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="213dp"
-        tools:layout_editor_absoluteY="146dp"
-        tools:ignore="HardcodedText,MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Divyang is a donkey."
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="303dp"
-        tools:ignore="HardcodedText,MissingConstraints" />
+        android:text="Explore"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="368dp" />
 
 </android.support.constraint.ConstraintLayout>
