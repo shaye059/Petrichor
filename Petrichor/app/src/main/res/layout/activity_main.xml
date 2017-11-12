@@ -3,24 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.weihu.petrichor.MainActivity">
+    tools:context="ca.weihu.petrichor.MainActivity"
+    android:background="@drawable/homescreen"
+    >
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="236dp"
-        android:layout_height="249dp"
-        android:text="Today"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="100dp" />
+    <!-- <a> Please Note: The Buttons Are Already IMPLEMENTED: They are merely invisible. </a> -->
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Explore"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="368dp" />
+     <Button
+         android:id="@+id/button"
+         android:layout_width="273dp"
+         android:layout_height="270dp"
+         android:text="Today"
+         android:visibility="invisible"
+         tools:ignore="HardcodedText,MissingConstraints"
+         tools:layout_editor_absoluteX="44dp"
+         tools:layout_editor_absoluteY="166dp" />
 
-</android.support.constraint.ConstraintLayout>
+     <Button
+         android:id="@+id/button3"
+         android:layout_width="234dp"
+         android:layout_height="47dp"
+         android:text="Explore"
+         android:visibility="invisible"
+         tools:ignore="HardcodedText,MissingConstraints"
+         tools:layout_editor_absoluteX="63dp"
+         tools:layout_editor_absoluteY="453dp" />
+
+ </android.support.constraint.ConstraintLayout>
