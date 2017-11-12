@@ -49,11 +49,12 @@
             android:background="@android:color/transparent"
             android:fontFamily="cursive"
             android:text="week"
+            android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="55sp"
+            tools:ignore="HardcodedText"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="190dp"
-            tools:ignore="HardcodedText" />
+            tools:layout_editor_absoluteY="190dp" />
 
         <Button
             android:id="@+id/monthButton"
@@ -62,12 +63,12 @@
             android:background="@android:color/transparent"
             android:fontFamily="cursive"
             android:text="month"
+            android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="55sp"
-            android:textStyle="italic"
+            tools:ignore="HardcodedText"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="144dp"
-            tools:ignore="HardcodedText" />
+            tools:layout_editor_absoluteY="144dp" />
 
         <Button
             android:id="@+id/yearButton"
