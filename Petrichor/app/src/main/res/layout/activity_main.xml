@@ -25,4 +25,12 @@
         tools:layout_constraintTop_creator="1"
         tools:ignore="HardcodedText,LabelFor" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DARE"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="98dp" />
+
 </android.support.constraint.ConstraintLayout>
