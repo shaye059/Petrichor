@@ -1,29 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ca.weihu.petrichor.MainActivity">
-
-    <EditText
-        android:id="@+id/editText"
-        style="@android:style/Widget.AutoCompleteTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:textAlignment="textStart"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        tools:ignore="HardcodedText,LabelFor" />
 
     <Button
         android:id="@+id/button"
@@ -31,7 +11,8 @@
         android:layout_height="wrap_content"
         android:text="DARE"
         tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="98dp" />
+        tools:layout_editor_absoluteY="98dp"
+        tools:ignore="HardcodedText,MissingConstraints" />
 
     <Button
         android:id="@+id/button3"
@@ -39,6 +20,16 @@
         android:layout_height="wrap_content"
         android:text="Button"
         tools:layout_editor_absoluteX="213dp"
-        tools:layout_editor_absoluteY="146dp" />
+        tools:layout_editor_absoluteY="146dp"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Divyang is a donkey."
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="303dp"
+        tools:ignore="HardcodedText,MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>
