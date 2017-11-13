@@ -7,33 +7,31 @@
     tools:context="ca.weihu.petrichor.Week">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/weekText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="casual"
+        android:fontFamily="arial"
         android:text="week"
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_light"
-        android:textSize="70sp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
-        tools:layout_constraintLeft_creator="1"
+        android:textSize="75sp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <ListView
+        android:id="@+id/weekList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="222dp"
-        tools:layout_constraintLeft_creator="1"
+        android:layout_marginTop="107dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="1.0" />
 </android.support.constraint.ConstraintLayout>
