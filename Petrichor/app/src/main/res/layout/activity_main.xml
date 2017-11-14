@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/homescreen"
     android:visibility="visible"
-    tools:context="ca.weihu.petrichor.MainActivity">
+    tools:context="ca.weihu.petrichor.MainActivity"
+    tools:ignore="ExtraText">
 
     <!-- <a> Please Note: The Buttons Are Already IMPLEMENTED: They are merely invisible. </a> -->
 
