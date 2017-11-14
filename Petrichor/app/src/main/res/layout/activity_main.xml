@@ -38,8 +38,6 @@
             tools:layout_editor_absoluteY="168dp"
             tools:onClick="OnTodayButton" />
 
-<<<<<<< HEAD
-=======
         <Button
             android:id="@+id/buttonExplore"
             android:layout_width="300dp"
