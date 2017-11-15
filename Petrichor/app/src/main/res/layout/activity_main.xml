@@ -10,15 +10,16 @@
     tools:ignore="ExtraText">
 
     <!-- <a> Please Note: The Buttons Are Already IMPLEMENTED: They are merely invisible. </a> -->
+    <!-- <a> At least, that was the case, until Divyang made them visible again </a> -->
 
     <LinearLayout
         android:layout_width="368dp"
         android:layout_height="551dp"
         android:gravity="center_vertical|center_horizontal|center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="-56dp">
 
         <Button
             android:id="@+id/buttonToday"
@@ -32,7 +33,6 @@
             android:background="@android:color/transparent"
             android:gravity="center_horizontal"
             android:onClick="OnTodayButton"
-            android:text="Today"
             android:visibility="visible"
             tools:ignore="HardcodedText,MissingConstraints,ObsoleteLayoutParam"
             tools:layout_editor_absoluteX="56dp"
@@ -42,15 +42,13 @@
         <Button
             android:id="@+id/buttonExplore"
             android:layout_width="300dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_column="3"
             android:layout_margin="20dp"
             android:layout_marginBottom="10dp"
             android:layout_row="3"
-            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="OnExploreButton"
-            android:text="Explore"
             android:visibility="visible"
             tools:ignore="HardcodedText,InefficientWeight,MissingConstraints,ObsoleteLayoutParam"
             tools:layout_editor_absoluteX="8dp"
@@ -58,5 +56,5 @@
             tools:onClick="OnExploreButton" />
     </LinearLayout>
 
->>>>>>> 289deb50cbf5431a6f32fff73a9ba402b7b304f3
+    >>>>>>> 289deb50cbf5431a6f32fff73a9ba402b7b304f3
 </android.support.constraint.ConstraintLayout>
