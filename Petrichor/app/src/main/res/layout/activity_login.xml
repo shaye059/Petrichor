@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/homescreen"
+    android:background="@drawable/explore"
     android:visibility="visible"
     tools:context="ca.weihu.petrichor.MainActivity">
 
@@ -15,7 +15,8 @@
         android:layout_width="0dp"
         android:layout_height="433dp"
         tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+        tools:layout_editor_absoluteX="8dp"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/buttonLogin"
