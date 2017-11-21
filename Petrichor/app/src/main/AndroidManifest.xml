@@ -13,6 +13,8 @@
         <activity android:name=".Today"> </activity>
         <activity android:name=".Month"> </activity>
         <activity android:name=".Year"> </activity>
+        <activity android:name=".Share"> </activity>
+        <activity android:name=".SharedMemory"> </activity>
         <activity android:name=".Week"> </activity>
         <activity android:name=".Random"> </activity>
         <activity android:name=".SameDayPastYear"> </activity>
