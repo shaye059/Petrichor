@@ -9,6 +9,7 @@ public class Today extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_today);getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -17,5 +18,9 @@ public class Today extends AppCompatActivity {
     public void OnImageButton(View view) {
         Intent in = new Intent(getApplicationContext(), Share.class);
         startActivity(in);
+    }
+
+    public void onBtnBack(View view) {
+        onBackPressed();
     }
 }

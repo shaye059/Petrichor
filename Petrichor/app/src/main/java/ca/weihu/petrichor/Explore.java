@@ -10,6 +10,7 @@ public class Explore extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_explore);getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -17,24 +18,27 @@ public class Explore extends AppCompatActivity {
     }
 
     public void OnWeekButton(View view) {
-        Intent in = new Intent(getApplicationContext(), Week.class);
+        Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
         startActivity(in);
     }
     public void OnMonthButton(View view) {
-        Intent in = new Intent(getApplicationContext(), Month.class);
+        Intent in = new Intent(getApplicationContext(), ExploreMonth.class);
         startActivity(in);
     }
     public void OnYearButton(View view) {
-        Intent in = new Intent(getApplicationContext(), Year.class);
+        Intent in = new Intent(getApplicationContext(), ExploreYear.class);
         startActivity(in);
     }
     public void OnSameDayInPastButton(View view) {
-        Intent in = new Intent(getApplicationContext(), SameDayPastYear.class);
+        Intent in = new Intent(getApplicationContext(), ExploreTodayInThePast.class);
         startActivity(in);
     }
     public void OnRandomButton(View view) {
-        Intent in = new Intent(getApplicationContext(), Random.class);
+        Intent in = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
         startActivity(in);
     }
 
+    public void onBtnBack(View view) {
+        onBackPressed();
+    }
 }

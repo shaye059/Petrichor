@@ -8,6 +8,14 @@
     android:layout_height="match_parent">
 
 
+    <Button
+        android:id="@+id/btnBack8"
+        android:layout_width="89dp"
+        android:layout_height="56dp"
+        android:background="@android:color/transparent"
+        android:onClick="onBtnBack"
+        android:visibility="visible" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -98,9 +106,9 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView"
             android:layout_alignParentEnd="true"
-            android:onClick="OnImageButton"
             android:layout_marginEnd="17dp"
             android:adjustViewBounds="true"
+            android:onClick="OnImageButton"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/share"
             tools:ignore="ContentDescription" />
@@ -111,9 +119,9 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/imageButton"
             android:layout_alignTop="@+id/textView2"
-            android:onClick="OnImageButton"
             android:layout_marginRight="129dp"
             android:adjustViewBounds="true"
+            android:onClick="OnImageButton"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/share"
             tools:ignore="ContentDescription,RtlHardcoded" />
@@ -124,9 +132,9 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/imageButton5"
             android:layout_alignTop="@+id/textView4"
-            android:onClick="OnImageButton"
             android:layout_marginRight="129dp"
             android:adjustViewBounds="true"
+            android:onClick="OnImageButton"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/share"
             tools:ignore="ContentDescription,RtlHardcoded" />

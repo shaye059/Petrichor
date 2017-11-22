@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/explore_1_week"
     android:layout_height="match_parent"
-    tools:context="ca.weihu.petrichor.Week">
+    android:background="@drawable/explore_4_today_in_the_past"
+    tools:context="ca.weihu.petrichor.ExploreMonth"
+    tools:ignore="ExtraText">
 
     <TextView
-        android:id="@+id/weekText"
+        android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="arial"
-        android:text="week"
+        android:fontFamily="casual"
+        android:text="today in the past "
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_light"
-        android:textSize="75sp"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="30sp"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,13 +27,19 @@
         tools:layout_constraintTop_creator="1" />
 
     <ListView
-        android:id="@+id/weekList"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="107dp"
+        android:layout_height="307dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="1.0" />
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <Button
+        android:id="@+id/btnBack3"
+        android:layout_width="89dp"
+        android:layout_height="56dp"
+        android:background="@android:color/transparent"
+        android:onClick="onBtnBack"
+        android:visibility="visible" />
+
 </android.support.constraint.ConstraintLayout>

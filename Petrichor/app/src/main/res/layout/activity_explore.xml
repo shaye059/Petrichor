@@ -99,7 +99,7 @@
             android:background="@android:color/transparent"
             android:fontFamily="cursive"
             android:onClick="OnSameDayInPastButton"
-            android:text="same day in the past "
+            android:text="today in\nthe past"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="55sp"
@@ -115,7 +115,7 @@
             android:background="@android:color/transparent"
             android:fontFamily="casual"
             android:onClick="OnRandomButton"
-            android:text="random"
+            android:text="visit a\nrandom day"
             android:textColor="@android:color/holo_orange_dark"
             android:textSize="36sp"
             android:typeface="normal"
@@ -128,5 +128,13 @@
             tools:layout_constraintTop_creator="1" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnBack6"
+        android:layout_width="89dp"
+        android:layout_height="56dp"
+        android:background="@android:color/transparent"
+        android:onClick="onBtnBack"
+        android:visibility="visible" />
 
 </android.support.constraint.ConstraintLayout>
