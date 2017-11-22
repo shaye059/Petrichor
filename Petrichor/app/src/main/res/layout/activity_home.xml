@@ -83,6 +83,7 @@
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="449dp"
                 tools:onClick="OnExploreButton" />
+
         </LinearLayout>
 
         <LinearLayout

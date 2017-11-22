@@ -17,10 +17,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView5"
@@ -32,7 +29,7 @@
             android:layout_marginTop="47dp"
             android:layout_weight="0.34"
             android:fontFamily="casual"
-            android:text="explore"
+            android:text="past"
             android:textAlignment="center"
             android:textColor="@android:color/holo_blue_light"
             android:textSize="80sp"
@@ -44,15 +41,16 @@
             tools:layout_constraintRight_creator="1" />
 
         <Button
-            android:id="@+id/pastButton"
+            android:id="@+id/weekButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView5"
+            android:layout_marginTop="42dp"
             android:background="@android:color/transparent"
             android:fontFamily="cursive"
-            android:onClick="OnPastButton"
-            android:text="past series"
+            android:onClick="OnWeekButton"
+            android:text="past week"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="55sp"
@@ -61,16 +59,15 @@
             tools:layout_editor_absoluteY="190dp" />
 
         <Button
-            android:id="@+id/highlightButton"
+            android:id="@+id/monthButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView5"
-            android:layout_marginTop="71dp"
+            android:layout_below="@+id/weekButton"
             android:background="@android:color/transparent"
             android:fontFamily="cursive"
-            android:onClick="OnHighlightsButton"
-            android:text="highlights"
+            android:onClick="OnMonthButton"
+            android:text="past month"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="55sp"
@@ -79,33 +76,15 @@
             tools:layout_editor_absoluteY="144dp" />
 
         <Button
-            android:id="@+id/timeperiodButton"
+            android:id="@+id/yearButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/highlightButton"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/monthButton"
             android:background="@android:color/transparent"
             android:fontFamily="cursive"
-            android:onClick="onTimePeriodButton"
-            android:text="time period "
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textSize="55sp"
-            tools:ignore="HardcodedText"
-            tools:layout_editor_absoluteX="64dp"
-            tools:layout_editor_absoluteY="207dp" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="275dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/timeperiodButton"
-            android:layout_centerHorizontal="true"
-            android:background="@android:color/transparent"
-            android:fontFamily="cursive"
-            android:onClick="OnSameDayInPastButton"
-            android:text="same day; past year"
-            android:textAlignment="center"
+            android:onClick="OnYearButton"
+            android:text="past year"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="55sp"
