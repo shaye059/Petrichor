@@ -6,13 +6,9 @@
     android:layout_height="match_parent"
     tools:context="ca.weihu.petrichor.ExploreMonth">
 
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView3"
@@ -27,35 +23,39 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
-            tools:layout_constraintTop_creator="1"
-            tools:ignore="HardcodedText" />
+            tools:layout_constraintTop_creator="1" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="307dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1" />
+            tools:layout_constraintTop_creator="1"
+            android:id="@+id/listView2" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/listView2"
+            android:layout_marginStart="58dp"
+            android:layout_marginTop="30dp"
             android:layout_weight="0.16"
             android:autoText="false"
             android:fontFamily="casual"
-            android:onClick="onDeleteTagged"
+
             android:text="delete tagged memories"
             android:textSize="24sp"
+            tools:ignore="Deprecated,HardcodedText,InefficientWeight,ObsoleteLayoutParam,TextViewEdits"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp"
-            tools:ignore="Deprecated,HardcodedText,InefficientWeight,ObsoleteLayoutParam,TextViewEdits" />
-
-    </LinearLayout>
+            tools:layout_editor_absoluteY="0dp" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

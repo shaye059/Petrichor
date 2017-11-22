@@ -7,6 +7,12 @@
     tools:context="ca.weihu.petrichor.ExploreMonth"
     tools:ignore="ExtraText">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
     <TextView
             android:id="@+id/textView3"
             android:layout_width="0dp"
@@ -31,6 +37,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1" />
+            tools:layout_constraintTop_creator="1" >
+
+        </ListView>
 
 </android.support.constraint.ConstraintLayout>

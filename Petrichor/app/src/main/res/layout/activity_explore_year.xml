@@ -7,34 +7,6 @@
     android:background="@drawable/explore_3_year"
     tools:context="ca.weihu.petrichor.ExploreYear">
 
-    <TextView
-        android:id="@+id/yearText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="casual"
-        android:text="year"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_blue_light"
-        android:textSize="70sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.0" />
-
-    <ListView
-        android:id="@+id/yearList"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearText"
-        app:layout_constraintVertical_bias="0.0" />
-
     <Button
         android:id="@+id/btnBack5"
         android:layout_width="89dp"
@@ -42,4 +14,43 @@
         android:background="@android:color/transparent"
         android:onClick="onBtnBack"
         android:visibility="visible" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/yearText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="53dp"
+            android:fontFamily="casual"
+            android:text="year"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="70sp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1" />
+
+        <ListView
+            android:id="@+id/yearList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/yearText"
+            android:layout_marginStart="52dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yearText"
+            app:layout_constraintVertical_bias="0.0" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
