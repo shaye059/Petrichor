@@ -17,18 +17,20 @@
         <activity android:name=".SharedMemory"></activity>
         <activity android:name=".Highlights"></activity>
         <activity android:name=".TimePeriod"></activity>
+        <activity android:name=".AccountCreate"></activity>
+        <activity android:name=".Home"></activity>
         <activity android:name=".Past"></activity>
         <activity android:name=".ExploreWeek"></activity>
         <activity android:name=".ExploreVisitARandomDay"></activity>
         <activity android:name=".ExploreTodayInThePast"></activity>
-        <activity android:name=".Home">
+        <activity android:name=".AccountLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AccountCreate"></activity>
+
     </application>
 
 </manifest>
