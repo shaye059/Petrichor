@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/explore"
     tools:context="ca.weihu.petrichor.ExploreMonth"
     tools:ignore="ExtraText">
 
@@ -17,7 +18,7 @@
         android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/julius_sans"
         android:text="ignored highlights"
         android:textAlignment="center"
@@ -31,6 +32,14 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
+
+    <Button
+        android:id="@+id/btnBack9"
+        android:layout_width="89dp"
+        android:layout_height="56dp"
+        android:background="@android:color/transparent"
+        android:onClick="onBtnBack"
+        android:visibility="visible" />
 
     <ListView
         android:layout_width="0dp"

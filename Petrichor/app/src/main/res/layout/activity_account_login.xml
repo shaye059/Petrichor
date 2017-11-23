@@ -81,6 +81,7 @@
             android:onClick="onLogin"
             android:text="login"
             android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
             android:textSize="36sp"
             android:visibility="visible"
             tools:ignore="HardcodedText,InefficientWeight,MissingConstraints,ObsoleteLayoutParam"
@@ -100,6 +101,7 @@
             android:onClick="onCreate"
             android:text="create account"
             android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
             android:textSize="36sp"
             tools:layout_editor_absoluteX="146dp"
             tools:layout_editor_absoluteY="260dp" />

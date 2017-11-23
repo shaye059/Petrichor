@@ -82,6 +82,7 @@
             android:onClick="onCreate"
             android:text="create account"
             android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
             android:textSize="36sp"
             android:visibility="visible"
             tools:ignore="HardcodedText,InefficientWeight,MissingConstraints,ObsoleteLayoutParam"

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/explore"
     android:layout_height="match_parent"
     tools:context="ca.weihu.petrichor.Explore">
 
@@ -10,12 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btnBack12"
+            android:layout_width="89dp"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            android:onClick="onBtnBack"
+            android:visibility="visible" />
+
         <TextView
             android:id="@+id/textView6"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/btnBack12"
             android:fontFamily="@font/julius_sans"
             android:gravity="center_horizontal"
             android:text="friends"
@@ -35,13 +45,14 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="22dp"
-            android:onClick="onTaggedMemories"
             android:layout_weight="0.10"
             android:fontFamily="@font/julius_sans"
             android:gravity="center_vertical|center_horizontal"
             android:lineSpacingExtra="12sp"
+            android:onClick="onTaggedMemories"
             android:text="tagged memories"
-            android:textSize="24sp"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp"
             android:typeface="serif"
             tools:ignore="HardcodedText,InefficientWeight" />
 

@@ -21,4 +21,8 @@ public class Share extends AppCompatActivity {
     public void onTaggedMemories(View view) {
         Intent in = new Intent(getApplicationContext(), SharedMemory.class);
         startActivity(in);
-    }}
+    }
+    public void onBtnBack(View view) {
+        onBackPressed();
+    }
+}
