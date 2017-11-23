@@ -28,6 +28,7 @@
             android:fontFamily="@font/julius_sans"
             android:text="Username"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="30sp" />
 
         <TextView
@@ -40,6 +41,7 @@
             android:fontFamily="@font/julius_sans"
             android:text="Password"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="30sp" />
 
         <EditText
