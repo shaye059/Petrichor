@@ -22,19 +22,20 @@
             android:id="@+id/textViewLoginUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_above="@+id/editTextLoginUsername"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="144dp"
-            android:fontFamily="serif"
+            android:layout_marginBottom="9dp"
+            android:fontFamily="@font/julius_sans"
             android:text="Username"
-            android:textSize="24sp" />
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTextLoginUsername"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/editTextLoginPassword"
-            android:layout_below="@+id/textViewLoginUsername"
+            android:layout_alignBottom="@+id/textViewLoginPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="64dp"
             android:ems="10"
             android:fontFamily="MS Reference Sans Serif"
             android:inputType="textPersonName"
@@ -44,21 +45,20 @@
             android:id="@+id/textViewLoginPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/editTextLoginPassword"
             android:layout_alignStart="@+id/textViewLoginUsername"
-            android:layout_below="@+id/editTextLoginUsername"
-            android:layout_marginTop="62dp"
-            android:fontFamily="serif"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/julius_sans"
             android:text="Password"
-            android:textSize="24sp" />
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTextLoginPassword"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textViewLoginPassword"
+            android:layout_above="@+id/buttonLogin"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginBottom="17dp"
             android:ems="10"
             android:fontFamily="MS Reference Sans Serif"
             android:inputType="textPassword"
@@ -68,10 +68,10 @@
             android:id="@+id/buttonLogin"
             android:layout_width="400dp"
             android:layout_height="75dp"
+            android:layout_above="@+id/btnAccCreate"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/editTextLoginPassword"
             android:layout_column="3"
-            android:layout_marginTop="11dp"
+            android:layout_marginBottom="33dp"
             android:layout_row="3"
             android:layout_weight="1"
             android:background="@android:color/transparent"
@@ -94,13 +94,22 @@
             android:layout_alignParentStart="true"
             android:layout_marginBottom="27dp"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/allan"
+            android:fontFamily="@font/raleway_thin"
             android:onClick="onCreate"
             android:text="create account"
             android:textAllCaps="false"
             android:textSize="36sp"
             tools:layout_editor_absoluteX="146dp"
             tools:layout_editor_absoluteY="260dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_alignBottom="@+id/textViewLoginUsername"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="57dp"
+            app:srcCompat="@drawable/icon" />
 
     </RelativeLayout>
 

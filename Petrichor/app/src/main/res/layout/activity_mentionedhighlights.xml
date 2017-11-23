@@ -15,11 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/julius_sans"
             android:text="mentioned highlights"
             android:textAlignment="center"
             android:textColor="@android:color/holo_blue_light"
-            android:textSize="36sp"
+            android:textSize="50sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,34 +28,37 @@
             tools:layout_constraintRight_creator="1"
             tools:layout_constraintTop_creator="1" />
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="407dp"
+            android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/listView2"
+            android:layout_marginStart="16dp"
+
+            android:layout_marginTop="18dp"
+            android:layout_weight="0.16"
+            android:autoText="false"
+            android:fontFamily="@font/julius_sans"
+            android:text="delete tagged memories"
+            android:textSize="30sp"
+            tools:ignore="Deprecated,HardcodedText,InefficientWeight,ObsoleteLayoutParam,TextViewEdits"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="610dp" />
+
         <ListView
+            android:id="@+id/listView2"
             android:layout_width="match_parent"
-            android:layout_height="307dp"
+            android:layout_height="450dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1"
-            android:id="@+id/listView2" />
+            tools:layout_constraintTop_creator="1" >
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/listView2"
-            android:layout_marginStart="58dp"
-            android:layout_marginTop="30dp"
-            android:layout_weight="0.16"
-            android:autoText="false"
-            android:fontFamily="casual"
+        </ListView>
 
-            android:text="delete tagged memories"
-            android:textSize="24sp"
-            tools:ignore="Deprecated,HardcodedText,InefficientWeight,ObsoleteLayoutParam,TextViewEdits"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
