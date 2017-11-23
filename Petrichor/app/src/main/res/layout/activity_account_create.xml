@@ -83,7 +83,7 @@
             tools:ignore="HardcodedText,InefficientWeight,MissingConstraints,ObsoleteLayoutParam"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="449dp"
-
+             />
     </LinearLayout>
 
     <Button
@@ -91,6 +91,5 @@
         android:layout_width="89dp"
         android:layout_height="56dp"
         android:background="@android:color/transparent"
-
         android:visibility="visible" />
 </android.support.constraint.ConstraintLayout>
