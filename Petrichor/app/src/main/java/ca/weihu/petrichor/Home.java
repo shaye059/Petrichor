@@ -36,4 +36,9 @@ public class Home extends AppCompatActivity {
         Intent in = new Intent(getApplicationContext(), AccountCreate.class);
         startActivity(in);
     }
+
+    public void onMyAccountButton(View view) {
+        Intent intent = new Intent(getApplicationContext(), AccountLogin.class);
+        startActivity(intent);
+    }
 }

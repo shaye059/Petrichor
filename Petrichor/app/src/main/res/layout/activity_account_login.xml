@@ -12,6 +12,7 @@
     <!-- <a> Please Note: The Buttons Are Already IMPLEMENTED: They are merely invisible. </a> -->
 
     <RelativeLayout
+        android:id="@+id/relLay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints"
@@ -98,7 +99,7 @@
             android:layout_marginBottom="27dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
-            android:onClick="onCreate"
+            android:onClick="onAccountCreate"
             android:text="create account"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
@@ -122,6 +123,7 @@
         android:layout_width="89dp"
         android:layout_height="56dp"
         android:background="@android:color/transparent"
+        android:onClick="onBtnBack"
         android:visibility="visible" />
 
 </android.support.constraint.ConstraintLayout>

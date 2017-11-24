@@ -90,8 +90,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight=".955"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4" />
+
+            <Button
+                android:id="@+id/btnMyAcc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="200dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:fontFamily="MS Reference Sans Serif"
+                android:onClick="onMyAccountButton"
+                android:padding="0dp"
+                android:text="my account"
+                android:textAllCaps="false"
+                android:textColor="#824d91"
+                android:textSize="80px" />
         </LinearLayout>
     </LinearLayout>
 

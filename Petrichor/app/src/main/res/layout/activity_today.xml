@@ -17,6 +17,7 @@
         android:visibility="visible" />
 
     <RelativeLayout
+        android:id="@+id/todayRelLay"
         android:layout_width="400dp"
         android:layout_height="600dp"
         tools:ignore="UselessParent">
