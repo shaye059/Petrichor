@@ -66,7 +66,6 @@ public class Today extends AppCompatActivity {
             hideSystemUI();
         }
     }
-
     // hides status bar and navbar
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(

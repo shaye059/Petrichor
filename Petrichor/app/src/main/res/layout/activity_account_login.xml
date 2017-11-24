@@ -118,12 +118,4 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/btnBack7"
-        android:layout_width="89dp"
-        android:layout_height="56dp"
-        android:background="@android:color/transparent"
-        android:onClick="onBtnBack"
-        android:visibility="visible" />
-
 </android.support.constraint.ConstraintLayout>
