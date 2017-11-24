@@ -23,7 +23,7 @@ public class Today extends AppCompatActivity {
 
         // code to hide keyboard when relative layout is touched
 
-        relLayout = findViewById(R.id.todayRelLay);
+        relLayout = (RelativeLayout) findViewById(R.id.todayRelLay);
 
         relLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -71,7 +71,7 @@ public class Today extends AppCompatActivity {
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 }
