@@ -25,7 +25,7 @@ public class AccountLogin extends AppCompatActivity {
 
         // code to hide keyboard when relative layout is touched
 
-        relLayout = findViewById(R.id.relLay);
+        relLayout = (RelativeLayout) findViewById(R.id.relLay);
 
         relLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override

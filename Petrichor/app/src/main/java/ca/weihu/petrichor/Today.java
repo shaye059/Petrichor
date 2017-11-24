@@ -23,7 +23,7 @@ public class Today extends AppCompatActivity {
 
         // code to hide keyboard when relative layout is touched
 
-        relLayout = findViewById(R.id.todayRelLay);
+        relLayout = (RelativeLayout) findViewById(R.id.todayRelLay);
 
         relLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
