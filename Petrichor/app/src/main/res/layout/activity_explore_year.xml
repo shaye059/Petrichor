@@ -2,13 +2,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/explore"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.weihu.petrichor.ExploreMonth">
+    android:background="@drawable/explore_3_year"
+    tools:context="ca.weihu.petrichor.ExploreYear">
 
     <Button
-        android:id="@+id/btnBack11"
+        android:id="@+id/btnBack5"
         android:layout_width="89dp"
         android:layout_height="56dp"
         android:background="@android:color/transparent"
@@ -20,17 +20,18 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/yearText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="58dp"
+            android:layout_marginTop="56dp"
             android:fontFamily="@font/julius_sans"
-            android:text="mentioned highlights"
+            android:text="year"
             android:textAlignment="center"
             android:textColor="@android:color/holo_blue_light"
-            android:textSize="50sp"
+            android:textSize="75sp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,38 +40,17 @@
             tools:layout_constraintRight_creator="1"
             tools:layout_constraintTop_creator="1" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="407dp"
-            android:layout_height="33dp"
-
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/listView2"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="0.16"
-            android:autoText="false"
-            android:fontFamily="@font/julius_sans"
-            android:text="delete tagged memories"
-            android:textColor="@android:color/background_light"
-            android:textSize="30sp"
-            tools:ignore="Deprecated,HardcodedText,InefficientWeight,ObsoleteLayoutParam,TextViewEdits"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="610dp" />
-
         <ListView
-            android:id="@+id/listView2"
+            android:id="@+id/yearList"
             android:layout_width="match_parent"
-            android:layout_height="425dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView3"
+            android:layout_below="@+id/yearText"
+            android:layout_marginStart="52dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1">
-
-        </ListView>
-
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yearText"
+            app:layout_constraintVertical_bias="0.0" />
     </RelativeLayout>
-
 </android.support.constraint.ConstraintLayout>

@@ -1,21 +1,23 @@
 package ca.weihu.petrichor;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
-public class Today extends AppCompatActivity {
+public class AccountCreate extends AppCompatActivity {
 
     private RelativeLayout relLayout = null;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_account_create);
 
-        setContentView(R.layout.activity_today);getWindow().getDecorView().setSystemUiVisibility(
+        getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
@@ -23,7 +25,7 @@ public class Today extends AppCompatActivity {
 
         // code to hide keyboard when relative layout is touched
 
-        relLayout = findViewById(R.id.todayRelLay);
+        relLayout = findViewById(R.id.accCreateRelLay);
 
         relLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -38,8 +40,9 @@ public class Today extends AppCompatActivity {
             }
         });
     }
-    public void OnImageButton(View view) {
-        Intent in = new Intent(getApplicationContext(), Share.class);
+
+    public void onAccountCreate(View view) {
+        Intent in = new Intent(getApplicationContext(), Home.class);
         startActivity(in);
     }
 
@@ -71,7 +74,7 @@ public class Today extends AppCompatActivity {
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 }

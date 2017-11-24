@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/account"
+    tools:context="ca.weihu.petrichor.AccountCreate">
+
+    <RelativeLayout
+        android:id="@+id/accCreateRelLay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewCreateUsername3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="144dp"
+            android:fontFamily="@font/julius_sans"
+            android:text="Username"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textViewCreatePassword3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editTextCreateUsername3"
+            android:layout_marginTop="33dp"
+            android:fontFamily="@font/julius_sans"
+            android:text="Password"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editTextCreateUsername3"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewCreateUsername3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:ems="10"
+            android:fontFamily="MS Reference Sans Serif"
+            android:inputType="textPersonName"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editTextCreatePassword3"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editTextCreateUsername3"
+            android:layout_below="@+id/textViewCreatePassword3"
+            android:ems="10"
+            android:fontFamily="MS Reference Sans Serif"
+            android:inputType="textPassword"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/buttonCreate"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editTextCreatePassword3"
+            android:layout_column="3"
+            android:layout_marginTop="51dp"
+            android:layout_row="3"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/raleway_thin"
+            android:onClick="onAccountCreate"
+            android:text="create account"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="36sp"
+            android:visibility="visible"
+            tools:ignore="HardcodedText,InefficientWeight,MissingConstraints,ObsoleteLayoutParam"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="449dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnBack10"
+        android:layout_width="89dp"
+        android:layout_height="56dp"
+        android:background="@android:color/transparent"
+        android:onClick="onBtnBack"
+        android:visibility="visible" />
+</android.support.constraint.ConstraintLayout>
