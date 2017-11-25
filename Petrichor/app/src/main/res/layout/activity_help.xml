@@ -6,4 +6,55 @@
     android:layout_height="match_parent"
     tools:context="ca.weihu.petrichor.Help">
 
+    <RelativeLayout
+        android:id="@+id/relLayHelp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_generic">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnAboutPetrichor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="200dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/julius_sans"
+                android:onClick="onAboutButton"
+                android:text="About"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40sp" />
+
+            <Button
+                android:id="@+id/btnHowToUsePetrichor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/julius_sans"
+                android:onClick="onHowToUseButton"
+                android:text="How to Use Petrichor"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnBack13"
+            android:layout_width="89dp"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            android:onClick="onBtnBack"
+            android:visibility="visible" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

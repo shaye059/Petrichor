@@ -13,7 +13,8 @@ import android.widget.RelativeLayout;
 
 public class AppCompatActivityMod extends AppCompatActivity {
 
-    private RelativeLayout relLayout = null;
+//    private RelativeLayout relLayout = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,8 @@ public class AppCompatActivityMod extends AppCompatActivity {
 
         hideSystemUI();
 
+/* This block has broken code because findViewById()'s argument must be specific; must
+   have target RelativeLayout ID to use R.id.
 
         // code to hide soft keyboard when relative layout is touched
 
@@ -38,7 +41,7 @@ public class AppCompatActivityMod extends AppCompatActivity {
 
                 return true;
             }
-        });
+        });*/
     }
 
 
@@ -67,5 +70,9 @@ public class AppCompatActivityMod extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
+    public void onBtnBack(View view) {
+        onBackPressed();
     }
 }
