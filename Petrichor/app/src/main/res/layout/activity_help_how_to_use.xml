@@ -17,6 +17,18 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="75dp"
+                android:fontFamily="julius_sans"
+                android:text="- Daily Highlights: Share your 3 highlights of the day.\n\n- Highlights of the Week: Choose your best 3 moments from the daily highlights you have collected throughout the week.\n\n- Highlights of the Month: Choose your best 3 moments from the weekly highlights you have collected throughout the month.\n\n- Highlights of the Year: Choose your best 3 moments from the monthly highlights you have collected throughout the year.\n\n\nShare!"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp" />
         </LinearLayout>
 
         <Button
