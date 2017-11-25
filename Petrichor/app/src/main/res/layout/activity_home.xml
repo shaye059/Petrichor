@@ -60,10 +60,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_navbar" />
-  
-        </LinearLayout>
 
-        <LinearLayout
+
+        <LinearLayout>
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight=".61"
@@ -95,7 +94,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <LinearLayout>
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight=".99"
@@ -168,5 +167,4 @@
             </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>>
 </android.support.constraint.ConstraintLayout>
