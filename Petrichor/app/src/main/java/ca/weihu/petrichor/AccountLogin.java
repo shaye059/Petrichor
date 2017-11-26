@@ -11,7 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import android.widget.RelativeLayout;
 
-public class AccountLogin extends AppCompatActivity {
+public class AccountLogin extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout relLayout = null;
 
@@ -29,7 +29,7 @@ public class AccountLogin extends AppCompatActivity {
 
         relLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event){
+            public boolean onTouch(View v, MotionEvent event) {
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -39,6 +39,16 @@ public class AccountLogin extends AppCompatActivity {
                 return true;
             }
         });
+        findViewById(R.id.btnAccCreate).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnAccCreate:
+                startActivity(new Intent(this, AccountCreate.class));
+                break;
+        }
     }
 
     /**
@@ -72,6 +82,7 @@ public class AccountLogin extends AppCompatActivity {
         Intent in = new Intent(getApplicationContext(), Home.class);
         startActivity(in);
     }
+
     public void onAccountCreate(View view) {
         Intent in = new Intent(getApplicationContext(), AccountCreate.class);
         startActivity(in);
@@ -90,8 +101,8 @@ public class AccountLogin extends AppCompatActivity {
         if (hasFocus) {
             hideSystemUI();
 
-        // When the window loses focus (e.g. the action overflow is shown),
-        // cancel any pending hide action.
+            // When the window loses focus (e.g. the action overflow is shown),
+            // cancel any pending hide action.
         } else {
             hideSystemUI();
         }
@@ -101,7 +112,8 @@ public class AccountLogin extends AppCompatActivity {
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 }
+

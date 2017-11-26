@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
-            android:onClick="onAccountCreate"
+            android:onClick="onClick"
             android:text="create account"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
