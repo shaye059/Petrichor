@@ -28,9 +28,7 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), Explore.class);
         startActivity(intent);
     }
-
-    // I don't see these codes being used so I commented it out. -T.N. ############################
-/*    public void onLogin(View view) {
+    /*public void onLogin(View view) {
         Intent in = new Intent(getApplicationContext(), Home.class);
         startActivity(in);
     }
@@ -38,14 +36,14 @@ public class Home extends AppCompatActivity {
         Intent in = new Intent(getApplicationContext(), AccountCreate.class);
         startActivity(in);
     }
-*/
+
     public void onMyAccountButton(View view) {
         Intent intent = new Intent(getApplicationContext(), AccountLogin.class);
         startActivity(intent);
-    }
+    }*/
 
-    public void onHelpButton(View view) {
-        Intent intent = new Intent(getApplicationContext(), Help.class);
+    public void onNavBarButton(View view){
+        Intent intent = new Intent(getApplicationContext(), NavBar.class);
         startActivity(intent);
     }
 }

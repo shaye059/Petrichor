@@ -86,7 +86,7 @@ public class AccountLogin extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
-        Intent in = new Intent(getApplicationContext(), Home.class);
+        Intent in = new Intent(getApplicationContext(), NavBar.class);
         startActivity(in);
     }
     public void onAccountCreate(View view) {

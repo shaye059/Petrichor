@@ -42,7 +42,7 @@ public class AccountCreate extends AppCompatActivity {
     }
 
     public void onAccountCreate(View view) {
-        Intent in = new Intent(getApplicationContext(), Home.class);
+        Intent in = new Intent(getApplicationContext(), NavBar.class);
         startActivity(in);
     }
 
