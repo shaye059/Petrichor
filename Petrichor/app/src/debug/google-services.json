@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "758194183065",
+    "firebase_url": "https://petrichor-7d240.firebaseio.com",
+    "project_id": "petrichor-7d240",
+    "storage_bucket": "petrichor-7d240.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758194183065:android:6bd935542ad29a77",
+        "android_client_info": {
+          "package_name": "ca.weihu.petrichor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758194183065-trcmbg121q2tbg65tbk9pquv4d466pio.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.weihu.petrichor",
+            "certificate_hash": "835b0cc3ab6eaf4457a145af630b0c994ee6a768"
+          }
+        },
+        {
+          "client_id": "758194183065-hd166vk50t5ajfftbj1mvggj8dd9i3me.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8_0UgWYwMbqn8vlz0E76SzYkOH0yYR4A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "758194183065-hd166vk50t5ajfftbj1mvggj8dd9i3me.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
