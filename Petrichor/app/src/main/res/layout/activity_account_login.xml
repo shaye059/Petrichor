@@ -99,7 +99,7 @@
             android:layout_marginBottom="25dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
-            android:onClick="onLogin"
+            android:onClick="onAccountCreate"
             android:text="create account"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"

@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.*;
 
 
 public class AccountLogin extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class AccountLogin extends AppCompatActivity {
     FirebaseAuth mAuth;
     EditText editTextUsername, editTextPassword;
     ProgressBar progressBar;
+
 
 
     @Override
@@ -61,6 +64,8 @@ public class AccountLogin extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         editTextUsername = (EditText) findViewById(R.id.editTextLoginUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextLoginPassword);
+
+
     }
 
     private void userLogin(){

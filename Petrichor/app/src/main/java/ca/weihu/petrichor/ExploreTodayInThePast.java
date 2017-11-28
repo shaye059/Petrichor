@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class ExploreTodayInThePast extends AppCompatActivity {
+public class ExploreTodayInThePast extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

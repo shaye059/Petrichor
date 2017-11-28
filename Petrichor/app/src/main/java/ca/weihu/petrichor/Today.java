@@ -6,11 +6,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.*;
+
 
 public class Today extends AppCompatActivity {
 
     private RelativeLayout relLayout = null;
+    private DatabaseReference databaseReference;
+    private Button buttonSubmit1;
+    private EditText editTextH1;
+    private EditText editTextH2;
+    private EditText editTextH3;
+    private FirebaseAuth firebaseAuth;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +52,38 @@ public class Today extends AppCompatActivity {
                 return true;
             }
         });
+        firebaseAuth=FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser()==null){
+            finish();
+            startActivity(new Intent(this, AccountLogin.class));
+        }
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        editTextH1 = (EditText) findViewById(R.id.editText);
+        editTextH2 = (EditText) findViewById(R.id.editText3);
+        editTextH3 = (EditText) findViewById(R.id.editText4);
+        buttonSubmit1 = (Button)findViewById(R.id.button);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
     }
     public void OnImageButton(View view) {
         Intent in = new Intent(getApplicationContext(), Share.class);
         startActivity(in);
+    }
+    private void saveUserData(){
+        String highlight1 =editTextH1.getText().toString().trim();
+        String highlight2 =editTextH2.getText().toString().trim();
+        String highlight3 =editTextH3.getText().toString().trim();
+
+        StoreHighlightDay highlights = new StoreHighlightDay(highlight1,highlight2,highlight3);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        databaseReference.child(user.getUid()).push().setValue(highlights);
+        Toast.makeText(this,"Information Saved...", Toast.LENGTH_LONG).show();
+    }
+
+    public void onSubmitData(View view){
+        saveUserData();
     }
 
     public void onBtnBack(View view) {
