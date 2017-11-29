@@ -92,7 +92,7 @@ public class AccountLogin extends AppCompatActivity {
             return;
         }
         if (password.length() < 6) {
-            editTextPassword.setError("Length should be 6");
+            editTextPassword.setError("Length should be greater than or equal to 6");
             editTextPassword.requestFocus();
             return;
         }

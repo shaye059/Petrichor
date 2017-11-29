@@ -6,6 +6,8 @@ import android.view.View;
 
 public class MyProfile extends AppCompatActivity {
 
+    Account acc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

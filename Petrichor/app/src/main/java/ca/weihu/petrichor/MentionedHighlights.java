@@ -5,7 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class MentionedHighlights extends AppCompatActivity {
+public class MentionedHighlights extends AppCompatActivity implements HighlightCollection{
+
+    @Override
+    public Highlight[] returnHighlight() {
+        return new Highlight[0];
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
