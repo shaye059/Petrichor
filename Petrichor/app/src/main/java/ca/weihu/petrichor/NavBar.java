@@ -98,7 +98,7 @@ public class NavBar extends AppCompatActivity
             Intent in = new Intent(getApplicationContext(), HelpHowToUse.class);
             startActivity(in);
         } else if (id == R.id.nav_about) {
-            Intent in = new Intent(getApplicationContext(), Help.class);
+            Intent in = new Intent(getApplicationContext(), About.class);
             startActivity(in);
         }
 
