@@ -7,4 +7,9 @@ package ca.weihu.petrichor;
  * @author      Galacticos
  */
 public class Contacts implements HighlightCollection {
+
+    //Account[]
+
+    //public Contacts
+
 }
