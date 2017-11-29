@@ -7,4 +7,9 @@ package ca.weihu.petrichor;
  * @author      Galacticos
  */
 public class RandomCollection implements HighlightCollection {
+
+    @Override
+    public Highlight[] returnHighlight() {
+        return new Highlight[0];
+    }
 }

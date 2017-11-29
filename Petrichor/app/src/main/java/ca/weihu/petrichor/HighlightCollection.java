@@ -7,4 +7,7 @@ package ca.weihu.petrichor;
  * @author      Galacticos
  */
 public interface HighlightCollection {
+
+    Highlight[] returnHighlight();
+
 }
