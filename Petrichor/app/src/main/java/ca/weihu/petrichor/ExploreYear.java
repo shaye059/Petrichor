@@ -16,7 +16,7 @@ public class ExploreYear extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
-    public void onBtnBack(View view) {
+    public void conBtnBak(View view) {
         onBackPressed();
     }
 }
