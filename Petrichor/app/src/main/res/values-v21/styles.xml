@@ -6,6 +6,7 @@
         <item name="android:colorForeground">@android:color/holo_blue_light</item>
         <item name="android:navigationBarColor">@android:color/holo_blue_light</item>
         <item name="android:statusBarColor">@android:color/holo_blue_light</item>
+        <item name="android:fontFamily">@font/raleway_light</item>
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
@@ -14,6 +15,7 @@
         <item name="android:colorForeground">@android:color/holo_blue_light</item>
         <item name="android:navigationBarColor">@android:color/holo_blue_light</item>
         <item name="android:statusBarColor">@android:color/holo_blue_light</item>
+        <item name="android:fontFamily">@font/raleway_light</item>
         <item name="android:colorPrimary">@android:color/holo_blue_light</item>
     </style>
 </resources>

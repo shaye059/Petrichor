@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/account"
+    android:visibility="visible"
+    tools:context="ca.weihu.petrichor.Home">
+
+    <!-- <a> Please Note: The Buttons Are Already IMPLEMENTED: They are merely invisible. </a> -->
+
+    <RelativeLayout
+        android:id="@+id/relLay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/textViewLoginUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/editTextLoginUsername"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="9dp"
+            android:fontFamily="@font/julius_sans"
+            android:text="Username"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editTextLoginUsername"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textViewLoginPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="64dp"
+            android:ems="10"
+            android:fontFamily="MS Reference Sans Serif"
+            android:inputType="textPersonName"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textViewLoginPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/editTextLoginPassword"
+            android:layout_alignStart="@+id/textViewLoginUsername"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/julius_sans"
+            android:text="Password"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editTextLoginPassword"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonLogin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="17dp"
+            android:ems="10"
+            android:fontFamily="MS Reference Sans Serif"
+            android:inputType="textPassword"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="400dp"
+            android:layout_height="75dp"
+            android:layout_above="@+id/btnAccCreate"
+            android:layout_alignParentStart="true"
+            android:layout_column="3"
+            android:layout_marginBottom="33dp"
+            android:layout_row="3"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/raleway_thin"
+            android:onClick="onLogin"
+            android:text="login"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="36sp"
+            android:visibility="visible"
+            tools:ignore="HardcodedText,InefficientWeight,MissingConstraints,ObsoleteLayoutParam"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="449dp"
+            tools:onClick="OnExploreButton" />
+
+        <Button
+            android:id="@+id/btnAccCreate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="27dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/raleway_thin"
+            android:onClick="onAccountCreate"
+            android:text="create account"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="36sp"
+            tools:layout_editor_absoluteX="146dp"
+            tools:layout_editor_absoluteY="260dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_alignBottom="@+id/textViewLoginUsername"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="57dp"
+            app:srcCompat="@drawable/icon" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
