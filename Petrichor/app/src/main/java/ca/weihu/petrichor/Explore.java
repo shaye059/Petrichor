@@ -53,4 +53,7 @@ public class Explore extends AppCompatActivity {
     public void onBtnBack(View view) {
         onBackPressed();
     }
+
+    public void onTaggedMemories(View view) {
+    }
 }

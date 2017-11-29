@@ -9,7 +9,7 @@ import android.view.View;
  * Created by divya on 11/10/2017.
  */
 
-public class Share extends AppCompatActivity {
+public class Friends extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -22,7 +22,7 @@ public class Share extends AppCompatActivity {
     }
 
     public void onTaggedMemories(View view) {
-        Intent in = new Intent(getApplicationContext(), SharedMemory.class);
+        Intent in = new Intent(getApplicationContext(), MentionedHighlights.class);
         startActivity(in);
     }
 

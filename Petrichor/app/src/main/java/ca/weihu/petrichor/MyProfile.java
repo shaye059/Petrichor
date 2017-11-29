@@ -16,4 +16,7 @@ public class MyProfile extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
+    public void onBtnBack(View view) {
+        onBackPressed();
+    }
 }

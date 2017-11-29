@@ -67,7 +67,7 @@ public class Today extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
     }
     public void OnImageButton(View view) {
-        Intent in = new Intent(getApplicationContext(), Share.class);
+        Intent in = new Intent(getApplicationContext(), Friends.class);
         startActivity(in);
     }
     private void saveUserData(){

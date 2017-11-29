@@ -29,8 +29,8 @@
         <activity android:name=".ExploreYear" />
         <activity android:name=".ExploreTodayInThePast" />
         <activity android:name=".ExploreVisitARandomDay" />
-        <activity android:name=".Share" />
-        <activity android:name=".SharedMemory" />
+        <activity android:name=".Friends" />
+        <activity android:name=".MentionedHighlights" />
         <activity android:name=".Highlights" />
         <activity android:name=".TimePeriodActivity" />
         <activity android:name=".Past" />
