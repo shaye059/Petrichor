@@ -39,8 +39,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="64dp"
             android:ems="10"
-            android:fontFamily="MS Reference Sans Serif"
+            android:fontFamily="@font/raleway_thin"
             android:inputType="textPersonName"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="30sp" />
 
         <TextView
@@ -63,8 +64,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="17dp"
             android:ems="10"
-            android:fontFamily="MS Reference Sans Serif"
+            android:fontFamily="@font/raleway_thin"
             android:inputType="textPassword"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="30sp" />
 
         <Button
@@ -99,7 +101,7 @@
             android:layout_marginBottom="25dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
-            android:onClick="onAccountCreate"
+            android:onClick="onCreate"
             android:text="create account"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
