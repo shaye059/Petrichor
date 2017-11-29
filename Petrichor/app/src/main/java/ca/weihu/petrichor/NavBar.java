@@ -84,15 +84,22 @@ public class NavBar extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-
+            Intent in = new Intent(getApplicationContext(), MyProfile.class);
+            startActivity(in);
         } else if (id == R.id.nav_friends) {
-
+            Intent in = new Intent(getApplicationContext(), Today.class);
+            startActivity(in);
         } else if (id == R.id.nav_logout) {
-
+            Intent in = new Intent(getApplicationContext(), AccountLogin.class);
+            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(in);
+            finish();
         }  else if (id == R.id.nav_help) {
-
+            Intent in = new Intent(getApplicationContext(), HelpHowToUse.class);
+            startActivity(in);
         } else if (id == R.id.nav_about) {
-
+            Intent in = new Intent(getApplicationContext(), Help.class);
+            startActivity(in);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
