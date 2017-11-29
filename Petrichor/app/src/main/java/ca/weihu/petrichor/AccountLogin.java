@@ -74,8 +74,9 @@ public class AccountLogin extends AppCompatActivity {
 
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        UserInfo info = new UserInfo(username, password);
 
-        if (username.isEmpty()) {
+        if (info.getUsername() == null) {
             editTextUsername.setError("Email is required");
             editTextUsername.requestFocus();
             return;
@@ -86,7 +87,7 @@ public class AccountLogin extends AppCompatActivity {
             editTextUsername.requestFocus();
             return;
         }
-        if (password.isEmpty()) {
+        if (info.getPassword()==null) {
             editTextPassword.setError("Password is required");
             editTextPassword.requestFocus();
             return;

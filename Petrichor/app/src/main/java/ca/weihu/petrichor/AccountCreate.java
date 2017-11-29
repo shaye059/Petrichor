@@ -65,8 +65,9 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
     private void registerUser(){
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        UserInfo info = new UserInfo(username, password);
 
-        if (username.isEmpty()){
+        if (info.getUsername() == null){
             editTextUsername.setError("Email is required");
             editTextUsername.requestFocus();
             return;
@@ -77,12 +78,12 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
             editTextUsername.requestFocus();
             return;
         }
-        if (password.isEmpty()){
+        if (info.getPassword() == null){
             editTextPassword.setError("Password is required");
             editTextPassword.requestFocus();
             return;
         }
-        if (password.length()<6){
+        if (info.getPassword().length()<6){
             editTextPassword.setError("Length should be 6");
             editTextPassword.requestFocus();
             return;
