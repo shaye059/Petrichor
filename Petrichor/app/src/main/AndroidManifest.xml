@@ -31,7 +31,7 @@
         <activity android:name=".ExploreVisitARandomDay" />
         <activity android:name=".Friends" />
         <activity android:name=".MentionedHighlights" />
-        <activity android:name=".Highlights" />
+        <activity android:name=".Highlight" />
         <activity android:name=".TimePeriodActivity" />
         <activity android:name=".Past" />
 
