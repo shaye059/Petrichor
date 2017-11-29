@@ -15,4 +15,6 @@ public class TimePeriod {
 
     private int identifier;
 
+    private TimePeriod parent;
+
 }

@@ -8,8 +8,6 @@ package ca.weihu.petrichor;
  */
 public class Contacts {
 
-    //Account[]
-
-    //public Contacts
+    public Account[] contacts;
 
 }
