@@ -4,24 +4,45 @@ import android.app.ActivityManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.*;
+
 
 import java.util.List;
 
 public class AccountLogin extends AppCompatActivity {
 
     private RelativeLayout relLayout = null;
+    FirebaseAuth mAuth;
+    EditText editTextUsername, editTextPassword;
+    ProgressBar progressBar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_login);
+        mAuth = FirebaseAuth.getInstance();
+
 
         hideSystemUI();
 
@@ -32,7 +53,7 @@ public class AccountLogin extends AppCompatActivity {
 
         relLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event){
+            public boolean onTouch(View v, MotionEvent event) {
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -40,6 +61,58 @@ public class AccountLogin extends AppCompatActivity {
                 hideSystemUI();
 
                 return true;
+            }
+        });
+
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        editTextUsername = (EditText) findViewById(R.id.editTextLoginUsername);
+        editTextPassword = (EditText) findViewById(R.id.editTextLoginPassword);
+
+
+    }
+
+    private void userLogin(){
+
+
+        String username = editTextUsername.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        if (username.isEmpty()){
+            editTextUsername.setError("Email is required");
+            editTextUsername.requestFocus();
+            return;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(username).matches()){
+            editTextUsername.setError("Please enter a valid email");
+            editTextUsername.requestFocus();
+            return;
+        }
+        if (password.isEmpty()){
+            editTextPassword.setError("Password is required");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if (password.length()<6){
+            editTextPassword.setError("Length should be 6");
+            editTextPassword.requestFocus();
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                progressBar.setVisibility(View.GONE);
+                if (task.isSuccessful()){
+                    Intent intent = new Intent(getApplicationContext(), NavBar.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Some error occured", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -86,8 +159,7 @@ public class AccountLogin extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
-        Intent in = new Intent(getApplicationContext(), NavBar.class);
-        startActivity(in);
+        userLogin();
     }
     public void onAccountCreate(View view) {
         Intent in = new Intent(getApplicationContext(), AccountCreate.class);
@@ -107,8 +179,8 @@ public class AccountLogin extends AppCompatActivity {
         if (hasFocus) {
             hideSystemUI();
 
-        // When the window loses focus (e.g. the action overflow is shown),
-        // cancel any pending hide action.
+            // When the window loses focus (e.g. the action overflow is shown),
+            // cancel any pending hide action.
         } else {
             hideSystemUI();
         }
@@ -118,7 +190,8 @@ public class AccountLogin extends AppCompatActivity {
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 }
+

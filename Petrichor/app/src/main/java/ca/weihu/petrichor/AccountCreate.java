@@ -1,16 +1,32 @@
 package ca.weihu.petrichor;
 
+import android.accounts.Account;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.view.View.OnClickListener;
+import android.util.*;
+import android.widget.Toast;
 
-public class AccountCreate extends AppCompatActivity {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+
+public class AccountCreate extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout relLayout = null;
+    EditText editTextUsername, editTextPassword;
+    private FirebaseAuth mAuth;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +55,73 @@ public class AccountCreate extends AppCompatActivity {
                 return true;
             }
         });
+
+        editTextUsername = (EditText) findViewById(R.id.editTextCreateUsername3);
+        editTextPassword = (EditText) findViewById(R.id.editTextCreatePassword3);
+        mAuth = FirebaseAuth.getInstance();
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
     }
+
+    private void registerUser(){
+        String username = editTextUsername.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        if (username.isEmpty()){
+            editTextUsername.setError("Email is required");
+            editTextUsername.requestFocus();
+            return;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(username).matches()){
+            editTextUsername.setError("Please enter a valid email");
+            editTextUsername.requestFocus();
+            return;
+        }
+        if (password.isEmpty()){
+            editTextPassword.setError("Password is required");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if (password.length()<6){
+            editTextPassword.setError("Length should be 6");
+            editTextPassword.requestFocus();
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        mAuth.createUserWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                progressBar.setVisibility(View.GONE);
+                if (task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if (task.getException()instanceof FirebaseAuthUserCollisionException){
+                        Toast.makeText(getApplicationContext(), "You are already registered", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Some error occured", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+    }
+    @Override
+    public void onClick(View v) {
+    switch(v.getId()){
+        case R.id.buttonCreate:
+            registerUser();
+            break;
+        case R.id.accCreateRelLay:
+            startActivity(new Intent(this, AccountLogin.class));
+            break;
+    }
+    }
+
+
+
 
     public void onAccountCreate(View view) {
         Intent in = new Intent(getApplicationContext(), NavBar.class);
@@ -77,4 +159,7 @@ public class AccountCreate extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
+
+
+
 }

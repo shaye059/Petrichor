@@ -49,6 +49,7 @@
             android:layout_centerHorizontal="true"
             android:background="@android:color/transparent"
             android:fontFamily="@font/julius_sans"
+            android:onClick="onSubmitData"
             android:text="submit"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
