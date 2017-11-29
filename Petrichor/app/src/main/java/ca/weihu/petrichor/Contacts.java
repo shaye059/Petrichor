@@ -1,8 +1,10 @@
 package ca.weihu.petrichor;
 
 /**
- * Created by Tri-An on November 28, 2017.
+ * Class TimePeriodCollection
+ *
+ * @version     1.0 Tuesday, November 28, 2017
+ * @author      Galacticos
  */
-
 public class Contacts implements HighlightCollection {
 }

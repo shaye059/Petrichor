@@ -32,7 +32,7 @@
         <activity android:name=".Share" />
         <activity android:name=".SharedMemory" />
         <activity android:name=".Highlights" />
-        <activity android:name=".TimePeriod" />
+        <activity android:name=".TimePeriodActivity" />
         <activity android:name=".Past" />
 
         <meta-data
