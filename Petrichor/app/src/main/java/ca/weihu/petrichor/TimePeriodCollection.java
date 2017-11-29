@@ -5,4 +5,11 @@ package ca.weihu.petrichor;
  */
 
 public class TimePeriodCollection implements HighlightCollection {
+
+    TimePeriod[] timePeriods;
+
+    @Override
+    public Highlight[] returnHighlight() {
+        return new Highlight[0];
+    }
 }

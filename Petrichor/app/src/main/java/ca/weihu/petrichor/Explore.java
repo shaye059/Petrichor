@@ -22,7 +22,7 @@ public class Explore extends AppCompatActivity {
         startActivity(in);
     }
     public void OnHighlightsButton(View view) {
-        Intent in = new Intent(getApplicationContext(), Highlights.class);
+        Intent in = new Intent(getApplicationContext(), Highlight.class);
         startActivity(in);
     }
     public void OnPastButton(View view) {

@@ -3,15 +3,25 @@ package ca.weihu.petrichor;
 /**
  * Class TimePeriodCollection
  *
- * @version     1.0 Tuesday, November 28, 2017
- * @author      Galacticos
+ * @author Galacticos
+ * @version 1.0 Tuesday, November 28, 2017
  */
 public class TimePeriod {
 
-    private enum TimePeriodLabel {
+    private TimePeriodLabel label;
+    private int identifier;
+    private TimePeriod parent;
 
+    private enum TimePeriodLabel {
         DAY, WEEK, MONTH, YEAR
     }
 
-    private int identifier;
+    public void setType(TimePeriodLabel x) {
+        label = x;
+    }
+
+    public void setIdentifier(int x) {
+        identifier = x;
+    }
+
 }

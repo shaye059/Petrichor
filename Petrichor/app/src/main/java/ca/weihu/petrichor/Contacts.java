@@ -6,5 +6,8 @@ package ca.weihu.petrichor;
  * @version     1.0 Tuesday, November 28, 2017
  * @author      Galacticos
  */
-public class Contacts implements HighlightCollection {
+public class Contacts {
+
+    public Account[] contacts;
+
 }

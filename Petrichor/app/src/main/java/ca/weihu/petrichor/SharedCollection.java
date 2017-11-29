@@ -5,4 +5,8 @@ package ca.weihu.petrichor;
  */
 
 public class SharedCollection implements HighlightCollection {
+
+    public Highlight[] returnHighlight() {
+        return null;
+    }
 }

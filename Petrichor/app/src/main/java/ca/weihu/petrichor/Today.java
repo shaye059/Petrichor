@@ -19,6 +19,8 @@ import com.google.firebase.auth.*;
 
 public class Today extends AppCompatActivity {
 
+    TimePeriod day;
+
     private RelativeLayout relLayout = null;
     private DatabaseReference databaseReference;
     private Button buttonSubmit1;
@@ -26,6 +28,11 @@ public class Today extends AppCompatActivity {
     private EditText editTextH2;
     private EditText editTextH3;
     private FirebaseAuth firebaseAuth;
+
+    public Today () {
+        day = new TimePeriod();
+
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
