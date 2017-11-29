@@ -159,7 +159,7 @@ public class AccountLogin extends AppCompatActivity {
         userLogin();
     }
 
-    public void onAccountCreate(View view) {
+    public void onCreate(View view) {
         Intent in = new Intent(getApplicationContext(), AccountCreate.class);
         startActivity(in);
     }

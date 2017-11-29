@@ -84,7 +84,7 @@ public class NavBar extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_friends) {
 
         } else if (id == R.id.nav_logout) {

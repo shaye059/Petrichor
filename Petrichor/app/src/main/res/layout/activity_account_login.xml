@@ -83,6 +83,7 @@
             android:fontFamily="@font/raleway_thin"
             android:onClick="onLogin"
             android:text="login"
+            android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
             android:textSize="36sp"
