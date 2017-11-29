@@ -7,6 +7,8 @@ import android.view.View;
 
 public class Highlight extends AppCompatActivity implements HighlightCollection {
 
+    Account[] sharedAccount;
+
     @Override
     public Highlight[] returnHighlight() {
         return new Highlight[0];
