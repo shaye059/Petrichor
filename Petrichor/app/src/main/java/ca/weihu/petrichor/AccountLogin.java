@@ -36,7 +36,6 @@ public class AccountLogin extends AppCompatActivity {
     ProgressBar progressBar;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,32 +67,31 @@ public class AccountLogin extends AppCompatActivity {
         editTextUsername = (EditText) findViewById(R.id.editTextLoginUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextLoginPassword);
 
-
     }
 
-    private void userLogin(){
+    private void userLogin() {
 
 
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        if (username.isEmpty()){
+        if (username.isEmpty()) {
             editTextUsername.setError("Email is required");
             editTextUsername.requestFocus();
             return;
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(username).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(username).matches()) {
             editTextUsername.setError("Please enter a valid email");
             editTextUsername.requestFocus();
             return;
         }
-        if (password.isEmpty()){
+        if (password.isEmpty()) {
             editTextPassword.setError("Password is required");
             editTextPassword.requestFocus();
             return;
         }
-        if (password.length()<6){
+        if (password.length() < 6) {
             editTextPassword.setError("Length should be 6");
             editTextPassword.requestFocus();
             return;
@@ -101,16 +99,15 @@ public class AccountLogin extends AppCompatActivity {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Intent intent = new Intent(getApplicationContext(), NavBar.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
-                }
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Some error occured", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -126,11 +123,11 @@ public class AccountLogin extends AppCompatActivity {
         // check if activity_account_login is last in the stack and if so then show warning
         // https://stackoverflow.com/questions/5975811/how-to-check-if-an-activity-is-the-last-one-in-the-activity-stack-for-an-applica
 
-        ActivityManager mngr = (ActivityManager) getSystemService( ACTIVITY_SERVICE );
+        ActivityManager mngr = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 
         List<ActivityManager.RunningTaskInfo> taskList = mngr.getRunningTasks(10);
 
-        if(taskList.get(0).numActivities == 1 &&
+        if (taskList.get(0).numActivities == 1 &&
                 taskList.get(0).topActivity.getClassName().equals(this.getClass().getName())) {
 
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -161,6 +158,7 @@ public class AccountLogin extends AppCompatActivity {
     public void onLogin(View view) {
         userLogin();
     }
+
     public void onAccountCreate(View view) {
         Intent in = new Intent(getApplicationContext(), AccountCreate.class);
         startActivity(in);
@@ -193,5 +191,5 @@ public class AccountLogin extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
-}
 
+}
