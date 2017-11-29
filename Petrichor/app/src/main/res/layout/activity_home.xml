@@ -57,13 +57,10 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@android:color/transparent"
+        android:onClick="onNavBarButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_navbar" /><![CDATA[
+        app:srcCompat="@drawable/ic_navbar" />
 
 
-
-    >>>>>>> 289deb50cbf5431a6f32fff73a9ba402b7b304f3
-
-]]>
 </android.support.constraint.ConstraintLayout>

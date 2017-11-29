@@ -1,5 +1,6 @@
 package ca.weihu.petrichor;
 
+import android.app.ActivityManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 
+
+import java.util.List;
 
 public class AccountLogin extends AppCompatActivity {
 
@@ -103,7 +106,7 @@ public class AccountLogin extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()){
-                    Intent intent = new Intent(getApplicationContext(), Home.class);
+                    Intent intent = new Intent(getApplicationContext(), NavBar.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
@@ -120,21 +123,35 @@ public class AccountLogin extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setTitle("Closing App");
-        dialogBuilder.setMessage("Do you really want to exit?");
+        // check if activity_account_login is last in the stack and if so then show warning
+        // https://stackoverflow.com/questions/5975811/how-to-check-if-an-activity-is-the-last-one-in-the-activity-stack-for-an-applica
 
-        dialogBuilder.setNegativeButton("No", null);
+        ActivityManager mngr = (ActivityManager) getSystemService( ACTIVITY_SERVICE );
 
-        dialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            //@Override
-            public void onClick(DialogInterface dialog, int n) {
-                AccountLogin.super.onBackPressed();
-            }
-        });
+        List<ActivityManager.RunningTaskInfo> taskList = mngr.getRunningTasks(10);
 
-        final AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.show();
+        if(taskList.get(0).numActivities == 1 &&
+                taskList.get(0).topActivity.getClassName().equals(this.getClass().getName())) {
+
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            dialogBuilder.setTitle("Closing App");
+            dialogBuilder.setMessage("Do you really want to exit?");
+
+            dialogBuilder.setNegativeButton("No", null);
+
+            dialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                //@Override
+                public void onClick(DialogInterface dialog, int n) {
+                    AccountLogin.super.onBackPressed();
+                }
+            });
+
+            final AlertDialog alertDialog = dialogBuilder.create();
+            alertDialog.show();
+
+        } else {
+            AccountLogin.super.onBackPressed();
+        }
     }
 
     public void onBtnBack(View view) {
@@ -144,7 +161,6 @@ public class AccountLogin extends AppCompatActivity {
     public void onLogin(View view) {
         userLogin();
     }
-
     public void onAccountCreate(View view) {
         Intent in = new Intent(getApplicationContext(), AccountCreate.class);
         startActivity(in);
