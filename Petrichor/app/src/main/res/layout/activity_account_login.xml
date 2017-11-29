@@ -15,6 +15,7 @@
         android:id="@+id/relLay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/home"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
@@ -118,13 +119,14 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="57dp"
             app:srcCompat="@drawable/icon" />
+
         <ProgressBar
+            android:id="@+id/progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:id="@+id/progressbar"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
