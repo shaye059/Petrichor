@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MyProfile extends AppCompatActivity {
     private TextView userEmail;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("userinfo");
 
     Account acc;
 
