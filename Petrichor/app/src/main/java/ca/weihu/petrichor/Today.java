@@ -11,15 +11,29 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.auth.*;
 
 
 public class Today extends AppCompatActivity {
 
     TimePeriod day;
+    boolean updateDatabase;
+    boolean isWeek;
+    boolean isMonth;
+    boolean isYear;
+
+    /*
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(mar.getEventDate());
+    int day = cal.get(Calendar.DAY_OF_MONTH);
+    int month = cal.get(Calendar.MONTH)
+    int year = cal.get(Calendar.YEAR)
+    int weekCounter;
+
+     */
 
     private RelativeLayout relLayout = null;
     private DatabaseReference databaseReference;
@@ -29,18 +43,18 @@ public class Today extends AppCompatActivity {
     private EditText editTextH3;
     private FirebaseAuth firebaseAuth;
 
-    public Today () {
-        day = new TimePeriod();
+    public Today() {
 
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_today);getWindow().getDecorView().setSystemUiVisibility(
+        setContentView(R.layout.activity_today);
+        getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
 
         // code to hide keyboard when relative layout is touched
@@ -49,7 +63,7 @@ public class Today extends AppCompatActivity {
 
         relLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event){
+            public boolean onTouch(View v, MotionEvent event) {
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -59,8 +73,8 @@ public class Today extends AppCompatActivity {
                 return true;
             }
         });
-        firebaseAuth=FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser()==null){
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, AccountLogin.class));
         }
@@ -69,27 +83,29 @@ public class Today extends AppCompatActivity {
         editTextH1 = (EditText) findViewById(R.id.editText);
         editTextH2 = (EditText) findViewById(R.id.editText3);
         editTextH3 = (EditText) findViewById(R.id.editText4);
-        buttonSubmit1 = (Button)findViewById(R.id.button);
+        buttonSubmit1 = (Button) findViewById(R.id.button);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
     }
+
     public void OnImageButton(View view) {
         Intent in = new Intent(getApplicationContext(), Friends.class);
         startActivity(in);
     }
-    private void saveUserData(){
-        String highlight1 =editTextH1.getText().toString().trim();
-        String highlight2 =editTextH2.getText().toString().trim();
-        String highlight3 =editTextH3.getText().toString().trim();
 
-        StoreHighlightDay highlights = new StoreHighlightDay(highlight1,highlight2,highlight3);
+    private void saveUserData() {
+        String highlight1 = editTextH1.getText().toString().trim();
+        String highlight2 = editTextH2.getText().toString().trim();
+        String highlight3 = editTextH3.getText().toString().trim();
+
+        StoreHighlightDay highlights = new StoreHighlightDay(highlight1, highlight2, highlight3);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databaseReference.child(user.getUid()).push().setValue(highlights);
-        Toast.makeText(this,"Information Saved...", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Information Saved...", Toast.LENGTH_LONG).show();
     }
 
-    public void onSubmitData(View view){
+    public void onSubmitData(View view) {
         saveUserData();
     }
 
@@ -116,11 +132,12 @@ public class Today extends AppCompatActivity {
             hideSystemUI();
         }
     }
+
     // hides status bar and navbar
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 }
