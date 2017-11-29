@@ -46,4 +46,10 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), NavBar.class);
         startActivity(intent);
     }
+
+    public void onCreate(View view) {
+    }
+
+    public void onLogin(View view) {
+    }
 }
