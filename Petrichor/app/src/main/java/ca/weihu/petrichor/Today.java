@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Array;
+
 
 public class Today extends AppCompatActivity {
 
@@ -24,7 +26,7 @@ public class Today extends AppCompatActivity {
     boolean isWeek;
     boolean isMonth;
     boolean isYear;
-
+    String [] memories = new String[2];
     /*
     Calendar cal = Calendar.getInstance();
     cal.setTime(mar.getEventDate());
@@ -85,7 +87,6 @@ public class Today extends AppCompatActivity {
         editTextH3 = (EditText) findViewById(R.id.editText4);
         buttonSubmit1 = (Button) findViewById(R.id.button);
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
     }
 
     public void OnImageButton(View view) {
@@ -98,12 +99,24 @@ public class Today extends AppCompatActivity {
         String highlight2 = editTextH2.getText().toString().trim();
         String highlight3 = editTextH3.getText().toString().trim();
 
-        StoreHighlightDay highlights = new StoreHighlightDay(highlight1, highlight2, highlight3);
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        databaseReference.child(user.getUid()).push().setValue(highlights);
-        Toast.makeText(this, "Information Saved...", Toast.LENGTH_LONG).show();
+
+        Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
+
+        in.putExtra("Highlight 1", highlight1);
+        in.putExtra("Highlight 2", highlight2);
+        in.putExtra("Highlight 3", highlight3);
+        startActivity(in);
+
+        Intent in2 = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
+
+        in2.putExtra("Highlight 1", highlight1);
+        in2.putExtra("Highlight 2", highlight2);
+        in2.putExtra("Highlight 3", highlight3);
+        startActivity(in2);
     }
+
+
 
     public void onSubmitData(View view) {
         saveUserData();

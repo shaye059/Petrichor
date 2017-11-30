@@ -19,11 +19,14 @@ public class ExploreVisitARandomDay extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         ListView list = (ListView) findViewById(R.id.listView);
 
-        ArrayList<String> random = new ArrayList<String>();
+        String n1 = getIntent().getExtras().getString("Highlight 1");
+        String n2 = getIntent().getExtras().getString("Highlight 2");
+        String n3 = getIntent().getExtras().getString("Highlight 3");
 
-        random.add("ATE APPLE");
-        random.add("ATE ORANGE");
-        random.add("ATE BANANA");
+        ArrayList<String> random = new ArrayList<String>();
+        random.add(n1);
+        random.add(n2);
+        random.add(n3);
 
 
 // Now create adapter
