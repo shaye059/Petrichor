@@ -36,7 +36,7 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mAuth;
     ProgressBar progressBar;
 
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference accountsRef = database.getReference("accounts");
 
     // Write a message to the database
