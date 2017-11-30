@@ -35,7 +35,7 @@ public class MentionedHighlights extends AppCompatActivity implements HighlightC
 
 // Now create adapter
 
-        MyAdapter adapter=new MyAdapter(this, mentionedHighlight);
+        MyDeleteAdapter adapter=new MyDeleteAdapter(this, mentionedHighlight);
 
 // NOw Set This Adapter to listview
         list.setAdapter(adapter);
