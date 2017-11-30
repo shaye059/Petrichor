@@ -1,6 +1,5 @@
 package ca.weihu.petrichor;
 
-import android.accounts.Account;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -20,18 +19,34 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+import ca.weihu.petrichor.Account;
 
 public class AccountCreate extends AppCompatActivity implements View.OnClickListener {
+    private Account account;
 
     private RelativeLayout relLayout = null;
     EditText editTextUsername, editTextPassword;
     private FirebaseAuth mAuth;
     ProgressBar progressBar;
 
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference accountsRef = database.getReference("accounts");
+
+    // Write a message to the database
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_create);
+
 
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -63,11 +78,11 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
     }
 
     private void registerUser(){
-        String username = editTextUsername.getText().toString().trim();
+        final String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        UserInfo info = new UserInfo(username, password);
+        account = new ca.weihu.petrichor.Account(username);
 
-        if (info.getUsername() == null){
+        if (username.isEmpty()){
             editTextUsername.setError("Email is required");
             editTextUsername.requestFocus();
             return;
@@ -78,12 +93,12 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
             editTextUsername.requestFocus();
             return;
         }
-        if (info.getPassword() == null){
+        if (password.isEmpty()){
             editTextPassword.setError("Password is required");
             editTextPassword.requestFocus();
             return;
         }
-        if (info.getPassword().length()<6){
+        if (password.length()<6){
             editTextPassword.setError("Length should be 6");
             editTextPassword.requestFocus();
             return;
@@ -91,12 +106,17 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.createUserWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(account.getUsername(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    String userID = user.getUid();
+
+                    accountsRef.child(userID).setValue(account);
+
                 }
                 else{
                     if (task.getException()instanceof FirebaseAuthUserCollisionException){

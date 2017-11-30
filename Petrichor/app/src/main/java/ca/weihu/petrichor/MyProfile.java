@@ -2,6 +2,7 @@ package ca.weihu.petrichor;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,7 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 public class MyProfile extends AppCompatActivity {
     private TextView userEmail;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("userinfo");
+    private DatabaseReference mAccountReference;
+    private ValueEventListener mValueListener;
+    private static final String TAG = "Unable to update";
 
     Account acc;
 
@@ -31,9 +34,10 @@ public class MyProfile extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        displayInfo();
+        //displayInfo();
     }
-    public void displayInfo(){
+
+    /*public void displayInfo(){
         FirebaseUser userid = firebaseAuth.getCurrentUser();
         userEmail =(TextView) findViewById(R.id.nameView);
 
@@ -49,7 +53,22 @@ public class MyProfile extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
+    ValueEventListener accountListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            // Get Post object and use the values to update the UI
+            Account account = dataSnapshot.getValue(Account.class);
+            // ...
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+        }
+
+    };
+
     public void onBtnBack(View view) {
         onBackPressed();
     }
