@@ -40,7 +40,7 @@ public class MyDeleteAdapter extends ArrayAdapter<String> {
             public void onClick(View v) {
                 // It will change textview text :
 
-                list_Txt.setText("Successfully Deleted");
+                list_Txt.setText("Successfully Deleted Friend");
 
             }
         });

@@ -40,7 +40,7 @@ public class MyShareAdapter extends ArrayAdapter<String> {
             public void onClick(View v) {
                 // It will change textview text :
                 CharSequence haha = list_Txt.getText();
-                list_Txt.setText("Shared to " + haha);
+                list_Txt.setText("Successfully Shared Memory");
 
             }
         });
