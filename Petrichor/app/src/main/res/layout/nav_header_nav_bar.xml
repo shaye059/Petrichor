@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/userName"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
+    android:layout_height="200dp"
     android:background="@color/colorPrimaryDark"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -26,10 +26,11 @@
         android:id="@+id/nameView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/julius_sans"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Name"
+        android:text="test@SEG2105.ca"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="20sp" />
+        android:textSize="25sp" />
 
 </LinearLayout>

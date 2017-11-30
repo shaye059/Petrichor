@@ -64,6 +64,7 @@
             tools:ignore="HardcodedText,InefficientWeight" />
 
         <ListView
+            android:id="@+id/listFriends"
             android:layout_width="match_parent"
             android:layout_height="307dp"
             android:layout_above="@+id/textViewTaggedMem"
