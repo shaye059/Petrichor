@@ -16,8 +16,8 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/btnBack13"
             android:fontFamily="@font/julius_sans"
             android:text="- Daily Highlights: Share your 3 highlights of the day.\n\n- Highlights of the Week: Choose your best 3 moments from the daily highlights you have collected throughout the week.\n\n- Highlights of the Month: Choose your best 3 moments from the weekly highlights you have collected throughout the month.\n\n- Highlights of the Year: Choose your best 3 moments from the monthly highlights you have collected throughout the year.\n\n\nShare!"
             android:textAlignment="center"
@@ -28,7 +28,10 @@
             android:id="@+id/btnBack13"
             android:layout_width="89dp"
             android:layout_height="56dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:background="@android:color/transparent"
+            android:onClick="onBtnBack"
             android:visibility="visible" />
 
     </RelativeLayout>

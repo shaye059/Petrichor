@@ -27,7 +27,7 @@ public class MyProfile extends AppCompatActivity {
     private String userID = user.getUid();
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference accountsRef = database.getReference("accounts");
-    private DatabaseReference nameRef = accountsRef.child(userID);
+    //private DatabaseReference nameRef = accountsRef.child(userID);
     private String username;
 
 
@@ -60,6 +60,7 @@ public class MyProfile extends AppCompatActivity {
     }
 
     public void updateName(){
+
         textView.setText(username);
     }
 

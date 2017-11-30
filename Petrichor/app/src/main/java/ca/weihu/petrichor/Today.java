@@ -15,6 +15,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.Query;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class Today extends AppCompatActivity {
@@ -36,18 +45,32 @@ public class Today extends AppCompatActivity {
      */
 
     private RelativeLayout relLayout = null;
-    private DatabaseReference databaseReference;
+
     private Button buttonSubmit1;
     private EditText editTextH1;
     private EditText editTextH2;
     private EditText editTextH3;
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseUser user = firebaseAuth.getCurrentUser();
+    public String userid = user.getUid();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = database.getReference();
+    private DatabaseReference ref2 = database.getReference("dailyhighlights");
+    public String username = user.getEmail();
+    public String highlight1, highlight2, highlight3;
+    public StoreHighlightDay high;
+    public int counter=1;
+    DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    Date today = Calendar.getInstance().getTime();
+    String reportDate = df.format(today);
+
 
     public Today() {
 
     }
 
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_today);
@@ -78,14 +101,11 @@ public class Today extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, AccountLogin.class));
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         editTextH1 = (EditText) findViewById(R.id.editText);
         editTextH2 = (EditText) findViewById(R.id.editText3);
         editTextH3 = (EditText) findViewById(R.id.editText4);
         buttonSubmit1 = (Button) findViewById(R.id.button);
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
     }
 
     public void OnImageButton(View view) {
@@ -93,26 +113,49 @@ public class Today extends AppCompatActivity {
         startActivity(in);
     }
 
-    private void saveUserData() {
-        String highlight1 = editTextH1.getText().toString().trim();
-        String highlight2 = editTextH2.getText().toString().trim();
-        String highlight3 = editTextH3.getText().toString().trim();
+    public void saveUserData() {
+        highlight1 = editTextH1.getText().toString().trim();
+        highlight2 = editTextH2.getText().toString().trim();
+        highlight3 = editTextH3.getText().toString().trim();
 
-        StoreHighlightDay highlights = new StoreHighlightDay(highlight1, highlight2, highlight3);
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        databaseReference.child(user.getUid()).push().setValue(highlights);
-        Toast.makeText(this, "Information Saved...", Toast.LENGTH_LONG).show();
+        StoreHighlightDay h1 = new StoreHighlightDay(highlight1);
+        StoreHighlightDay h2 = new StoreHighlightDay(highlight2);
+        StoreHighlightDay h3 = new StoreHighlightDay(highlight3);
+        //Toast.makeText(this,username, Toast.LENGTH_LONG).show();
+        //databaseReference.child("dailyhighlight");
+        ref2.child((userid.toString())).child(reportDate).child((String.valueOf(counter))).push().setValue(h1);
+        ref2.child((userid.toString())).child(reportDate).child((String.valueOf(counter))).push().setValue(h2);
+        ref2.child((userid.toString())).child(reportDate).child((String.valueOf(counter))).push().setValue(h3);
+        counter++;
     }
 
     public void onSubmitData(View view) {
         saveUserData();
+        /*Query childq= ref2.child(userid).child(reportDate).orderByChild(counter).equalTo(counter);
+        childq.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot single: dataSnapshot.getChildren()){
+                    String high = single.getValue(StoreHighlightDay.class).toString();
+                    editTextH1.setText(high);
+                    editTextH2.setText(high);
+                    editTextH3.setText(high);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
     }
 
     public void onBtnBack(View view) {
+
         onBackPressed();
     }
-
 
     // P R E V E N T I N G  E X I T I N G  F U L L S C R E E N
 

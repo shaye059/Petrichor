@@ -37,10 +37,6 @@ public class NavBar extends AppCompatActivity
         setContentView(R.layout.activity_nav_bar);
 
 
-
-
-
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 

@@ -5,18 +5,15 @@ package ca.weihu.petrichor;
  */
 
 public class StoreHighlightDay {
-    public String highlight1;
-    public String highlight2;
-    public String highlight3;
+    public String highlight;
+
 
     public StoreHighlightDay(){
 
     }
 
-    public StoreHighlightDay(String highlight1, String highlight2, String highlight3){
-        this.highlight1= highlight1;
-        this.highlight2=highlight2;
-        this.highlight3=highlight3;
+    public StoreHighlightDay(String highlight){
+        this.highlight= highlight;
     }
 
 }

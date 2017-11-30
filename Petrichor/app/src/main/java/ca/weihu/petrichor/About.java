@@ -1,5 +1,6 @@
 package ca.weihu.petrichor;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,8 @@ public class About extends AppCompatActivity {
     }
 
     public void onBtnBack(View view) {
-        onBackPressed();
+
+        Intent in = new Intent(getApplicationContext(), NavBar.class);
+        startActivity(in);
     }
 }
