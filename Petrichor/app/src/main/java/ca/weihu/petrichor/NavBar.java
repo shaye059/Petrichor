@@ -89,7 +89,11 @@ public class NavBar extends AppCompatActivity
     private void setName(){
         View navHeaderView = navigationView.getHeaderView(0);
         TextView textView = (TextView) navHeaderView.findViewById(R.id.nameView);
-        textView.setText(account.getname());
+        if(!account.getname().equals("")) {
+            textView.setText(account.getname());
+        }else{
+            textView.setText("Enter Name In Profile");
+        }
     }
 
     public void OnTodayButton(View view) {
