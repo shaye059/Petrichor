@@ -2,7 +2,9 @@ package ca.weihu.petrichor;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -34,56 +36,37 @@ public class Today extends AppCompatActivity {
     boolean isMonth;
     boolean isYear;
 
-    /*
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(mar.getEventDate());
-    int day = cal.get(Calendar.DAY_OF_MONTH);
-    int month = cal.get(Calendar.MONTH)
-    int year = cal.get(Calendar.YEAR)
-    int weekCounter;
-
-     */
-
     private RelativeLayout relLayout = null;
 
     private Button buttonSubmit1;
-    private EditText editTextH1;
-    private EditText editTextH2;
-    private EditText editTextH3;
+    public EditText editTextH1, editTextH2, editTextH3;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = firebaseAuth.getCurrentUser();
     public String userid = user.getUid();
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference();
-    private DatabaseReference ref2 = database.getReference("dailyhighlights");
+    public DatabaseReference ref2 = database.getReference("dailyhighlights");
     public String username = user.getEmail();
-    public String highlight1, highlight2, highlight3;
+    public String highlight1= editTextH1.getText().toString().trim();
+    public String highlight2= editTextH2.getText().toString().trim();
+    public String highlight3= editTextH3.getText().toString().trim();
     public StoreHighlightDay high;
-    public int counter=1;
-    DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-    Date today = Calendar.getInstance().getTime();
-    String reportDate = df.format(today);
-
+    DateFormat df = DateFormat.getDateInstance();
+    String reportDate = (df.format(new Date())).toString();
+    public int counter = 0;
 
     public Today() {
 
     }
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_today);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
-
-        // code to hide keyboard when relative layout is touched
-
         relLayout = (RelativeLayout) findViewById(R.id.todayRelLay);
-
         relLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -96,16 +79,19 @@ public class Today extends AppCompatActivity {
                 return true;
             }
         });
+
+        //Firebase Stuff
         firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() == null) {
+        if (firebaseAuth.getCurrentUser() == null) { //check if user is logged in
             finish();
             startActivity(new Intent(this, AccountLogin.class));
         }
 
-        editTextH1 = (EditText) findViewById(R.id.editText);
-        editTextH2 = (EditText) findViewById(R.id.editText3);
-        editTextH3 = (EditText) findViewById(R.id.editText4);
+        editTextH1 = findViewById(R.id.editText);
+        editTextH2 = findViewById(R.id.editText3);
+        editTextH3 = findViewById(R.id.editText4);
         buttonSubmit1 = (Button) findViewById(R.id.button);
+        test();
     }
 
     public void OnImageButton(View view) {
@@ -113,47 +99,53 @@ public class Today extends AppCompatActivity {
         startActivity(in);
     }
 
-    public void saveUserData() {
-        highlight1 = editTextH1.getText().toString().trim();
-        highlight2 = editTextH2.getText().toString().trim();
-        highlight3 = editTextH3.getText().toString().trim();
+    public void saveUserData(String high1, String high2, String high3) {
 
-        StoreHighlightDay h1 = new StoreHighlightDay(highlight1);
-        StoreHighlightDay h2 = new StoreHighlightDay(highlight2);
-        StoreHighlightDay h3 = new StoreHighlightDay(highlight3);
-        //Toast.makeText(this,username, Toast.LENGTH_LONG).show();
-        //databaseReference.child("dailyhighlight");
-        ref2.child((userid.toString())).child(reportDate).child((String.valueOf(counter))).push().setValue(h1);
-        ref2.child((userid.toString())).child(reportDate).child((String.valueOf(counter))).push().setValue(h2);
-        ref2.child((userid.toString())).child(reportDate).child((String.valueOf(counter))).push().setValue(h3);
-        counter++;
+        String h1 = highlight1;
+        String h2 = highlight2;
+        String h3 = highlight3;
+
+        ref2.child((userid.toString())).child(reportDate).child("Highlight 1").setValue(h1);
+        ref2.child((userid.toString())).child(reportDate).child("Highlight 2").setValue(h2);
+        ref2.child((userid.toString())).child(reportDate).child("Highlight 3").setValue(h3);
+        Toast.makeText(this,"Information Saved", Toast.LENGTH_LONG).show();
     }
 
     public void onSubmitData(View view) {
-        saveUserData();
-        /*Query childq= ref2.child(userid).child(reportDate).orderByChild(counter).equalTo(counter);
-        childq.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot single: dataSnapshot.getChildren()){
-                    String high = single.getValue(StoreHighlightDay.class).toString();
-                    editTextH1.setText(high);
-                    editTextH2.setText(high);
-                    editTextH3.setText(high);
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
+        saveUserData(highlight1,highlight2,highlight3);
     }
 
-    public void onBtnBack(View view) {
 
+    public void test(){
+        ref2.child(userid).child(reportDate).addValueEventListener(new ValueEventListener() {
+
+            @Override
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+               String h1 = (String) dataSnapshot.child("Highlight 1").getValue();
+               String h2 = (String) dataSnapshot.child("Highlight 2").getValue();
+               String h3 = (String) dataSnapshot.child("Highlight 3").getValue();
+
+               editTextH1 = findViewById(R.id.editText);
+               editTextH2 = findViewById(R.id.editText3);
+               editTextH3 = findViewById(R.id.editText4);
+               editTextH1.setHint((CharSequence) h1);
+               editTextH2.setHint((CharSequence) h2);
+               editTextH3.setHint((CharSequence) h3);
+
+                counter = counter+1;
+                if (counter!=0&&((h1=="")||(h2=="")||(h3==""))){
+                    
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(),"database fuckup", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public void onBtnBack(View view) {
         onBackPressed();
     }
 
@@ -175,7 +167,6 @@ public class Today extends AppCompatActivity {
             hideSystemUI();
         }
     }
-
     // hides status bar and navbar
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
