@@ -26,13 +26,23 @@ import com.google.firebase.database.ValueEventListener;
 public class NavBar extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference accountsRef = database.getReference("accounts");
-    private FirebaseUser user = mAuth.getCurrentUser();
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private String userID;
+    private DatabaseReference databaseAccounts;
+    private DatabaseReference ref;
+    NavigationView navigationView;
+    private Account account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance().getInstance();
+        user = mAuth.getCurrentUser();
+        userID = user.getUid();
+        setContentView(R.layout.activity_my_profile);
+        databaseAccounts = FirebaseDatabase.getInstance().getReference();
+        ref = databaseAccounts.child("accounts");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_bar);
 
@@ -41,12 +51,45 @@ public class NavBar extends AppCompatActivity
 
 
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    public void onStart(){
+        super.onStart();
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+                setName();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void showData(DataSnapshot  datasnapshot){
+        Iterable<DataSnapshot> children = datasnapshot.getChildren();
+
+        for(DataSnapshot accountC : children) {
+            if (accountC.getKey().equals(userID)) {
+                account = accountC.getValue(Account.class);
+            }
+        }
+
+    }
+
+    private void setName(){
         View navHeaderView = navigationView.getHeaderView(0);
         TextView textView = (TextView) navHeaderView.findViewById(R.id.nameView);
-        textView.setText(user.getEmail());
+        textView.setText(account.getname());
     }
 
     public void OnTodayButton(View view) {

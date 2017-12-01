@@ -12,20 +12,25 @@ public class Account {
 
     }
 
-    public Account(String username){
+    public Account(String username, String name){
         this.username = username;
+        this.name = name;
     }
 
     public String getUsername(){
         return username;
     }
 
-    public void setName(String name){
+    public void setname(String name){
         this.name = name;
     }
 
-    public String getName(){
+    public String getname(){
         return name;
+    }
+
+    public void setusername(String user){
+        this.username = user;
     }
 
 }
