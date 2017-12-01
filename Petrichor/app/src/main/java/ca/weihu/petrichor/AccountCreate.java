@@ -114,7 +114,6 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                     String userID = user.getUid();
-
                     accountsRef.child(userID).setValue(account);
 
                 }
