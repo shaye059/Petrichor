@@ -13,6 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class NavBar extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -90,8 +93,10 @@ public class NavBar extends AppCompatActivity
             Intent in = new Intent(getApplicationContext(), Friends.class);
             startActivity(in);
         } else if (id == R.id.nav_logout) {
+            //FirebaseAuth.getInstance().signOut();
+            Toast.makeText(this, "Logging out.", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(getApplicationContext(), AccountLogin.class);
-            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            //in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(in);
             finish();
         }  else if (id == R.id.nav_help) {

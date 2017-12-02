@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 public class MentionedHighlights extends AppCompatActivity implements HighlightCollection{
 
-    @Override
+/*    @Override
     public Highlight[] returnHighlight() {
         return new Highlight[0];
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

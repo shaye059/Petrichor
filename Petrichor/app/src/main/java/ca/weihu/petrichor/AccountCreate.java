@@ -21,19 +21,24 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
 import ca.weihu.petrichor.Account;
 
 public class AccountCreate extends AppCompatActivity implements View.OnClickListener {
-    private Account account;
 
     private RelativeLayout relLayout = null;
+
     EditText editTextUsername, editTextPassword;
     private FirebaseAuth mAuth;
+
+    private Account account;
+
     ProgressBar progressBar;
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -78,8 +83,10 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
     }
 
     private void registerUser(){
+
         final String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+
         account = new ca.weihu.petrichor.Account(username);
 
         if (username.isEmpty()){
@@ -106,22 +113,32 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.createUserWithEmailAndPassword(account.getUsername(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(account.getUsername(), password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 progressBar.setVisibility(View.GONE);
+
                 if (task.isSuccessful()){
+
                     Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+
                     FirebaseUser user = mAuth.getCurrentUser();
                     String userID = user.getUid();
 
                     accountsRef.child(userID).setValue(account);
 
+                    startActivity(new Intent(getApplicationContext(), AccountLogin.class));
                 }
+
                 else{
+
                     if (task.getException()instanceof FirebaseAuthUserCollisionException){
                         Toast.makeText(getApplicationContext(), "You are already registered", Toast.LENGTH_SHORT).show();
                     }
+
                     else{
                         Toast.makeText(getApplicationContext(),"Some error occured", Toast.LENGTH_SHORT).show();
                     }
@@ -129,20 +146,18 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+
     @Override
     public void onClick(View v) {
-    switch(v.getId()){
-        case R.id.buttonCreate:
-            registerUser();
-            break;
-        case R.id.accCreateRelLay:
-            startActivity(new Intent(this, AccountLogin.class));
-            break;
+        switch(v.getId()){
+            case R.id.buttonCreate:
+                registerUser();
+                break;
+            case R.id.accCreateRelLay:
+                startActivity(new Intent(this, AccountLogin.class));
+                break;
+        }
     }
-    }
-
-
-
 
     public void onAccountCreate(View view) {
         Intent in = new Intent(getApplicationContext(), NavBar.class);
@@ -180,7 +195,4 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
-
-
-
 }

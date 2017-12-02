@@ -8,8 +8,8 @@ package ca.weihu.petrichor;
  */
 public class RandomCollection implements HighlightCollection {
 
-    @Override
+/*    @Override
     public Highlight[] returnHighlight() {
         return new Highlight[0];
-    }
+    }*/
 }

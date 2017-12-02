@@ -9,7 +9,6 @@ public class Account {
     private String name;
 
     public Account(){
-
     }
 
     public Account(String username){

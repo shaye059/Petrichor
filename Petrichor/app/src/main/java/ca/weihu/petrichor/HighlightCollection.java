@@ -8,6 +8,6 @@ package ca.weihu.petrichor;
  */
 public interface HighlightCollection {
 
-    Highlight[] returnHighlight();
+    //Highlight[] returnHighlight();
 
 }

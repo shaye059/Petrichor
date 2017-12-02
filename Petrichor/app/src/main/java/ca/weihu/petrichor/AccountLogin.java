@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
@@ -38,10 +39,27 @@ public class AccountLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_login);
-        mAuth = FirebaseAuth.getInstance();
 
+        /*if ( FirebaseAuth.getInstance().getCurrentUser() != null ) {
+
+            Toast.makeText(this, FirebaseAuth.getInstance().getCurrentUser().getUid() + " logging out.", Toast.LENGTH_SHORT).show();
+            FirebaseAuth.getInstance().signOut();
+            Log.d("\n\n\nsigned out", "signed out");
+        } else {
+            Toast.makeText(this, "not logged in", Toast.LENGTH_SHORT).show();
+            Log.d("\n\n\nnotloggedin", "not logged in");
+        }
+
+        try {
+            mAuth = FirebaseAuth.getInstance();
+        } catch (Exception e) {
+            Log.d("\n\n\nbroken", "broken code");
+        }*/
+
+        mAuth = FirebaseAuth.getInstance();
 
         hideSystemUI();
 
@@ -66,15 +84,19 @@ public class AccountLogin extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         editTextUsername = (EditText) findViewById(R.id.editTextLoginUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextLoginPassword);
-
     }
 
-    private void userLogin() {
+/*    @Override
+    protected void onStart()*/
 
+
+    private void userLogin() {
 
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         UserInfo info = new UserInfo(username, password);
+
+        String accUsername = "";
 
         if (info.getUsername() == null) {
             editTextUsername.setError("Email is required");
@@ -113,6 +135,43 @@ public class AccountLogin extends AppCompatActivity {
                 }
             }
         });
+
+
+        // Create toast to welcome the user
+
+        Log.d("\n\n\nAccountLogin.java", "accounts/" + FirebaseAuth.getInstance()
+                .getCurrentUser().getUid());
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+            FirebaseDatabase.getInstance().getReference("accounts/" + mAuth.getCurrentUser().getUid())
+                    .addValueEventListener(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            // if the user set a name then display it
+                            if (dataSnapshot.getValue(Account.class).getName() != null) {
+
+                                Toast.makeText(getApplicationContext(), "Welcome "
+                                                + dataSnapshot.getValue(Account.class).getName(),
+                                        Toast.LENGTH_SHORT).show();
+
+                            // if the user DID NOT set a name then display user's email
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Welcome "
+                                                + dataSnapshot.getValue(Account.class).getUsername(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            //accUsername = "The read failed: " + databaseError.getCode();
+                            Log.d("AccountCreate.java", "The read failed: " + databaseError.getCode());
+                        }
+                    });
+        }
     }
 
     /**

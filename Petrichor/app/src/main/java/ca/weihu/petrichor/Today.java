@@ -3,6 +3,7 @@ package ca.weihu.petrichor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -16,7 +17,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class Today extends AppCompatActivity {
@@ -38,16 +42,37 @@ public class Today extends AppCompatActivity {
      */
 
     private RelativeLayout relLayout = null;
-    private DatabaseReference databaseReference;
-    private Button buttonSubmit1;
+
+    // database current user node
+    private DatabaseReference databaseUser;
+
+    private DatabaseReference databaseHighlight;
+
+    private DatabaseReference databaseTimePeriod;
+
+    private DatabaseReference databaseHighlightCollection;
+/*    private DatabaseReference databaseTimePeriodCollection;
+    private DatabaseReference databaseDayInThePastCollection;
+    private DatabaseReference databaseRandomCollection;
+    private DatabaseReference databaseSharedCollection;*/
+
+    private FirebaseAuth firebaseAuth;
+
     private EditText editTextH1;
     private EditText editTextH2;
     private EditText editTextH3;
-    private FirebaseAuth firebaseAuth;
+    private Button buttonSubmit1;
+
+//    private DatabaseReference databaseReference;
+
+
+    // C O N S T R U C T O R
 
     public Today() {
-
     }
+
+
+    // M E T H O D S
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,18 +100,31 @@ public class Today extends AppCompatActivity {
                 return true;
             }
         });
+
         firebaseAuth = FirebaseAuth.getInstance();
+
+        // if user is not logged in
         if (firebaseAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, AccountLogin.class));
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        String userID = user.getUid();
+
+        databaseUser = FirebaseDatabase.getInstance().getReference( user.getUid() );
+
+        databaseHighlight = FirebaseDatabase.getInstance()
+                .getReference( "accounts/" + userID + "/Highlight" );
+
+//        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        Log.d("\n\n---\n\nTODAY\n\n", "accounts/" + userID + "/Highlight");
 
         editTextH1 = (EditText) findViewById(R.id.editText);
         editTextH2 = (EditText) findViewById(R.id.editText3);
         editTextH3 = (EditText) findViewById(R.id.editText4);
         buttonSubmit1 = (Button) findViewById(R.id.button);
-
     }
 
     public void OnImageButton(View view) {
@@ -95,24 +133,55 @@ public class Today extends AppCompatActivity {
     }
 
     private void saveUserData() {
-        String highlight1 = editTextH1.getText().toString().trim();
-        String highlight2 = editTextH2.getText().toString().trim();
-        String highlight3 = editTextH3.getText().toString().trim();
 
+        // Firebase keys of the highlights
+        String keyH1;
+        String keyH2;
+        String keyH3;
+
+
+        // step 1 of 4: generate keyPrefix for highlight (suffix is h1, h2 or h3)
+
+        DateFormat df = new SimpleDateFormat("yyyyMMwwddEEE");
+        Date today = Calendar.getInstance().getTime();
+        String keyPrefix = df.format(today);
+
+
+        // step 2 of 4: saving the 3 highlights the user inputs
+
+        String descriptionH1 = editTextH1.getText().toString().trim();
+        String descriptionH2 = editTextH2.getText().toString().trim();
+        String descriptionH3 = editTextH3.getText().toString().trim();
+
+
+        // set 3 of 4: initiate keys
+
+        keyH1 = keyPrefix + "h1";
+        keyH2 = keyPrefix + "h2";
+        keyH3 = keyPrefix + "h3";
+
+
+        // step 4 of 4: create highlights and add to Firebase
+
+        databaseHighlight.child(keyH1).setValue( new Highlight(keyH1, descriptionH1) );
+        databaseHighlight.child(keyH2).setValue( new Highlight(keyH2, descriptionH2) );
+        databaseHighlight.child(keyH3).setValue( new Highlight(keyH3, descriptionH3) );
+
+        Toast.makeText(this, "Highlights saved.", Toast.LENGTH_LONG).show();
 
 
         Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
 
-        in.putExtra("Highlight 1", highlight1);
-        in.putExtra("Highlight 2", highlight2);
-        in.putExtra("Highlight 3", highlight3);
+        in.putExtra("Highlight 1", descriptionH1);
+        in.putExtra("Highlight 2", descriptionH2);
+        in.putExtra("Highlight 3", descriptionH3);
         startActivity(in);
 
         Intent in2 = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
 
-        in2.putExtra("Highlight 1", highlight1);
-        in2.putExtra("Highlight 2", highlight2);
-        in2.putExtra("Highlight 3", highlight3);
+        in2.putExtra("Highlight 1", descriptionH1);
+        in2.putExtra("Highlight 2", descriptionH2);
+        in2.putExtra("Highlight 3", descriptionH3);
         startActivity(in2);
     }
 
