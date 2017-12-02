@@ -130,49 +130,71 @@ public class AccountLogin extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), NavBar.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+
+                    // Create toast to welcome the user
+
+                    Log.d("\n\n\nAccountLogin.java", "accounts/" + FirebaseAuth
+                            .getInstance().getCurrentUser().getUid());
+
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+                        FirebaseDatabase.getInstance().getReference("accounts/"
+                                + mAuth.getCurrentUser().getUid())
+                                .addValueEventListener(new ValueEventListener() {
+
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                        // if the user set a name then display it
+                                        if (dataSnapshot.getValue(Account.class).getName()
+                                                != null) {
+
+                                            Toast.makeText(getApplicationContext(), "Welcome "
+                                                    + dataSnapshot.getValue(Account.class)
+                                                    .getName(), Toast.LENGTH_SHORT).show();
+
+                                        // if the user DID NOT set a name then display user's email
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Welcome "
+                                                    + dataSnapshot.getValue(Account.class)
+                                                    .getUsername(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Toast.makeText(AccountLogin.this,
+                                                "The read failed: " + databaseError.getCode(),
+                                                Toast.LENGTH_SHORT).show();
+                                        Log.d("AccountLogin.java", "The read failed: "
+                                                + databaseError.getCode());
+                                    }
+                                });
+                    }
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Some error occured", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
-        // Create toast to welcome the user
-
-        Log.d("\n\n\nAccountLogin.java", "accounts/" + FirebaseAuth.getInstance()
-                .getCurrentUser().getUid());
-
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-
-            FirebaseDatabase.getInstance().getReference("accounts/" + mAuth.getCurrentUser().getUid())
-                    .addValueEventListener(new ValueEventListener() {
-
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            // if the user set a name then display it
-                            if (dataSnapshot.getValue(Account.class).getName() != null) {
-
-                                Toast.makeText(getApplicationContext(), "Welcome "
-                                                + dataSnapshot.getValue(Account.class).getName(),
-                                        Toast.LENGTH_SHORT).show();
-
-                            // if the user DID NOT set a name then display user's email
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Welcome "
-                                                + dataSnapshot.getValue(Account.class).getUsername(),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            //accUsername = "The read failed: " + databaseError.getCode();
-                            Log.d("AccountCreate.java", "The read failed: " + databaseError.getCode());
-                        }
-                    });
-        }
     }
+
+
+    // A C T I V I T Y  S E C T I O N
+
+    public void onBtnBack(View view) {
+        onBackPressed();
+    }
+
+    public void onLogin(View view) {
+        userLogin();
+    }
+
+    public void onCreate(View view) {
+        Intent in = new Intent(getApplicationContext(), AccountCreate.class);
+        startActivity(in);
+    }
+
 
     /**
      * Overriding onBackPressed() to display a warning before exiting the app
@@ -209,19 +231,6 @@ public class AccountLogin extends AppCompatActivity {
         } else {
             AccountLogin.super.onBackPressed();
         }
-    }
-
-    public void onBtnBack(View view) {
-        onBackPressed();
-    }
-
-    public void onLogin(View view) {
-        userLogin();
-    }
-
-    public void onCreate(View view) {
-        Intent in = new Intent(getApplicationContext(), AccountCreate.class);
-        startActivity(in);
     }
 
 
