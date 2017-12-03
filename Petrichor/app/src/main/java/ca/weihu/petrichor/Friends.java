@@ -25,22 +25,6 @@ public class Friends extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-
-        ListView list=(ListView)findViewById(R.id.listFriends);
-
-        ArrayList<String> friends =new ArrayList<String>();
-
-        friends.add("realmadrid@soccer.com");
-        friends.add("ronaldo@realmadrid.com");
-        friends.add("rodriguez@bayern.com");
-        friends.add("cuadrado@juventus.com");
-        friends.add("falcao@monaco.com");
-
-// Now create adapter
-        MyShareAdapter adapter=new MyShareAdapter(this, friends);
-
-// NOw Set This Adapter to listview
-        list.setAdapter(adapter);
     }
 
 

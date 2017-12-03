@@ -18,7 +18,6 @@ public class Account {
     private String name;
 
     // either way still have to use database snapshot... delete this later T.N.
-    private DatabaseReference dbRefUser;
 
 
     /*==============================================================================================
@@ -33,17 +32,12 @@ public class Account {
         this.name = name;
     }
 
-    public Account(String username, DatabaseReference dbRefUser) {
-        this.username = username;
-        this.dbRefUser = dbRefUser;
-    }
-
 
     /*==============================================================================================
         M E T H O D S
     ==============================================================================================*/
 
-    public String getUsername(){
+    public String getusername(){
         return username;
     }
 

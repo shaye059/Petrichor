@@ -1,5 +1,6 @@
 package ca.weihu.petrichor;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseUser;
 
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +40,7 @@ public class MyProfile extends AppCompatActivity {
         userID = user.getUid();
         setContentView(R.layout.activity_my_profile);
         databaseAccounts = FirebaseDatabase.getInstance().getReference();
-        ref = databaseAccounts.child("accounts");
+        ref = databaseAccounts.child("Account");
         String userEmail;
 
         TextView textView = (TextView) findViewById(R.id.textViewEmail);
@@ -89,6 +91,12 @@ public class MyProfile extends AppCompatActivity {
 
 
     public void updateProfile() {
+
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
         final TextView nameView = (TextView) findViewById(R.id.nameEdit);
         final TextView emailView = (TextView) findViewById(R.id.textViewEmail);
 

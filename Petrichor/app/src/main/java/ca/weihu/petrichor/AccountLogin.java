@@ -39,11 +39,10 @@ public class AccountLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_login);
-
         mAuth = FirebaseAuth.getInstance();
+
 
         hideSystemUI();
 
@@ -68,16 +67,15 @@ public class AccountLogin extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         editTextUsername = (EditText) findViewById(R.id.editTextLoginUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextLoginPassword);
+
     }
 
-
     private void userLogin() {
+
 
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         UserInfo info = new UserInfo(username, password);
-
-        String accUsername = "";
 
         if (info.getUsername() == null) {
             editTextUsername.setError("Email is required");
@@ -103,21 +101,14 @@ public class AccountLogin extends AppCompatActivity {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(username, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
                 progressBar.setVisibility(View.GONE);
-
                 if (task.isSuccessful()) {
-
                     Intent intent = new Intent(getApplicationContext(), NavBar.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
-
-                    // Create toast to welcome the user
 
                     Log.d("\n\n\nAccountLogin.java", "Account/" + FirebaseAuth
                             .getInstance().getCurrentUser().getUid());
@@ -133,19 +124,19 @@ public class AccountLogin extends AppCompatActivity {
                                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                                         // if the user set a name then display it
-                                        if (dataSnapshot.getValue(Account.class).getName()
+                                        if (dataSnapshot.getValue(Account.class).getname()
                                                 != null) {
 
                                             Toast.makeText(getApplicationContext(), "Welcome "
                                                     + dataSnapshot.getValue(Account.class)
-                                                    .getName(), Toast.LENGTH_SHORT).show();
+                                                    .getname(), Toast.LENGTH_SHORT).show();
 
-                                        // if the user DID NOT set a name then display user's email
+                                            // if the user DID NOT set a name then display user's email
                                         } else {
 
                                             Toast.makeText(getApplicationContext(), "Welcome "
                                                     + dataSnapshot.getValue(Account.class)
-                                                    .getUsername(), Toast.LENGTH_SHORT).show();
+                                                    .getusername(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
 
@@ -161,30 +152,11 @@ public class AccountLogin extends AppCompatActivity {
                     }
 
                 } else {
-
-                    Toast.makeText(getApplicationContext(), "Some error occurred",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Some error occured", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
-
-    // A C T I V I T Y  S E C T I O N
-
-    public void onBtnBack(View view) {
-        onBackPressed();
-    }
-
-    public void onLogin(View view) {
-        userLogin();
-    }
-
-    public void onCreate(View view) {
-        Intent in = new Intent(getApplicationContext(), AccountCreate.class);
-        startActivity(in);
-    }
-
 
     /**
      * Overriding onBackPressed() to display a warning before exiting the app
@@ -221,6 +193,19 @@ public class AccountLogin extends AppCompatActivity {
         } else {
             AccountLogin.super.onBackPressed();
         }
+    }
+
+    public void onBtnBack(View view) {
+        onBackPressed();
+    }
+
+    public void onLogin(View view) {
+        userLogin();
+    }
+
+    public void onCreate(View view) {
+        Intent in = new Intent(getApplicationContext(), AccountCreate.class);
+        startActivity(in);
     }
 
 

@@ -17,8 +17,6 @@ public class AddFriend extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
 
-        View loading = findViewById(R.id.progressBar4);
-        loading.setVisibility(View.INVISIBLE);
     }
 
     public void onBtnBack(View view) {

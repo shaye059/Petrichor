@@ -43,7 +43,7 @@ public class NavBar extends AppCompatActivity
         userID = user.getUid();
         setContentView(R.layout.activity_my_profile);
         databaseAccounts = FirebaseDatabase.getInstance().getReference();
-        ref = databaseAccounts.child("accounts");
+        ref = databaseAccounts.child("Account");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_bar);
