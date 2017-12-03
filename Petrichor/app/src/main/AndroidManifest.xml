@@ -45,8 +45,6 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".About" />
         <activity android:name=".MyProfile" />
-        <activity android:name=".Help" />
-        <activity android:name=".HelpAbout" />
         <activity android:name=".HelpHowToUse" />
         <activity android:name=".AddFriend"></activity>
     </application>

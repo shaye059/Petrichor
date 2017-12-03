@@ -42,16 +42,27 @@
             tools:layout_constraintTop_creator="1" />
 
         <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
+            android:id="@+id/versionView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/aboutView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="52dp"
-            android:text="Version 1.0"
+            android:textAlignment="center"
             android:textColor="@android:color/background_light"
             android:textSize="24sp"
             android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/infoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 

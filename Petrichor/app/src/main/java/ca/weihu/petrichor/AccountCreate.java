@@ -10,7 +10,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.view.View.OnClickListener;
 import android.util.*;
 import android.widget.Toast;
 
@@ -20,13 +19,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
-import ca.weihu.petrichor.Account;
 
 public class AccountCreate extends AppCompatActivity implements View.OnClickListener {
     private Account account;
@@ -71,6 +66,7 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
             }
         });
 
+
         editTextUsername = (EditText) findViewById(R.id.editTextCreateUsername3);
         editTextPassword = (EditText) findViewById(R.id.editTextCreatePassword3);
         mAuth = FirebaseAuth.getInstance();
@@ -111,6 +107,7 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()){
+
                     Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                     String userID = user.getUid();

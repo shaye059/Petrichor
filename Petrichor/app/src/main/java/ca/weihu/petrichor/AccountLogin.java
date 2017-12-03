@@ -13,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -23,7 +22,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 
 
@@ -113,42 +111,41 @@ public class AccountLogin extends AppCompatActivity {
                     Log.d("\n\n\nAccountLogin.java", "Account/" + FirebaseAuth
                             .getInstance().getCurrentUser().getUid());
 
+                    // maybe should split up the dbRef into variables so code can fit on 1 line
                     if (FirebaseAuth.getInstance().getCurrentUser() != null) {
 
-                        // maybe should split up the dbRef into variables so code can fit on 1 line
                         FirebaseDatabase.getInstance().getReference("Account/"
-                                + mAuth.getCurrentUser().getUid())
-                                .addValueEventListener(new ValueEventListener() {
+                                + mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                // if the user set a name then display it
+                                if (dataSnapshot.getValue(Account.class).getname()
+                                        != null) {
 
-                                        // if the user set a name then display it
-                                        if (dataSnapshot.getValue(Account.class).getname()
-                                                != null) {
+                                    Toast.makeText(getApplicationContext(), "Welcome "
+                                            + dataSnapshot.getValue(Account.class)
+                                            .getname(), Toast.LENGTH_SHORT).show();
 
-                                            Toast.makeText(getApplicationContext(), "Welcome "
-                                                    + dataSnapshot.getValue(Account.class)
-                                                    .getname(), Toast.LENGTH_SHORT).show();
+                                    // if the user DID NOT set a name then display user's email
+                                } else {
 
-                                            // if the user DID NOT set a name then display user's email
-                                        } else {
+                                    Toast.makeText(getApplicationContext(), "Welcome "
+                                            + dataSnapshot.getValue(Account.class)
+                                            .getusername(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
-                                            Toast.makeText(getApplicationContext(), "Welcome "
-                                                    + dataSnapshot.getValue(Account.class)
-                                                    .getusername(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(AccountLogin.this,
+                                        "The read failed: " + databaseError.getCode(),
+                                        Toast.LENGTH_SHORT).show();
+                                Log.d("AccountLogin.java", "The read failed: "
+                                        + databaseError.getCode());
+                            }
+                        });
 
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-                                        Toast.makeText(AccountLogin.this,
-                                                "The read failed: " + databaseError.getCode(),
-                                                Toast.LENGTH_SHORT).show();
-                                        Log.d("AccountLogin.java", "The read failed: "
-                                                + databaseError.getCode());
-                                    }
-                                });
                     }
 
                 } else {

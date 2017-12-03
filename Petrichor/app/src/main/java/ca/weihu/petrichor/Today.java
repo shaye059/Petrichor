@@ -116,11 +116,11 @@ public class Today extends AppCompatActivity {
         dbRefUser = FirebaseDatabase.getInstance().getReference( user.getUid() );
 
         dbRefHighlight = FirebaseDatabase.getInstance()
-                .getReference( "accounts" + userID + "/Highlight" );
+                .getReference( "Account" + userID + "/Highlight" );
 
 //        databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        Log.d("\n\n---\n\nTODAY\n\n", "accounts" + userID + "/Highlight");
+        Log.d("\n\n---\n\nTODAY\n\n", "Account" + userID + "/Highlight");
 
         editTextH1 = (EditText) findViewById(R.id.editText);
         editTextH2 = (EditText) findViewById(R.id.editText3);
