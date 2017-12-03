@@ -113,7 +113,7 @@
             android:background="@android:color/transparent"
             android:onClick="OnImageButton"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/friends"
+            app:srcCompat="@drawable/friendsicon"
             tools:ignore="ContentDescription,RtlHardcoded" />
 
         <ImageButton
@@ -126,7 +126,7 @@
             android:background="@android:color/transparent"
             android:onClick="OnImageButton"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/friends"
+            app:srcCompat="@drawable/friendsicon"
             tools:ignore="ContentDescription,RtlHardcoded" />
 
         <ImageButton
@@ -140,7 +140,7 @@
             android:background="@android:color/transparent"
             android:onClick="OnImageButton"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/friends"
+            app:srcCompat="@drawable/friendsicon"
             tools:ignore="ContentDescription" />
 
     </RelativeLayout>

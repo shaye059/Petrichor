@@ -2,17 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pageLayout"
     android:layout_width="match_parent"
-    android:background="@drawable/explore"
     android:layout_height="match_parent"
-    tools:context="ca.weihu.petrichor.Explore">
-
-    <Button
-        android:id="@+id/btnBack7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:onClick="onBtnBack" />
+    android:background="@drawable/friends"
+    tools:context="ca.weihu.petrichor.Friends">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,7 +15,7 @@
         <Button
             android:id="@+id/btnBack12"
             android:layout_width="89dp"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:background="@android:color/transparent"
             android:onClick="onBtnBack"
             android:visibility="visible" />
@@ -51,27 +45,42 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="22dp"
-            android:layout_weight="0.10"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/julius_sans"
             android:gravity="center_vertical|center_horizontal"
             android:lineSpacingExtra="12sp"
             android:onClick="onTaggedMemories"
             android:text="tagged memories"
+            android:textAlignment="center"
             android:textColor="@android:color/background_light"
             android:textSize="30sp"
             android:typeface="serif"
             tools:ignore="HardcodedText,InefficientWeight" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="307dp"
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_above="@+id/textViewTaggedMem"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/transparent"
+            android:onClick="onBtnAdd"
+            app:srcCompat="@drawable/ic_add" />
+
+        <ListView
+            android:id="@+id/listView4"
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layout_above="@+id/imageButton4"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView6"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1" />
+            tools:layout_constraintTop_creator="1">
+
+        </ListView>
 
     </RelativeLayout>
 

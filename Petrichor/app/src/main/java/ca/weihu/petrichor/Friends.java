@@ -15,7 +15,8 @@ public class Friends extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_friends);getWindow().getDecorView().setSystemUiVisibility(
+        setContentView(R.layout.activity_friends);
+        getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
@@ -28,5 +29,10 @@ public class Friends extends AppCompatActivity {
 
     public void onBtnBack(View view) {
         onBackPressed();
+    }
+
+    public void onBtnAdd(View view){
+        Intent intent = new Intent(getApplicationContext(), AddFriend.class);
+        startActivity(intent);
     }
 }
