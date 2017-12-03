@@ -8,8 +8,8 @@ public class TimePeriodCollection implements HighlightCollection {
 
     TimePeriod[] timePeriods;
 
-    @Override
+/*    @Override
     public Highlight[] returnHighlight() {
         return new Highlight[0];
-    }
+    }*/
 }

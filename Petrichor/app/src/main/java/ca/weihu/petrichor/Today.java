@@ -2,7 +2,6 @@ package ca.weihu.petrichor;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -17,10 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.Query;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -35,38 +30,65 @@ public class Today extends AppCompatActivity {
     boolean isWeek;
     boolean isMonth;
     boolean isYear;
+    String [] memories = new String[2];
+    /*
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(mar.getEventDate());
+    int day = cal.get(Calendar.DAY_OF_MONTH);
+    int month = cal.get(Calendar.MONTH)
+    int year = cal.get(Calendar.YEAR)
+    int weekCounter;
+
+     */
 
     private RelativeLayout relLayout = null;
 
+    // database current user node
+    private DatabaseReference dbRefUser;
+
+    private DatabaseReference dbRefHighlight;
+
+    private DatabaseReference databaseTimePeriod;
+
+    private DatabaseReference databaseHighlightCollection;
+/*    private DatabaseReference databaseTimePeriodCollection;
+    private DatabaseReference databaseDayInThePastCollection;
+    private DatabaseReference databaseRandomCollection;
+    private DatabaseReference databaseSharedCollection;*/
+
+    private FirebaseAuth firebaseAuth;
+
+    private EditText editTextH1;
+    private EditText editTextH2;
+    private EditText editTextH3;
     private Button buttonSubmit1;
-    public EditText editTextH1, editTextH2, editTextH3;
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private FirebaseUser user = firebaseAuth.getCurrentUser();
-    public String userid = user.getUid();
-    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = database.getReference();
-    public DatabaseReference ref2 = database.getReference("dailyhighlights");
-    public String username = user.getEmail();
-    public String highlight1= editTextH1.getText().toString().trim();
-    public String highlight2= editTextH2.getText().toString().trim();
-    public String highlight3= editTextH3.getText().toString().trim();
-    public StoreHighlightDay high;
-    DateFormat df = DateFormat.getDateInstance();
-    String reportDate = (df.format(new Date())).toString();
-    public int counter = 0;
+
+//    private DatabaseReference databaseReference;
+
+
+    // C O N S T R U C T O R
 
     public Today() {
-
     }
 
+
+    // M E T H O D S
+
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today);
+
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
+
+        // code to hide keyboard when relative layout is touched
+
         relLayout = (RelativeLayout) findViewById(R.id.todayRelLay);
+
         relLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -80,18 +102,30 @@ public class Today extends AppCompatActivity {
             }
         });
 
-        //Firebase Stuff
         firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() == null) { //check if user is logged in
+
+        // if user is not logged in
+        if (firebaseAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, AccountLogin.class));
         }
 
-        editTextH1 = findViewById(R.id.editText);
-        editTextH2 = findViewById(R.id.editText3);
-        editTextH3 = findViewById(R.id.editText4);
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        String userID = user.getUid();
+
+        dbRefUser = FirebaseDatabase.getInstance().getReference( user.getUid() );
+
+        dbRefHighlight = FirebaseDatabase.getInstance()
+                .getReference( "Account/" + userID + "/Highlight" );
+
+//        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        Log.d("\n\n---\n\nTODAY\n\n", "Account/" + userID + "/Highlight");
+
+        editTextH1 = (EditText) findViewById(R.id.editText);
+        editTextH2 = (EditText) findViewById(R.id.editText3);
+        editTextH3 = (EditText) findViewById(R.id.editText4);
         buttonSubmit1 = (Button) findViewById(R.id.button);
-        test();
     }
 
     public void OnImageButton(View view) {
@@ -99,55 +133,68 @@ public class Today extends AppCompatActivity {
         startActivity(in);
     }
 
-    public void saveUserData(String high1, String high2, String high3) {
+    private void saveUserData() {
 
-        String h1 = highlight1;
-        String h2 = highlight2;
-        String h3 = highlight3;
+        // Firebase keys of the highlights
+        String keyH1;
+        String keyH2;
+        String keyH3;
 
-        ref2.child((userid.toString())).child(reportDate).child("Highlight 1").setValue(h1);
-        ref2.child((userid.toString())).child(reportDate).child("Highlight 2").setValue(h2);
-        ref2.child((userid.toString())).child(reportDate).child("Highlight 3").setValue(h3);
-        Toast.makeText(this,"Information Saved", Toast.LENGTH_LONG).show();
+
+        // step 1 of 4: generate keyPrefix for highlight (suffix is h1, h2 or h3)
+
+        DateFormat df = new SimpleDateFormat("yyyyMMwwddEEE");
+        Date today = Calendar.getInstance().getTime();
+        String keyPrefix = df.format(today);
+
+
+        // step 2 of 4: saving the 3 highlights the user inputs
+
+        String descriptionH1 = editTextH1.getText().toString().trim();
+        String descriptionH2 = editTextH2.getText().toString().trim();
+        String descriptionH3 = editTextH3.getText().toString().trim();
+
+
+        // set 3 of 4: initiate keys
+
+        keyH1 = keyPrefix + "h1";
+        keyH2 = keyPrefix + "h2";
+        keyH3 = keyPrefix + "h3";
+
+
+        // step 4 of 4: create highlights and add to Firebase
+
+        dbRefHighlight.child(keyH1).setValue( new Highlight(keyH1, descriptionH1) );
+        dbRefHighlight.child(keyH2).setValue( new Highlight(keyH2, descriptionH2) );
+        dbRefHighlight.child(keyH3).setValue( new Highlight(keyH3, descriptionH3) );
+
+        Toast.makeText(this, "Highlights saved.", Toast.LENGTH_SHORT).show();
+
+
+        Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
+
+        in.putExtra("Highlight 1", descriptionH1);
+        in.putExtra("Highlight 2", descriptionH2);
+        in.putExtra("Highlight 3", descriptionH3);
+        startActivity(in);
+
+        Intent in2 = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
+
+        in2.putExtra("Highlight 1", descriptionH1);
+        in2.putExtra("Highlight 2", descriptionH2);
+        in2.putExtra("Highlight 3", descriptionH3);
+        startActivity(in2);
     }
+
 
     public void onSubmitData(View view) {
-        saveUserData(highlight1,highlight2,highlight3);
+        saveUserData();
     }
 
-
-    public void test(){
-        ref2.child(userid).child(reportDate).addValueEventListener(new ValueEventListener() {
-
-            @Override
-
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-               String h1 = (String) dataSnapshot.child("Highlight 1").getValue();
-               String h2 = (String) dataSnapshot.child("Highlight 2").getValue();
-               String h3 = (String) dataSnapshot.child("Highlight 3").getValue();
-
-               editTextH1 = findViewById(R.id.editText);
-               editTextH2 = findViewById(R.id.editText3);
-               editTextH3 = findViewById(R.id.editText4);
-               editTextH1.setHint((CharSequence) h1);
-               editTextH2.setHint((CharSequence) h2);
-               editTextH3.setHint((CharSequence) h3);
-
-                counter = counter+1;
-                if (counter!=0&&((h1=="")||(h2=="")||(h3==""))){
-                    
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(),"database fuckup", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
     public void onBtnBack(View view) {
         onBackPressed();
     }
+
 
     // P R E V E N T I N G  E X I T I N G  F U L L S C R E E N
 
@@ -167,6 +214,7 @@ public class Today extends AppCompatActivity {
             hideSystemUI();
         }
     }
+
     // hides status bar and navbar
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(

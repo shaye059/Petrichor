@@ -10,4 +10,10 @@
     <string name="search">Search</string>
     <string name="enter_friend_s_email">Enter friend\'s email</string>
 
+    <string name="title_activity_list_view_custom">ListViewCustom</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_custom_list_view">CustomListView</string>
+
 </resources>

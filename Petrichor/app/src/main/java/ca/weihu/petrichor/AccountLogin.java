@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
@@ -38,10 +39,11 @@ public class AccountLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_login);
-        mAuth = FirebaseAuth.getInstance();
 
+        mAuth = FirebaseAuth.getInstance();
 
         hideSystemUI();
 
@@ -66,15 +68,16 @@ public class AccountLogin extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         editTextUsername = (EditText) findViewById(R.id.editTextLoginUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextLoginPassword);
-
     }
 
-    private void userLogin() {
 
+    private void userLogin() {
 
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         UserInfo info = new UserInfo(username, password);
+
+        String accUsername = "";
 
         if (info.getUsername() == null) {
             editTextUsername.setError("Email is required");
@@ -100,20 +103,88 @@ public class AccountLogin extends AppCompatActivity {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(username, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 progressBar.setVisibility(View.GONE);
+
                 if (task.isSuccessful()) {
+
                     Intent intent = new Intent(getApplicationContext(), NavBar.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+
+                    // Create toast to welcome the user
+
+                    Log.d("\n\n\nAccountLogin.java", "Account/" + FirebaseAuth
+                            .getInstance().getCurrentUser().getUid());
+
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+                        // maybe should split up the dbRef into variables so code can fit on 1 line
+                        FirebaseDatabase.getInstance().getReference("Account/"
+                                + mAuth.getCurrentUser().getUid())
+                                .addValueEventListener(new ValueEventListener() {
+
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                        // if the user set a name then display it
+                                        if (dataSnapshot.getValue(Account.class).getName()
+                                                != null) {
+
+                                            Toast.makeText(getApplicationContext(), "Welcome "
+                                                    + dataSnapshot.getValue(Account.class)
+                                                    .getName(), Toast.LENGTH_SHORT).show();
+
+                                        // if the user DID NOT set a name then display user's email
+                                        } else {
+
+                                            Toast.makeText(getApplicationContext(), "Welcome "
+                                                    + dataSnapshot.getValue(Account.class)
+                                                    .getUsername(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Toast.makeText(AccountLogin.this,
+                                                "The read failed: " + databaseError.getCode(),
+                                                Toast.LENGTH_SHORT).show();
+                                        Log.d("AccountLogin.java", "The read failed: "
+                                                + databaseError.getCode());
+                                    }
+                                });
+                    }
+
                 } else {
-                    Toast.makeText(getApplicationContext(), "Some error occured", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getApplicationContext(), "Some error occurred",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
+
+    // A C T I V I T Y  S E C T I O N
+
+    public void onBtnBack(View view) {
+        onBackPressed();
+    }
+
+    public void onLogin(View view) {
+        userLogin();
+    }
+
+    public void onCreate(View view) {
+        Intent in = new Intent(getApplicationContext(), AccountCreate.class);
+        startActivity(in);
+    }
+
 
     /**
      * Overriding onBackPressed() to display a warning before exiting the app
@@ -150,19 +221,6 @@ public class AccountLogin extends AppCompatActivity {
         } else {
             AccountLogin.super.onBackPressed();
         }
-    }
-
-    public void onBtnBack(View view) {
-        onBackPressed();
-    }
-
-    public void onLogin(View view) {
-        userLogin();
-    }
-
-    public void onCreate(View view) {
-        Intent in = new Intent(getApplicationContext(), AccountCreate.class);
-        startActivity(in);
     }
 
 

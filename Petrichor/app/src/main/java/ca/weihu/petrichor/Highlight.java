@@ -1,53 +1,57 @@
 package ca.weihu.petrichor;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import com.google.firebase.database.DatabaseReference;
 
-public class Highlight extends AppCompatActivity implements HighlightCollection {
+/**
+ * Created by Tri-An on December 02, 2017.
+ */
 
-    Account[] sharedAccount;
+public class Highlight {
 
-    @Override
-    public Highlight[] returnHighlight() {
-        return new Highlight[0];
+    // I N S T A N C E  V A R I A B L E S
+
+    private String id;
+    private String description;
+
+    private DatabaseReference dbRefHighlight;
+
+
+    // C O N S T R U C T O R S
+
+    public Highlight() {
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public Highlight(String id, String description){
 
-        setContentView(R.layout.activity_highlight);getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-    }
-
-    public void OnWeekButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
-        startActivity(in);
-    }
-    public void OnMonthButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreMonth.class);
-        startActivity(in);
-    }
-    public void OnYearButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreYear.class);
-        startActivity(in);
-    }
-    public void OnSameDayInPastButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreTodayInThePast.class);
-        startActivity(in);
-    }
-    public void OnRandomButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
-        startActivity(in);
-    }
-
-    public void onBtnBack(View view) {
-        onBackPressed();
+        this.id = id;
+        this.description = description;
     }
 
 
+    // M E T H O D S
+
+    // S E T T E R S
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+    // G E T T E R S
+
+    public String getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public DatabaseReference getDbRefHighlight() {
+        return dbRefHighlight;
+    }
 }
