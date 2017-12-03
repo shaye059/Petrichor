@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,17 +14,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class NavBar extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    DatabaseReference dbRefUser;
+
+    TextView navBarUsername;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_bar);
+
         /*getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -49,7 +62,47 @@ public class NavBar extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        dbRefUser = FirebaseDatabase.getInstance().getReference( "Account/" +
+                FirebaseAuth.getInstance().getCurrentUser().getUid() );
+
+
+        // Setting username/email into R.id.navBarUsername (TextView) on the navbar drawer
+
+        dbRefUser.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // if the user set a name then display it
+                if (dataSnapshot.getValue(Account.class).getName() != null) {
+
+                    setUsernameToDrawerTextView(dataSnapshot.getValue(Account.class).getName());
+
+                    // if the user DID NOT set a name then display user's email
+                } else if (dataSnapshot.getValue(Account.class).getUsername() != null) {
+
+                    setUsernameToDrawerTextView(dataSnapshot.getValue(Account.class).getUsername());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                Toast.makeText(NavBar.this,
+                        "The read failed: " + databaseError.getCode(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+    private void setUsernameToDrawerTextView( String username ) {
+
+        // load username/email into R.id.navBarUsername
+        navBarUsername = (TextView) findViewById(R.id.navBarUsername);
+        navBarUsername.setText( username );
+    }
+
 
     public void OnTodayButton(View view) {
         Intent in = new Intent(getApplicationContext(), Today.class);
@@ -76,8 +129,6 @@ public class NavBar extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
-
 
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -42,16 +42,16 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
     ProgressBar progressBar;
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference accountsRef = database.getReference("accounts");
+    private DatabaseReference accountsRef = database.getReference("Account");
 
     // Write a message to the database
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_create);
-
 
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -129,6 +129,9 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
                     String userID = user.getUid();
 
                     accountsRef.child(userID).setValue(account);
+
+                    //FirebaseDatabase.getInstance()
+                      //      .getReference( FirebaseAuth.getInstance().getCurrentUser().getUid()
 
                     startActivity(new Intent(getApplicationContext(), AccountLogin.class));
                 }

@@ -43,22 +43,6 @@ public class AccountLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_login);
 
-        /*if ( FirebaseAuth.getInstance().getCurrentUser() != null ) {
-
-            Toast.makeText(this, FirebaseAuth.getInstance().getCurrentUser().getUid() + " logging out.", Toast.LENGTH_SHORT).show();
-            FirebaseAuth.getInstance().signOut();
-            Log.d("\n\n\nsigned out", "signed out");
-        } else {
-            Toast.makeText(this, "not logged in", Toast.LENGTH_SHORT).show();
-            Log.d("\n\n\nnotloggedin", "not logged in");
-        }
-
-        try {
-            mAuth = FirebaseAuth.getInstance();
-        } catch (Exception e) {
-            Log.d("\n\n\nbroken", "broken code");
-        }*/
-
         mAuth = FirebaseAuth.getInstance();
 
         hideSystemUI();
@@ -85,9 +69,6 @@ public class AccountLogin extends AppCompatActivity {
         editTextUsername = (EditText) findViewById(R.id.editTextLoginUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextLoginPassword);
     }
-
-/*    @Override
-    protected void onStart()*/
 
 
     private void userLogin() {
@@ -122,23 +103,29 @@ public class AccountLogin extends AppCompatActivity {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(username, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 progressBar.setVisibility(View.GONE);
+
                 if (task.isSuccessful()) {
+
                     Intent intent = new Intent(getApplicationContext(), NavBar.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
 
                     // Create toast to welcome the user
 
-                    Log.d("\n\n\nAccountLogin.java", "accounts/" + FirebaseAuth
+                    Log.d("\n\n\nAccountLogin.java", "Account/" + FirebaseAuth
                             .getInstance().getCurrentUser().getUid());
 
                     if (FirebaseAuth.getInstance().getCurrentUser() != null) {
 
-                        FirebaseDatabase.getInstance().getReference("accounts/"
+                        // maybe should split up the dbRef into variables so code can fit on 1 line
+                        FirebaseDatabase.getInstance().getReference("Account/"
                                 + mAuth.getCurrentUser().getUid())
                                 .addValueEventListener(new ValueEventListener() {
 
@@ -155,6 +142,7 @@ public class AccountLogin extends AppCompatActivity {
 
                                         // if the user DID NOT set a name then display user's email
                                         } else {
+
                                             Toast.makeText(getApplicationContext(), "Welcome "
                                                     + dataSnapshot.getValue(Account.class)
                                                     .getUsername(), Toast.LENGTH_SHORT).show();
@@ -173,7 +161,9 @@ public class AccountLogin extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "Some error occured", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getApplicationContext(), "Some error occurred",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });

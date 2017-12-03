@@ -44,9 +44,9 @@ public class Today extends AppCompatActivity {
     private RelativeLayout relLayout = null;
 
     // database current user node
-    private DatabaseReference databaseUser;
+    private DatabaseReference dbRefUser;
 
-    private DatabaseReference databaseHighlight;
+    private DatabaseReference dbRefHighlight;
 
     private DatabaseReference databaseTimePeriod;
 
@@ -75,9 +75,10 @@ public class Today extends AppCompatActivity {
     // M E T H O D S
 
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today);
+
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -112,14 +113,14 @@ public class Today extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userID = user.getUid();
 
-        databaseUser = FirebaseDatabase.getInstance().getReference( user.getUid() );
+        dbRefUser = FirebaseDatabase.getInstance().getReference( user.getUid() );
 
-        databaseHighlight = FirebaseDatabase.getInstance()
-                .getReference( "accounts/" + userID + "/Highlight" );
+        dbRefHighlight = FirebaseDatabase.getInstance()
+                .getReference( "Account/" + userID + "/Highlight" );
 
 //        databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        Log.d("\n\n---\n\nTODAY\n\n", "accounts/" + userID + "/Highlight");
+        Log.d("\n\n---\n\nTODAY\n\n", "Account/" + userID + "/Highlight");
 
         editTextH1 = (EditText) findViewById(R.id.editText);
         editTextH2 = (EditText) findViewById(R.id.editText3);
@@ -163,11 +164,11 @@ public class Today extends AppCompatActivity {
 
         // step 4 of 4: create highlights and add to Firebase
 
-        databaseHighlight.child(keyH1).setValue( new Highlight(keyH1, descriptionH1) );
-        databaseHighlight.child(keyH2).setValue( new Highlight(keyH2, descriptionH2) );
-        databaseHighlight.child(keyH3).setValue( new Highlight(keyH3, descriptionH3) );
+        dbRefHighlight.child(keyH1).setValue( new Highlight(keyH1, descriptionH1) );
+        dbRefHighlight.child(keyH2).setValue( new Highlight(keyH2, descriptionH2) );
+        dbRefHighlight.child(keyH3).setValue( new Highlight(keyH3, descriptionH3) );
 
-        Toast.makeText(this, "Highlights saved.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Highlights saved.", Toast.LENGTH_SHORT).show();
 
 
         Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
@@ -184,7 +185,6 @@ public class Today extends AppCompatActivity {
         in2.putExtra("Highlight 3", descriptionH3);
         startActivity(in2);
     }
-
 
 
     public void onSubmitData(View view) {

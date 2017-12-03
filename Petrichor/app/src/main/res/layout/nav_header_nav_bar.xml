@@ -23,14 +23,15 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
-        android:id="@+id/nameView"
+        android:id="@+id/navBarUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/julius_sans"
+
+        android:hint="test@SEG2105.ca"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="test@SEG2105.ca"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="25sp" />
-
 </LinearLayout>

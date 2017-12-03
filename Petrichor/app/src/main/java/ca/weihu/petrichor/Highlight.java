@@ -1,5 +1,7 @@
 package ca.weihu.petrichor;
 
+import com.google.firebase.database.DatabaseReference;
+
 /**
  * Created by Tri-An on December 02, 2017.
  */
@@ -10,6 +12,8 @@ public class Highlight {
 
     private String id;
     private String description;
+
+    private DatabaseReference dbRefHighlight;
 
 
     // C O N S T R U C T O R S
@@ -45,5 +49,9 @@ public class Highlight {
 
     public String getDescription() {
         return description;
+    }
+
+    public DatabaseReference getDbRefHighlight() {
+        return dbRefHighlight;
     }
 }
