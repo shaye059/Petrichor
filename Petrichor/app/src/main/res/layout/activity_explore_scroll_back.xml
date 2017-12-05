@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/explore_3_year"
-    tools:context="ca.weihu.petrichor.ExploreYear">
+    android:background="@drawable/bg_generic"
+    tools:context="ca.weihu.petrichor.ScrollBack">
 
     <Button
-        android:id="@+id/btnBack5"
+        android:id="@+id/btnBack15"
         android:layout_width="89dp"
         android:layout_height="56dp"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewYear"
+        android:id="@+id/textViewScrollBack"
         android:layout_width="match_parent"
         android:layout_height="75sp"
         android:layout_alignParentStart="true"
@@ -28,7 +28,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/julius_sans"
-        android:text="year"
+        android:text="Highlights"
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="60sp"
@@ -36,26 +36,26 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack5"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack15"
         tools:ignore="HardcodedText"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
 
     <ListView
-        android:id="@+id/listViewThisYear"
+        android:id="@+id/listViewScrollBack"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/weekText"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewYear"
+        app:layout_constraintTop_toBottomOf="@+id/textViewScrollBack"
         tools:layout_constraintTop_creator="1">
 
     </ListView>
+
 </android.support.constraint.ConstraintLayout>

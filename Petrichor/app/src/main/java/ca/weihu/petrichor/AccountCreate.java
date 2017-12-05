@@ -78,7 +78,9 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
 
         editTextUsername = (EditText) findViewById(R.id.editTextCreateUsername3);
         editTextPassword = (EditText) findViewById(R.id.editTextCreatePassword3);
+
         mAuth = FirebaseAuth.getInstance();
+
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
     }
 
@@ -123,7 +125,7 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
 
                 if (task.isSuccessful()){
 
-                    Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Registration successful.", Toast.LENGTH_SHORT).show();
 
                     FirebaseUser user = mAuth.getCurrentUser();
                     String userID = user.getUid();
@@ -139,11 +141,11 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
                 else{
 
                     if (task.getException()instanceof FirebaseAuthUserCollisionException){
-                        Toast.makeText(getApplicationContext(), "You are already registered", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You are already registered.", Toast.LENGTH_SHORT).show();
                     }
 
                     else{
-                        Toast.makeText(getApplicationContext(),"Some error occured", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Some error occurred.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

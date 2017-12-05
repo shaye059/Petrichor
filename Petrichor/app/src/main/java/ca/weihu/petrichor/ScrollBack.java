@@ -13,7 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExploreTodayInThePast extends AppCompatActivity  {
+public class ScrollBack extends AppCompatActivity {
 
     private List<Highlight> highlights;
     private ListView listViewHighlights;
@@ -22,14 +22,14 @@ public class ExploreTodayInThePast extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_explore_today_in_the_past);
+        setContentView(R.layout.activity_explore_scroll_back);
 
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-        listViewHighlights = (ListView) findViewById(R.id.listViewTodayInThePast);
+        listViewHighlights = (ListView) findViewById(R.id.listViewScrollBack);
 
         highlights = new ArrayList<>();
     }
@@ -45,35 +45,16 @@ public class ExploreTodayInThePast extends AppCompatActivity  {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Highlight none = new Highlight(null,"Submit your highlights today and"
-                        + " next year this section won't be empty!");
-
                 highlights.clear();
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                     Highlight highlight = postSnapshot.getValue(Highlight.class);
-
-                    // if not same year but same month and day... add to list
-                    if ( (Time.currentYear().compareTo(
-                            Time.convertToYear(highlight.getId()) ) != 0)
-
-                            && (Time.currentMonth().compareTo(
-                            Time.convertToMonth(highlight.getId()) ) == 0)
-
-                            && (Time.currentDay().compareTo(
-                            Time.convertToDay(highlight.getId()) ) == 0) ) {
-
-                        highlights.add(highlight);
-                    }
-
-                    if (highlights.isEmpty()) {
-                        highlights.add( none );
-                    }
+                    highlights.add(highlight);
                 }
 
                 HighlightListAdapter highlightsAdapter =
-                        new HighlightListAdapter(ExploreTodayInThePast.this, highlights,
+                        new HighlightListAdapter(ScrollBack.this, highlights,
                                 HighlightListAdapter.hListPurpose.SCROLLBACK);
 
                 listViewHighlights.setAdapter(highlightsAdapter);
@@ -81,8 +62,8 @@ public class ExploreTodayInThePast extends AppCompatActivity  {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(ExploreTodayInThePast.this,
-                        "Error retrieving highlights.", Toast.LENGTH_SHORT);
+                Toast.makeText(ScrollBack.this, "Error retrieving highlights.",
+                        Toast.LENGTH_SHORT);
             }
         });
     }

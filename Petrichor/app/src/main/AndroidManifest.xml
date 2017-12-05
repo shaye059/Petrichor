@@ -48,6 +48,9 @@
         <activity android:name=".Help" />
         <activity android:name=".HelpAbout" />
         <activity android:name=".HelpHowToUse" />
+        <activity android:name=".HighlightList" />
+        <activity android:name=".MissedADay" />
+        <activity android:name=".ScrollBack"></activity>
     </application>
 
 </manifest>

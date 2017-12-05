@@ -8,15 +8,16 @@ package ca.weihu.petrichor;
  */
 public class TimePeriod {
 
+    public enum TimePeriodLabel {
+        DAY, WEEK, MONTH, YEAR
+    }
+
     private TimePeriodLabel label;
     private int identifier;
     private TimePeriod parent;
 
-    private enum TimePeriodLabel {
-        DAY, WEEK, MONTH, YEAR
-    }
 
-    private void TimePeriod(TimePeriodLabel label, int identifier, TimePeriod parent){
+    public TimePeriod(TimePeriodLabel label, int identifier, TimePeriod parent) {
         this.label=label;
         this.identifier=identifier;
         this.parent=parent;

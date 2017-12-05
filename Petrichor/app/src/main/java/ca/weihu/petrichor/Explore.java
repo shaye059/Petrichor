@@ -17,6 +17,40 @@ public class Explore extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
+    public void onBtnThisWeek(View view) {
+        Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
+        startActivity(in);
+    }
+    public void onBtnThisMonth(View view) {
+        Intent in = new Intent(getApplicationContext(), ExploreMonth.class);
+        startActivity(in);
+    }
+    public void onBtnThisYear(View view) {
+        Intent in = new Intent(getApplicationContext(), ExploreYear.class);
+        startActivity(in);
+    }
+    public void onBtnScrollBack(View view) {
+        Intent in = new Intent(getApplicationContext(), ScrollBack.class);
+        startActivity(in);
+    }
+    public void onBtnTodayInThePast(View view) {
+        Intent in = new Intent(getApplicationContext(), ExploreTodayInThePast.class);
+        startActivity(in);
+    }
+    public void onRandomButton(View view) {
+        Intent in = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
+        startActivity(in);
+    }
+    public void onBtnBack(View view) {
+        onBackPressed();
+    }
+
+
+
+
+
+
+
     public void onTimePeriodButton(View view) {
         Intent in = new Intent(getApplicationContext(), TimePeriodActivity.class);
         startActivity(in);
@@ -33,26 +67,7 @@ public class Explore extends AppCompatActivity {
         Intent in = new Intent(getApplicationContext(), ExploreTodayInThePast.class);
         startActivity(in);
     }
-    public void OnWeekButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
-        startActivity(in);
-    }
-    public void OnMonthButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreMonth.class);
-        startActivity(in);
-    }
-    public void OnYearButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreYear.class);
-        startActivity(in);
-    }
-    public void OnRandomButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
-        startActivity(in);
-    }
 
-    public void onBtnBack(View view) {
-        onBackPressed();
-    }
 
     public void onTaggedMemories(View view) {
     }

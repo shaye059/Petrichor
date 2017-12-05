@@ -2,40 +2,51 @@ package ca.weihu.petrichor;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NavBar extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    DatabaseReference dbRefUser;
+    /*==============================================================================================
+        V A R I A B L E S
+    ==============================================================================================*/
 
-    TextView navBarUsername;
+    private DatabaseReference dbRefUser;
+
+    private String currentDayOfWeek;
+
+    List<Highlight> highlights;
+    ListView listViewHighlights;
+
+
+    /*==============================================================================================
+        A C T I V I T Y  L I F E C Y C L E  M E T H O D S
+    ==============================================================================================*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_bar);
+
+// please clean this up (start) --------------------------------------------------------------------
 
         /*getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -60,14 +71,15 @@ public class NavBar extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();*/
 
+// please clean this up (end) ----------------------------------------------------------------------
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        dbRefUser = FirebaseDatabase.getInstance().getReference( "Account/" +
-                FirebaseAuth.getInstance().getCurrentUser().getUid() );
+        dbRefUser = Account.getDbRefUser();
 
 
-        // Setting username/email into R.id.navBarUsername (TextView) on the navbar drawer
+        // Setting username/email into TextView (R.id.navBarUsername) on the navbar drawer
 
         dbRefUser.addValueEventListener(new ValueEventListener() {
 
@@ -77,39 +89,163 @@ public class NavBar extends AppCompatActivity
                 // if the user set a name then display it
                 if (dataSnapshot.getValue(Account.class).getName() != null) {
 
-                    setUsernameToDrawerTextView(dataSnapshot.getValue(Account.class).getName());
+                    displayUsernameInDrawer(dataSnapshot.getValue(Account.class).getName());
 
                     // if the user DID NOT set a name then display user's email
                 } else if (dataSnapshot.getValue(Account.class).getUsername() != null) {
 
-                    setUsernameToDrawerTextView(dataSnapshot.getValue(Account.class).getUsername());
+                    displayUsernameInDrawer(dataSnapshot.getValue(Account.class).getUsername());
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-                Toast.makeText(NavBar.this,
+                Toast.makeText(getApplicationContext(),
                         "The read failed: " + databaseError.getCode(),
                         Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        /*------------------------------------------------------------------------------------------
+            PROMPTING USER FOR WEEKLY/MONTHLY/YEARLY HIGHLIGHTS SELECTION
+        ------------------------------------------------------------------------------------------*/
+
+        // I N I T I A L I Z I N G
+
+        // assign ListView to a variable and create an ADS to hold the highlights
+        listViewHighlights = (ListView) findViewById(R.id.listViewHighlights);
+        highlights = new ArrayList<>();
+
+        currentDayOfWeek = Time.currentDayOfWeek();
+
+
+
+        /*  - user is logged in (activity_home.xml only available after login screen)
+            - prompt user to insert highlight of the week/month/year
+         */
+
+
+        // P R O M P T I N G  W E E K L Y
+        /*  Note: be careful of partial weeks (1st half of week can be the end of a month and 2nd
+            half of week can be the start of a new month)
+        */
+
+        // currentDay() < 8 means it's a partial week
+
+        /*// if it's Sunday and last week's total submitted highlights > 3 (of the 21 max), prompt
+        if ( currentDayOfWeek.equals("Sun") ) {
+
+            dbRefUser.orderByChild("Highlight/TimePeriodYYYY").limitToFirst(21)
+                    .addChildEventListener(new ValueEventListener())
+
+
+
+            // equal to or less than 3: add all of them
+        } else if (true) {
+
+
+
+        }*/
+
+
+
+        // P R O M P T I N G  M O N T H L Y
+
+
+        // P R O M P T I N G  Y E A R L Y
+
     }
 
-    private void setUsernameToDrawerTextView( String username ) {
+
+    /*==============================================================================================
+        D A T A B A S E - R E L A T E D  M E T H O D S
+    ==============================================================================================*/
+
+    public void missedADay() {
+        Intent intent = new Intent(getApplicationContext(), MissedADay.class);
+        startActivity(intent);
+    }
+
+// NOT FINISHED: implementation
+    public void promptChooseWeeklyH() {
+
+        Toast.makeText(this, "opening Highlights", Toast.LENGTH_SHORT).show();
+
+        /*dbRefUser.child("Highlight").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                highlights.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    Highlight highlight = postSnapshot.getValue(Highlight.class);
+                    highlights.add(highlight);
+
+                    Log.d("\n\n\nhighlight", highlight.getDescription());
+                }
+
+                HighlightListAdapter highlightsAdapter =
+                        new HighlightListAdapter(NavBar.this, highlights);
+                listViewHighlights.setAdapter(highlightsAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(NavBar.this, "Error retrieving highlights.",
+                        Toast.LENGTH_SHORT);
+            }
+        });*/
+
+        Intent in = new Intent(getApplicationContext(), HighlightList.class);
+        startActivity(in);
+    }
+
+
+    // bugged: once logged out then logged in then the TextView shows the hint and not name...
+    private void displayUsernameInDrawer(String username ) {
 
         // load username/email into R.id.navBarUsername
-        navBarUsername = (TextView) findViewById(R.id.navBarUsername);
-        navBarUsername.setText( username );
+
+        TextView navBarUsername = (TextView) findViewById(R.id.navBarUsername);
+
+        if (navBarUsername == null) {
+            Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_SHORT).show();
+        }
+
+
+        /*  without this if... when logout via navbar: java.lang.NullPointerException: Attempt to
+            invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on
+            a null object reference
+         */
+        if (navBarUsername != null) {
+            navBarUsername.setText(username);
+        }
     }
 
 
-    public void OnTodayButton(View view) {
+    /*==============================================================================================
+        A C T I V I T Y  M E T H O D S
+    ==============================================================================================*/
+
+    public void prompt(View view) {
+        //Toast.makeText(this, "prompt", Toast.LENGTH_SHORT).show();
+        promptChooseWeeklyH();
+    }
+
+    public void onBtnMissedADay(View view) {
+        missedADay();
+    }
+
+    public void onTodayButton(View view) {
         Intent in = new Intent(getApplicationContext(), Today.class);
         startActivity(in);
     }
 
-    public void OnExploreButton(View view) {
+    public void onExploreButton(View view) {
         Intent intent = new Intent(getApplicationContext(), Explore.class);
         startActivity(intent);
     }

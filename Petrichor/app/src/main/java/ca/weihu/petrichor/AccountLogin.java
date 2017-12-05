@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -117,7 +118,9 @@ public class AccountLogin extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
 
-                    // Create toast to welcome the user
+                    /*------------------------------------------------------------------------------
+                        create toast to welcome the user
+                    ------------------------------------------------------------------------------*/
 
                     Log.d("\n\n\nAccountLogin.java", "Account/" + FirebaseAuth
                             .getInstance().getCurrentUser().getUid());
@@ -125,8 +128,8 @@ public class AccountLogin extends AppCompatActivity {
                     if (FirebaseAuth.getInstance().getCurrentUser() != null) {
 
                         // maybe should split up the dbRef into variables so code can fit on 1 line
-                        FirebaseDatabase.getInstance().getReference("Account/"
-                                + mAuth.getCurrentUser().getUid())
+                        FirebaseDatabase.getInstance().getReference( "Account/"
+                                + mAuth.getCurrentUser().getUid() )
                                 .addValueEventListener(new ValueEventListener() {
 
                                     @Override
