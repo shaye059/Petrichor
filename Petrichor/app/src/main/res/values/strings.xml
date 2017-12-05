@@ -16,5 +16,6 @@
 
     <string name="title_activity_custom_list_view">CustomListView</string>
     <string name="daily_highlights_share_your_3_highlights_of_the_day_n_n_highlights_of_the_week_choose_your_best_3_moments_from_the_daily_highlights_you_have_collected_throughout_the_week_n_n_highlights_of_the_month_choose_your_best_3_moments_from_the_weekly_highlights_you_have_collected_throughout_the_month_n_n_highlights_of_the_year_choose_your_best_3_moments_from_the_monthly_highlights_you_have_collected_throughout_the_year_n_n_nshare">- Daily Highlights: Share your 3 highlights of the day.  - Highlights of the Week: Choose your best 3 moments from the daily highlights you have collected throughout the week.  - Highlights of the Month: Choose your best 3 moments from the weekly highlights you have collected throughout the month.  - Highlights of the Year: Choose your best 3 moments from the monthly highlights you have collected throughout the year.   Share!</string>
+    <string name="add">Add</string>
 
 </resources>

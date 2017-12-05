@@ -57,9 +57,10 @@ public class HelpHowToUse extends AppCompatActivityMod {
 
     }
 
+    //OnClick method for Back Button
     public void onBtnBack(View view) {
 
-        Intent in = new Intent(getApplicationContext(), Home.class);
+        Intent in = new Intent(getApplicationContext(), NavBar.class);
         startActivity(in);
     }
 }

@@ -68,6 +68,11 @@ public class AccountLogin extends AppCompatActivity {
 
     }
 
+    //OnCLick method for Login button. Attempts to log a user in based on the email and password provided.
+    //Prompts the user if they enter an invalid email or password. Displays progress bar while it attempts
+    //to connect to database. Displays 'Some error occured message if the user email isn't registered or
+    // the app cannot read from the database.
+    //If login is successful it brings the user to the homepage and a welcome message pops up
     private void userLogin() {
 
 

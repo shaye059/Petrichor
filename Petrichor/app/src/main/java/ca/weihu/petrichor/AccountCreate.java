@@ -32,7 +32,7 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
     ProgressBar progressBar;
 
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference accountsRef = database.getReference("Account");
+    private DatabaseReference accountsRef = database.getReference().child("Account");
 
     // Write a message to the database
 
@@ -66,17 +66,20 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
             }
         });
 
-
         editTextUsername = (EditText) findViewById(R.id.editTextCreateUsername3);
         editTextPassword = (EditText) findViewById(R.id.editTextCreatePassword3);
         mAuth = FirebaseAuth.getInstance();
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
     }
 
+    //Method that attempts to add a user from the email and password provided.
+    //Prompts the user is they don't input a proper email or password.
+    //If the user is already registered, the system prompts them with a message informing them
+    //that they are already registered
+
     private void registerUser(){
         final String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        account = new ca.weihu.petrichor.Account(username, "");
 
         if (username.isEmpty()){
             editTextUsername.setError("Email is required");
@@ -102,7 +105,7 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.createUserWithEmailAndPassword(account.getusername(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
@@ -111,8 +114,10 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                     String userID = user.getUid();
+                    account = new ca.weihu.petrichor.Account(username, "");
 
                     accountsRef.child(userID).setValue(account);
+                    startActivity(new Intent(getApplicationContext(), AccountLogin.class));
 
                 }
                 else{
@@ -140,12 +145,13 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
 
 
 
-
+    //OnCLick method for Create Account button
     public void onAccountCreate(View view) {
         Intent in = new Intent(getApplicationContext(), NavBar.class);
         startActivity(in);
     }
 
+    //OnClick method for Back button
     public void onBtnBack(View view) {
         onBackPressed();
     }
@@ -181,3 +187,6 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
 
 
 }
+
+
+

@@ -69,7 +69,7 @@
             app:srcCompat="@drawable/ic_add" />
 
         <ListView
-            android:id="@+id/listView4"
+            android:id="@+id/listViewFriends"
             android:layout_width="match_parent"
             android:layout_height="290dp"
             android:layout_above="@+id/imageButton4"

@@ -24,7 +24,8 @@ public class About extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-        //Reader that extracts texts from "instructions" text file in assets
+
+        //Reader that extracts text from "instructions" text file in assets
         //Code borrowed from Naruto Uzumaki, found on Stack Overflow in the following thread
         // https://stackoverflow.com/questions/33779607/reading-a-txt-file-and-outputing-as-a-textview-in-android
         BufferedReader reader = null;
@@ -56,6 +57,8 @@ public class About extends AppCompatActivity {
             output.setMovementMethod(new ScrollingMovementMethod());
 
         }
+
+        //Second reader to extract from info
 
         reader = null;
         StringBuilder text = new StringBuilder();
@@ -89,6 +92,7 @@ public class About extends AppCompatActivity {
         }
     }
 
+    //OnClick method for Back Button
     public void onBtnBack(View view) {
 
         Intent in = new Intent(getApplicationContext(), NavBar.class);
