@@ -41,10 +41,14 @@ public class ExploreVisitARandomDay extends AppCompatActivity {
 
         super.onStart();
 
-        /*  Note: inefficient code right now to retrieve a random day because it requires to go
-            through the records twice (first to count number of highlights, second to choose one)...
-            Implement more efficient code when time permits.
-           */
+        roll();
+    }
+
+    /*  Note: inefficient code right now to retrieve a random day because it requires to go
+        through the records twice (first to count number of highlights, second to choose one)...
+        Implement more efficient code when time permits.
+    */
+    public void roll() {
 
         Account.getDbRefUserHighlights()
                 .orderByValue().addValueEventListener(new ValueEventListener() {
@@ -95,6 +99,10 @@ public class ExploreVisitARandomDay extends AppCompatActivity {
                         "Error retrieving highlights.", Toast.LENGTH_SHORT);
             }
         });
+    }
+
+    public void onBtnReroll(View view) {
+        roll();
     }
 
     public void onBtnBack(View view) {

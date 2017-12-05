@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/explore_5_random"
-    tools:context="ca.weihu.petrichor.ExploreMonth">
+    tools:context="ca.weihu.petrichor.ExploreVisitARandomDay">
 
     <Button
         android:id="@+id/btnBack2"
@@ -48,8 +48,9 @@
         android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/weekText"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -57,4 +58,23 @@
         tools:layout_constraintTop_creator="1">
 
     </ListView>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/julius_sans"
+        android:onClick="onBtnReroll"
+        android:text="reroll"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
