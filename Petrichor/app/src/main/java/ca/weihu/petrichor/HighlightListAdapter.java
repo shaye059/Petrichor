@@ -90,13 +90,13 @@ public class HighlightListAdapter extends ArrayAdapter<Highlight> {
             //textViewDate.setWidth(250);
 
             if (highlight.getId() != null) {
-                textViewDate.setText(Time.convertToMonthAbr(highlight.getId()) + " "
-                        + Time.convertToDayOfWeekAbr(highlight.getId()) + " "
+                textViewDate.setText( Time.convertToDayOfWeekAbr(highlight.getId()) + " "
+                        + Time.convertToMonthAbr(highlight.getId()) + " "
                         + Time.convertToDay(highlight.getId()) + ", "
                         + Time.convertToYear(highlight.getId()) + " (week "
-                        + Time.convertToWeek(highlight.getId()) + ")");
+                        + Time.convertToWeek(highlight.getId()) + ")" );
             } else {
-                textViewDate.setText("No Highlights to display.");
+                textViewDate.setText( "No Highlights to display." );
             }
         }
 

@@ -50,7 +50,7 @@ public class ScrollBack extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                     Highlight highlight = postSnapshot.getValue(Highlight.class);
-                    highlights.add(highlight);
+                    highlights.add(0, highlight);
                 }
 
                 HighlightListAdapter highlightsAdapter =
