@@ -42,13 +42,14 @@
             tools:ignore="HardcodedText" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="94dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@android:color/transparent"
             android:fontFamily="@font/julius_sans"
+            android:nextFocusForward="@id/editTextH1"
             android:onClick="onSubmitData"
             android:text="submit"
             android:textAllCaps="false"
@@ -63,7 +64,7 @@
             tools:layout_constraintTop_creator="1" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editTextH1"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageButton5"
@@ -73,32 +74,35 @@
             android:fontFamily="@font/raleway_thin"
             android:hint="HIGHLIGHT 1"
             android:inputType="text|textPersonName"
+            android:nextFocusForward="@id/editTextH2"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@android:color/background_light" />
 
         <EditText
-            android:id="@+id/editText4"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageButton"
-            android:layout_alignStart="@+id/editText3"
-            android:ems="10"
-            android:fontFamily="@font/raleway_thin"
-            android:hint="HIGHLIGHT 3"
-            android:inputType="text|textPersonName"
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@android:color/background_light" />
-
-        <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/editTextH2"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageButton3"
-            android:layout_alignStart="@+id/editText"
+            android:layout_alignStart="@+id/editTextH1"
             android:ems="10"
             android:fontFamily="@font/raleway_thin"
             android:hint="HIGHLIGHT 2"
             android:inputType="text|textPersonName"
+            android:nextFocusForward="@id/editTextH3"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@android:color/background_light" />
+
+        <EditText
+            android:id="@+id/editTextH3"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageButton"
+            android:layout_alignStart="@+id/editTextH2"
+            android:ems="10"
+            android:fontFamily="@font/raleway_thin"
+            android:hint="HIGHLIGHT 3"
+            android:inputType="text|textPersonName"
+            android:nextFocusForward="@id/btnSubmit"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@android:color/background_light" />
 
@@ -133,7 +137,7 @@
             android:id="@+id/imageButton"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/button"
+            android:layout_above="@+id/btnSubmit"
             android:layout_alignStart="@+id/imageButton3"
             android:layout_marginBottom="29dp"
             android:adjustViewBounds="true"

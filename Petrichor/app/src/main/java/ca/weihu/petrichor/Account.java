@@ -2,7 +2,9 @@ package ca.weihu.petrichor;
 
 import android.provider.ContactsContract;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class Account {
     private int numfriends;
 
     // either way still have to use database snapshot... delete this later T.N.
+    //private DatabaseReference dbRefUser;
 
 
     /*==============================================================================================
@@ -53,8 +56,24 @@ public class Account {
 
 
     //Getters and setters for username (users email)
-    public String getusername(){
+    public String getusername() {
+        // The purpose of these DbRefs is to be able to change DbRef names in one sole definition
         return username;
+    }
+    // Note: change Account to accounts when have time
+    public static DatabaseReference getDbRefUser() {
+        return ( FirebaseDatabase.getInstance().getReference("Account/" +
+                FirebaseAuth.getInstance().getCurrentUser().getUid()) );
+    }
+
+    public static DatabaseReference getDbRefUserHighlights() {
+        return ( FirebaseDatabase.getInstance().getReference("Account/" +
+                FirebaseAuth.getInstance().getCurrentUser().getUid() + "/highlights") );
+    }
+
+    public static DatabaseReference getDbRefUserTPCs() {
+        return ( FirebaseDatabase.getInstance().getReference("Account/" +
+                FirebaseAuth.getInstance().getCurrentUser().getUid() + "/timePeriodCollections") );
     }
 
     public void setusername(String user){

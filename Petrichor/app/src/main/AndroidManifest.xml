@@ -46,7 +46,10 @@
         <activity android:name=".About" />
         <activity android:name=".MyProfile" />
         <activity android:name=".HelpHowToUse" />
-        <activity android:name=".AddFriend"></activity>
+        <activity android:name=".AddFriend"/>
+        <activity android:name=".HighlightList" />
+        <activity android:name=".MissedADay" />
+        <activity android:name=".ScrollBack"></activity>
     </application>
 
 </manifest>

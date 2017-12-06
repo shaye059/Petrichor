@@ -14,8 +14,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,6 +27,10 @@ import java.util.Date;
 
 
 public class Today extends AppCompatActivity {
+
+    /*==============================================================================================
+        V A R I A B L E S
+    ==============================================================================================*/
 
     TimePeriod day;
     boolean updateDatabase;
@@ -66,13 +73,17 @@ public class Today extends AppCompatActivity {
 //    private DatabaseReference databaseReference;
 
 
-    // C O N S T R U C T O R
+    /*==============================================================================================
+        C O N S T R U C T O R S
+    ==============================================================================================*/
 
     public Today() {
     }
 
 
-    // M E T H O D S
+    /*==============================================================================================
+        A C T I V I T Y  L I F E C Y C L E  M E T H O D S
+    ==============================================================================================*/
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -84,6 +95,7 @@ public class Today extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
+        displayEnteredHighlights();
 
         // code to hide keyboard when relative layout is touched
 
@@ -116,76 +128,27 @@ public class Today extends AppCompatActivity {
         dbRefUser = FirebaseDatabase.getInstance().getReference( user.getUid() );
 
         dbRefHighlight = FirebaseDatabase.getInstance()
-                .getReference( "Account" + userID + "/Highlight" );
+                .getReference( "Account/" + userID + "/highlights" );
 
 //        databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        Log.d("\n\n---\n\nTODAY\n\n", "Account" + userID + "/Highlight");
+        Log.d("\n\n---\n\nTODAY\n\n", "Account/" + userID + "/highlights");
 
-        editTextH1 = (EditText) findViewById(R.id.editText);
-        editTextH2 = (EditText) findViewById(R.id.editText3);
-        editTextH3 = (EditText) findViewById(R.id.editText4);
-        buttonSubmit1 = (Button) findViewById(R.id.button);
+        editTextH1 = (EditText) findViewById(R.id.editTextH1);
+        editTextH2 = (EditText) findViewById(R.id.editTextH2);
+        editTextH3 = (EditText) findViewById(R.id.editTextH3);
+        buttonSubmit1 = (Button) findViewById(R.id.btnSubmit);
     }
+
+
+    /*==============================================================================================
+        A C T I V I T Y  M E T H O D S
+    ==============================================================================================*/
 
     public void OnImageButton(View view) {
         Intent in = new Intent(getApplicationContext(), Friends.class);
         startActivity(in);
     }
-
-    private void saveUserData() {
-
-        // Firebase keys of the highlights
-        String keyH1;
-        String keyH2;
-        String keyH3;
-
-
-        // step 1 of 4: generate keyPrefix for highlight (suffix is h1, h2 or h3)
-
-        DateFormat df = new SimpleDateFormat("yyyyMMwwddEEE");
-        Date today = Calendar.getInstance().getTime();
-        String keyPrefix = df.format(today);
-
-
-        // step 2 of 4: saving the 3 highlights the user inputs
-
-        String descriptionH1 = editTextH1.getText().toString().trim();
-        String descriptionH2 = editTextH2.getText().toString().trim();
-        String descriptionH3 = editTextH3.getText().toString().trim();
-
-
-        // set 3 of 4: initiate keys
-
-        keyH1 = keyPrefix + "h1";
-        keyH2 = keyPrefix + "h2";
-        keyH3 = keyPrefix + "h3";
-
-
-        // step 4 of 4: create highlights and add to Firebase
-
-        dbRefHighlight.child(keyH1).setValue( new Highlight(keyH1, descriptionH1) );
-        dbRefHighlight.child(keyH2).setValue( new Highlight(keyH2, descriptionH2) );
-        dbRefHighlight.child(keyH3).setValue( new Highlight(keyH3, descriptionH3) );
-
-        Toast.makeText(this, "Highlights saved.", Toast.LENGTH_SHORT).show();
-
-
-        Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
-
-        in.putExtra("Highlight 1", descriptionH1);
-        in.putExtra("Highlight 2", descriptionH2);
-        in.putExtra("Highlight 3", descriptionH3);
-        startActivity(in);
-
-        Intent in2 = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
-
-        in2.putExtra("Highlight 1", descriptionH1);
-        in2.putExtra("Highlight 2", descriptionH2);
-        in2.putExtra("Highlight 3", descriptionH3);
-        startActivity(in2);
-    }
-
 
     public void onSubmitData(View view) {
         saveUserData();
@@ -221,5 +184,124 @@ public class Today extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
+
+    /*==============================================================================================
+        D A T A B A S E - R E L A T E D  M E T H O D S
+    ==============================================================================================*/
+
+    private void saveUserData() {
+
+        Highlight h1;
+        Highlight h2;
+        Highlight h3;
+
+        // Firebase keys of the highlights
+        String keyH1;
+        String keyH2;
+        String keyH3;
+
+
+        // step 1 of 5: generate keyPrefix for highlight (suffix is h1, h2 or h3)
+
+        DateFormat df = new SimpleDateFormat("yyyyMMwwddEEE");
+        Date today = Calendar.getInstance().getTime();
+        String keyPrefix = df.format(today);
+
+
+        // step 2 of 5: saving the 3 highlights the user inputs
+
+        String descriptionH1 = editTextH1.getText().toString().trim();
+        String descriptionH2 = editTextH2.getText().toString().trim();
+        String descriptionH3 = editTextH3.getText().toString().trim();
+
+
+        // set 3 of 5: initiate keys
+
+        keyH1 = keyPrefix + "h1";
+        keyH2 = keyPrefix + "h2";
+        keyH3 = keyPrefix + "h3";
+
+
+        // step 4 of 5: create highlights and add to Firebase
+
+        h1 = new Highlight(keyH1, descriptionH1);
+        h2 = new Highlight(keyH2, descriptionH2);
+        h3 = new Highlight(keyH3, descriptionH3);
+
+        dbRefHighlight.child(keyH1).setValue( h1 );
+        dbRefHighlight.child(keyH2).setValue( h2 );
+        dbRefHighlight.child(keyH3).setValue( h3 );
+
+
+        // step 5 of 5: attach time labels (and add to collections?)
+        //dbRefHighlight.child(keyH1 + "/HighlightCollection");
+
+        // 5.1 adding to specific highlight in db
+
+        TimePeriodCollection.addToDbHighlights(dbRefHighlight, keyH1);
+        TimePeriodCollection.addToDbHighlights(dbRefHighlight, keyH2);
+        TimePeriodCollection.addToDbHighlights(dbRefHighlight, keyH3);
+
+        // 5.2 adding to timePeriodsCollection dbRef (for querying by TimeCollectionPeriod)
+
+        TimePeriodCollection.addToDbTPCs(Time.currentYear(), Time.currentMonth(), Time.currentWeek(),
+                Time.currentDay(), keyH1, h1);
+        TimePeriodCollection.addToDbTPCs(Time.currentYear(), Time.currentMonth(), Time.currentWeek(),
+                Time.currentDay(), keyH2, h2);
+        TimePeriodCollection.addToDbTPCs(Time.currentYear(), Time.currentMonth(), Time.currentWeek(),
+                Time.currentDay(), keyH3, h3);
+
+        Toast.makeText(this, "Daily Highlights Submitted.", Toast.LENGTH_SHORT).show();
+
+
+// @whoever's code: this implementation needs improvement... uncomment when implemented. -T.N.
+        /*Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
+
+        in.putExtra("Highlight 1", descriptionH1);
+        in.putExtra("Highlight 2", descriptionH2);
+        in.putExtra("Highlight 3", descriptionH3);
+        startActivity(in);
+
+        Intent in2 = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
+
+        in2.putExtra("Highlight 1", descriptionH1);
+        in2.putExtra("Highlight 2", descriptionH2);
+        in2.putExtra("Highlight 3", descriptionH3);
+        startActivity(in2);*/
+    }
+
+    private void displayEnteredHighlights() {
+
+        final String h1 = Time.dateOfToday() + "h1";
+        final String h2 = Time.dateOfToday() + "h2";
+        final String h3 = Time.dateOfToday() + "h3";
+
+        final EditText h1Text = (EditText) findViewById(R.id.editTextH1);
+        final EditText h2Text = (EditText) findViewById(R.id.editTextH2);
+        final EditText h3Text = (EditText) findViewById(R.id.editTextH3);
+
+        Account.getDbRefUserHighlights().child("/").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    if (postSnapshot.getKey().compareTo(h1) == 0) {
+                        h1Text.setText(postSnapshot.getValue(Highlight.class).getDescription());
+                    } else if (postSnapshot.getKey().compareTo(h2) == 0) {
+                        h2Text.setText(postSnapshot.getValue(Highlight.class).getDescription());
+                    } else if (postSnapshot.getKey().compareTo(h3) == 0) {
+                        h3Text.setText(postSnapshot.getValue(Highlight.class).getDescription());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

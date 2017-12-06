@@ -2,18 +2,14 @@ package ca.weihu.petrichor;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,16 +21,37 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class NavBar extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    /*==============================================================================================
+        V A R I A B L E S
+    ==============================================================================================*/
+
+
+    private String currentDayOfWeek;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private String userID;
     private DatabaseReference databaseAccounts;
     private DatabaseReference ref;
-    NavigationView navigationView;
+    private NavigationView navigationView;
     private Account account;
+
+    private List<Highlight> highlights;
+    private ListView listViewHighlights;
+
+
+    /*==============================================================================================
+        A C T I V I T Y  L I F E C Y C L E  M E T H O D S
+    ==============================================================================================*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +92,102 @@ public class NavBar extends AppCompatActivity
         });
 
 
+
+
+    /*------------------------------------------------------------------------------------------
+            PROMPTING USER FOR WEEKLY/MONTHLY/YEARLY HIGHLIGHTS SELECTION
+        ------------------------------------------------------------------------------------------*/
+
+    // I N I T I A L I Z I N G
+
+    // assign ListView to a variable and create an ADS to hold the highlights
+    listViewHighlights = (ListView) findViewById(R.id.listViewHighlights);
+    highlights = new ArrayList<>();
+
+    currentDayOfWeek = Time.currentDayOfWeek();
+
+
+
+        /*  - user is logged in (activity_home.xml only available after login screen)
+            - prompt user to insert highlight of the week/month/year
+         */
+
+
+    // P R O M P T I N G  W E E K L Y
+        /*  Note: be careful of partial weeks (1st half of week can be the end of a month and 2nd
+            half of week can be the start of a new month)
+        */
+
+    // currentDay() < 8 means it's a partial week
+
+        /*// if it's Sunday and last week's total submitted highlights > 3 (of the 21 max), prompt
+        if ( currentDayOfWeek.equals("Sun") ) {
+
+            dbRefUser.orderByChild("Highlight/TimePeriodYYYY").limitToFirst(21)
+                    .addChildEventListener(new ValueEventListener())
+
+
+
+            // equal to or less than 3: add all of them
+        } else if (true) {
+
+
+
+        }*/
+
+
+
+    // P R O M P T I N G  M O N T H L Y
+
+
+    // P R O M P T I N G  Y E A R L Y
+
+}
+
+
+    /*==============================================================================================
+        D A T A B A S E - R E L A T E D  M E T H O D S
+    ==============================================================================================*/
+
+    public void missedADay() {
+        Intent intent = new Intent(getApplicationContext(), MissedADay.class);
+        startActivity(intent);
+    }
+
+    // NOT FINISHED: implementation
+    public void promptChooseWeeklyH() {
+
+        Toast.makeText(this, "opening Highlights", Toast.LENGTH_SHORT).show();
+
+        /*dbRefUser.child("Highlight").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                highlights.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    Highlight highlight = postSnapshot.getValue(Highlight.class);
+                    highlights.add(highlight);
+
+                    Log.d("\n\n\nhighlight", highlight.getDescription());
+                }
+
+                HighlightListAdapter highlightsAdapter =
+                        new HighlightListAdapter(NavBar.this, highlights);
+                listViewHighlights.setAdapter(highlightsAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(NavBar.this, "Error retrieving highlights.",
+                        Toast.LENGTH_SHORT);
+            }
+        });*/
+
+        Intent in = new Intent(getApplicationContext(), HighlightList.class);
+        startActivity(in);
     }
 
     private void showData(DataSnapshot  datasnapshot){
@@ -98,12 +211,25 @@ public class NavBar extends AppCompatActivity
         }
     }
 
-    public void OnTodayButton(View view) {
+    /*==============================================================================================
+        A C T I V I T Y  M E T H O D S
+    ==============================================================================================*/
+
+    public void prompt(View view) {
+        //Toast.makeText(this, "prompt", Toast.LENGTH_SHORT).show();
+        promptChooseWeeklyH();
+    }
+
+    public void onBtnMissedADay(View view) {
+        missedADay();
+    }
+
+    public void onTodayButton(View view) {
         Intent in = new Intent(getApplicationContext(), Today.class);
         startActivity(in);
     }
 
-    public void OnExploreButton(View view) {
+    public void onExploreButton(View view) {
         Intent intent = new Intent(getApplicationContext(), Explore.class);
         startActivity(intent);
     }
@@ -155,5 +281,8 @@ public class NavBar extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private class ListView {
     }
 }

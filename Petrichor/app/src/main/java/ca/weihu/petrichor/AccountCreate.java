@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.view.View.OnClickListener;
 import android.util.*;
 import android.widget.Toast;
 
@@ -19,16 +20,25 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+import ca.weihu.petrichor.Account;
 
 public class AccountCreate extends AppCompatActivity implements View.OnClickListener {
-    private Account account;
 
     private RelativeLayout relLayout = null;
+
     EditText editTextUsername, editTextPassword;
     private FirebaseAuth mAuth;
+
+    private Account account;
+
     ProgressBar progressBar;
 
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -42,11 +52,10 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_create);
 
-
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
 
         // code to hide keyboard when relative layout is touched
@@ -78,8 +87,11 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
     //that they are already registered
 
     private void registerUser(){
+
         final String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+
+        account = new ca.weihu.petrichor.Account(username);
 
         if (username.isEmpty()){
             editTextUsername.setError("Email is required");
@@ -111,26 +123,26 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()){
 
-                    Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Registration successful.", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                     String userID = user.getUid();
                     account = new ca.weihu.petrichor.Account(username, "");
 
                     accountsRef.child(userID).setValue(account);
                     startActivity(new Intent(getApplicationContext(), AccountLogin.class));
-
                 }
                 else{
                     if (task.getException()instanceof FirebaseAuthUserCollisionException){
-                        Toast.makeText(getApplicationContext(), "You are already registered", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You are already registered.", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(getApplicationContext(),"Some error occured", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Some error occurred.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
     }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){

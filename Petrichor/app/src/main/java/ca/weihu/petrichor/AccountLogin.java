@@ -41,7 +41,6 @@ public class AccountLogin extends AppCompatActivity {
         setContentView(R.layout.activity_account_login);
         mAuth = FirebaseAuth.getInstance();
 
-
         hideSystemUI();
 
 
@@ -65,7 +64,6 @@ public class AccountLogin extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         editTextUsername = (EditText) findViewById(R.id.editTextLoginUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextLoginPassword);
-
     }
 
     //OnCLick method for Login button. Attempts to log a user in based on the email and password provided.
@@ -74,7 +72,6 @@ public class AccountLogin extends AppCompatActivity {
     // the app cannot read from the database.
     //If login is successful it brings the user to the homepage and a welcome message pops up
     private void userLogin() {
-
 
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -113,6 +110,10 @@ public class AccountLogin extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
 
+                    /*------------------------------------------------------------------------------
+                        create toast to welcome the user
+                    ------------------------------------------------------------------------------*/
+
                     Log.d("\n\n\nAccountLogin.java", "Account/" + FirebaseAuth
                             .getInstance().getCurrentUser().getUid());
 
@@ -141,16 +142,15 @@ public class AccountLogin extends AppCompatActivity {
                                 }
                             }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Toast.makeText(AccountLogin.this,
-                                        "The read failed: " + databaseError.getCode(),
-                                        Toast.LENGTH_SHORT).show();
-                                Log.d("AccountLogin.java", "The read failed: "
-                                        + databaseError.getCode());
-                            }
-                        });
-
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Toast.makeText(AccountLogin.this,
+                                                "The read failed: " + databaseError.getCode(),
+                                                Toast.LENGTH_SHORT).show();
+                                        Log.d("AccountLogin.java", "The read failed: "
+                                                + databaseError.getCode());
+                                    }
+                                });
                     }
 
                 } else {
@@ -159,6 +159,23 @@ public class AccountLogin extends AppCompatActivity {
             }
         });
     }
+
+
+    // A C T I V I T Y  S E C T I O N
+
+    public void onBtnBack(View view) {
+        onBackPressed();
+    }
+
+    public void onLogin(View view) {
+        userLogin();
+    }
+
+    public void onCreate(View view) {
+        Intent in = new Intent(getApplicationContext(), AccountCreate.class);
+        startActivity(in);
+    }
+
 
     /**
      * Overriding onBackPressed() to display a warning before exiting the app
@@ -197,18 +214,6 @@ public class AccountLogin extends AppCompatActivity {
         }
     }
 
-    public void onBtnBack(View view) {
-        onBackPressed();
-    }
-
-    public void onLogin(View view) {
-        userLogin();
-    }
-
-    public void onCreate(View view) {
-        Intent in = new Intent(getApplicationContext(), AccountCreate.class);
-        startActivity(in);
-    }
 
 
     // P R E V E N T I N G  E X I T I N G  F U L L S C R E E N
