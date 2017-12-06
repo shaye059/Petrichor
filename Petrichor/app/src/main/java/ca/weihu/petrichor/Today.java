@@ -1,7 +1,9 @@
 package ca.weihu.petrichor;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -105,11 +107,16 @@ public class Today extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                // this code crashes sometimes... temporary: try and catch
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-                hideSystemUI();
+                    hideSystemUI();
 
+                } catch (Exception e) {
+                }
+                    
                 return true;
             }
         });
@@ -151,28 +158,39 @@ public class Today extends AppCompatActivity {
     }
 
     public void onBtnEraseH1(View view) {
-        if (editTextH1.getText().toString().trim().compareTo("") > 0 ) {
-            eraseHighlight(Time.dateOfToday() + "h1");
-        } else {
-            Toast.makeText(this, "No highlight to be erased.",
-                    Toast.LENGTH_SHORT).show();
-        }
+        eraseH(editTextH1, "h1");
     }
     public void onBtnEraseH2(View view) {
-        if (editTextH2.getText().toString().trim().compareTo("") > 0 ) {
-            eraseHighlight( Time.dateOfToday() + "h2" );
-        } else {
-            Toast.makeText(this, "No highlight to be erased.",
-                    Toast.LENGTH_SHORT).show();
-        }
+        eraseH(editTextH2, "h2");
     }
     public void onBtnEraseH3(View view) {
-        if (editTextH3.getText().toString().trim().compareTo("") > 0 ) {
-            eraseHighlight( Time.dateOfToday() + "h3" );
-        } else {
-            Toast.makeText(this, "No highlight to be erased.",
-                    Toast.LENGTH_SHORT).show();
-        }
+        eraseH(editTextH3, "h3");
+    }
+
+    private void eraseH(final EditText eT, final String h) {
+
+        final String hDescription = eT.getText().toString().trim();
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle("Do you really want to erase this highlight?");
+        dialogBuilder.setMessage(hDescription);
+
+        dialogBuilder.setNegativeButton("No", null);
+
+        dialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int n) {
+                if (hDescription.compareTo("") > 0) {
+                    eraseHighlight(Time.dateOfToday() + h);
+                } else {
+                    Toast.makeText(getApplicationContext(), "No highlight to be erased.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
     }
 
     public void onSubmitData(View view) {
