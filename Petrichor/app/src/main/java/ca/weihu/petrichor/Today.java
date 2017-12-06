@@ -150,6 +150,31 @@ public class Today extends AppCompatActivity {
         startActivity(in);
     }
 
+    public void onBtnEraseH1(View view) {
+        if (editTextH1.getText().toString().trim().compareTo("") > 0 ) {
+            eraseHighlight(Time.dateOfToday() + "h1");
+        } else {
+            Toast.makeText(this, "No highlight to be erased.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void onBtnEraseH2(View view) {
+        if (editTextH2.getText().toString().trim().compareTo("") > 0 ) {
+            eraseHighlight( Time.dateOfToday() + "h2" );
+        } else {
+            Toast.makeText(this, "No highlight to be erased.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void onBtnEraseH3(View view) {
+        if (editTextH3.getText().toString().trim().compareTo("") > 0 ) {
+            eraseHighlight( Time.dateOfToday() + "h3" );
+        } else {
+            Toast.makeText(this, "No highlight to be erased.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void onSubmitData(View view) {
         saveUserData();
     }
@@ -182,8 +207,8 @@ public class Today extends AppCompatActivity {
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
 
@@ -191,11 +216,27 @@ public class Today extends AppCompatActivity {
         D A T A B A S E - R E L A T E D  M E T H O D S
     ==============================================================================================*/
 
-    private void saveUserData() {
+    private void eraseHighlight( String keyH ) {
 
-        Highlight h1;
-        Highlight h2;
-        Highlight h3;
+        TimePeriodCollection.eraseFromDbHighlights( Account.getDbRefUserHighlights().child(keyH) );
+
+        TimePeriodCollection.eraseFromDbTPCs( Time.currentYear(), Time.currentMonth(),
+                                              Time.currentWeek(), Time.currentDay(), keyH );
+
+        if ( (String.valueOf(keyH.charAt(13)) + String.valueOf(keyH.charAt(14)))
+                .compareTo("h1") == 0 ) {
+            editTextH1.setText("");
+        } else if ( (String.valueOf(keyH.charAt(13)) + String.valueOf(keyH.charAt(14)))
+                .compareTo("h2") == 0 ) {
+            editTextH2.setText("");
+        } else {
+            editTextH3.setText("");
+        }
+
+        Toast.makeText(this, "Highlight erased.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveUserData() {
 
         // Firebase keys of the highlights
         String keyH1;
@@ -224,15 +265,32 @@ public class Today extends AppCompatActivity {
         keyH3 = keyPrefix + "h3";
 
 
+        // (steps 4 of 5 and 5 of 5 are in addHighlightsToDb(...) method)
+
+        if (descriptionH1.compareTo("") > 0) {
+            addHighlightsToDb(keyH1, descriptionH1);
+        }
+        if (descriptionH2.compareTo("") > 0) {
+            addHighlightsToDb(keyH2, descriptionH2);
+        }
+        if (descriptionH3.compareTo("") > 0) {
+            addHighlightsToDb(keyH3, descriptionH3);
+        }
+    }
+
+
+    /**
+     *
+     * @param key : the key of the individual highlight
+     * @param description
+     */
+    private void addHighlightsToDb(String key, String description) {
+
         // step 4 of 5: create highlights and add to Firebase
 
-        h1 = new Highlight(keyH1, descriptionH1);
-        h2 = new Highlight(keyH2, descriptionH2);
-        h3 = new Highlight(keyH3, descriptionH3);
+        Highlight h = new Highlight(key, description);
 
-        dbRefHighlight.child(keyH1).setValue( h1 );
-        dbRefHighlight.child(keyH2).setValue( h2 );
-        dbRefHighlight.child(keyH3).setValue( h3 );
+        dbRefHighlight.child(key).setValue( h );
 
 
         // step 5 of 5: attach time labels (and add to collections?)
@@ -240,20 +298,15 @@ public class Today extends AppCompatActivity {
 
         // 5.1 adding to specific highlight in db
 
-        TimePeriodCollection.addToDbHighlights(dbRefHighlight, keyH1);
-        TimePeriodCollection.addToDbHighlights(dbRefHighlight, keyH2);
-        TimePeriodCollection.addToDbHighlights(dbRefHighlight, keyH3);
+        TimePeriodCollection.addToDbHighlights(dbRefHighlight, key);
 
         // 5.2 adding to timePeriodsCollection dbRef (for querying by TimeCollectionPeriod)
 
-        TimePeriodCollection.addToDbTPCs(Time.currentYear(), Time.currentMonth(), Time.currentWeek(),
-                Time.currentDay(), keyH1, h1);
-        TimePeriodCollection.addToDbTPCs(Time.currentYear(), Time.currentMonth(), Time.currentWeek(),
-                Time.currentDay(), keyH2, h2);
-        TimePeriodCollection.addToDbTPCs(Time.currentYear(), Time.currentMonth(), Time.currentWeek(),
-                Time.currentDay(), keyH3, h3);
+        TimePeriodCollection.addToDbTPCs(Time.currentYear(), Time.currentMonth(),
+                Time.currentWeek(), Time.currentDay(), key, h);
 
         Toast.makeText(this, "Daily Highlights Submitted.", Toast.LENGTH_SHORT).show();
+    }
 
 
 // @whoever's code: this implementation needs improvement... uncomment when implemented. -T.N.
@@ -270,7 +323,7 @@ public class Today extends AppCompatActivity {
         in2.putExtra("Highlight 2", descriptionH2);
         in2.putExtra("Highlight 3", descriptionH3);
         startActivity(in2);*/
-    }
+
 
     private void displayEnteredHighlights() {
 

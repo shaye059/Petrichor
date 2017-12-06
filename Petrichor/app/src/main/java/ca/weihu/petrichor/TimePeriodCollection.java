@@ -16,6 +16,9 @@ public class TimePeriodCollection implements HighlightCollection {
     }*/
 
 
+    /*----------------------------------------------------------------------------------------------
+        dbRef: Account/user-key/highlights/highlight
+    ----------------------------------------------------------------------------------------------*/
 
     /**
      * sets the TimePeriod for a highlight
@@ -70,6 +73,17 @@ public class TimePeriodCollection implements HighlightCollection {
                 + Time.currentDay()).setValue(true);
     }
 
+    public static void eraseFromDbHighlights(DatabaseReference dbRefHighlight) {
+        dbRefHighlight.removeValue();
+    }
+
+
+    /*----------------------------------------------------------------------------------------------
+        dbRef: Account/user-key/timePeriodCollections/t/n/highlights/highlight
+            where   t = days, months, weeks or years
+                    n = t value
+    ----------------------------------------------------------------------------------------------*/
+
     /**
      * adds a highlight to a user dbRef TimePeriodCollection
      *
@@ -84,8 +98,7 @@ public class TimePeriodCollection implements HighlightCollection {
         dbRefUser.child("timePeriodCollections/years/" + yyyy + "/highlights/" + key)
                 .setValue(highlight);
 
-        dbRefUser.child("timePeriodCollections/months/" + mm + "/highlights/"
-                + key)
+        dbRefUser.child("timePeriodCollections/months/" + mm + "/highlights/" + key)
                 .setValue(highlight);
 
         dbRefUser.child("timePeriodCollections/weeks/" + ww + "/highlights/" + key)
@@ -93,5 +106,21 @@ public class TimePeriodCollection implements HighlightCollection {
 
         dbRefUser.child("timePeriodCollections/days/" + dd + "/highlights/" + key)
                 .setValue(highlight);
+    }
+
+    public static void eraseFromDbTPCs(String yyyy, String mm, String ww, String dd, String key) {
+        DatabaseReference dbRefUser = Account.getDbRefUser();
+
+        dbRefUser.child("timePeriodCollections/years/" + yyyy + "/highlights/" + key)
+                .removeValue();
+
+        dbRefUser.child("timePeriodCollections/months/" + mm + "/highlights/" + key)
+                .removeValue();
+
+        dbRefUser.child("timePeriodCollections/weeks/" + ww + "/highlights/" + key)
+                .removeValue();
+
+        dbRefUser.child("timePeriodCollections/days/" + dd + "/highlights/" + key)
+                .removeValue();
     }
 }

@@ -1,10 +1,14 @@
 package ca.weihu.petrichor;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +40,8 @@ public class MissedADay extends AppCompatActivity {
         V A R I A B L E S
     ==============================================================================================*/
 
+    private ConstraintLayout conLay;
+
     private EditText editTextYYYY;
     private EditText editTextMM;
     private EditText editTextDD;
@@ -59,10 +65,24 @@ public class MissedADay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_missed_a_day);
 
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        hideSystemUI();
+
+        // hide keyboard when ConstraintLayout is touched
+
+        conLay = (ConstraintLayout) findViewById(R.id.conLayMissedADay);
+
+        conLay.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+                hideSystemUI();
+
+                return true;
+            }
+        });
 
         editTextYYYY = (EditText) findViewById(R.id.editTextYear);
         editTextMM = (EditText) findViewById(R.id.editTextMonth);
@@ -112,6 +132,12 @@ public class MissedADay extends AppCompatActivity {
             Initial Validation Checks
         ------------------------------------------------------------------------------------------*/
 
+        if (description.compareTo("") == 0) {
+            Toast.makeText(this, "Please enter a highlight.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
         // check for valid input: format (number of characters)
         if ( strYYYY.length() != 4 && strMM.length() != 2 && strDD.length() != 2 ) {
 
@@ -260,6 +286,13 @@ public class MissedADay extends AppCompatActivity {
         if (checkBoxH2.isChecked()) {
             checkBoxH2.toggle();
         }
+    }
+
+    private void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     public void onBtnBack(View view) {
