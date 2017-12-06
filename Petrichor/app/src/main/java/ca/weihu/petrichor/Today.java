@@ -134,9 +134,9 @@ public class Today extends AppCompatActivity {
 
         Log.d("\n\n---\n\nTODAY\n\n", "Account/" + userID + "/highlights");
 
-        editTextH1 = (EditText) findViewById(R.id.editTextH1);
-        editTextH2 = (EditText) findViewById(R.id.editTextH2);
-        editTextH3 = (EditText) findViewById(R.id.editTextH3);
+        editTextH1 = (EditText) findViewById(R.id.editTextHighlightOne);
+        editTextH2 = (EditText) findViewById(R.id.editTextHighlightTwo);
+        editTextH3 = (EditText) findViewById(R.id.editTextHighlightThree);
         buttonSubmit1 = (Button) findViewById(R.id.btnSubmit);
     }
 
@@ -278,9 +278,9 @@ public class Today extends AppCompatActivity {
         final String h2 = Time.dateOfToday() + "h2";
         final String h3 = Time.dateOfToday() + "h3";
 
-        final EditText h1Text = (EditText) findViewById(R.id.editTextH1);
-        final EditText h2Text = (EditText) findViewById(R.id.editTextH2);
-        final EditText h3Text = (EditText) findViewById(R.id.editTextH3);
+        final EditText h1Text = (EditText) findViewById(R.id.editTextHighlightOne);
+        final EditText h2Text = (EditText) findViewById(R.id.editTextHighlightTwo);
+        final EditText h3Text = (EditText) findViewById(R.id.editTextHighlightThree);
 
         Account.getDbRefUserHighlights().child("/").addValueEventListener(new ValueEventListener() {
             @Override

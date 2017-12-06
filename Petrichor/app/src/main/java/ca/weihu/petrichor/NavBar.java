@@ -46,7 +46,9 @@ public class NavBar extends AppCompatActivity
     private Account account;
 
     private List<Highlight> highlights;
-    private ListView listViewHighlights;
+
+    /*Fix ca.weihu.petrichor.ListView to avoid confusion!*/
+    private android.widget.ListView listViewHighlights;
 
 
     /*==============================================================================================
@@ -58,7 +60,6 @@ public class NavBar extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance().getInstance();
         user = mAuth.getCurrentUser();
         userID = user.getUid();
-        setContentView(R.layout.activity_my_profile);
         databaseAccounts = FirebaseDatabase.getInstance().getReference();
         ref = databaseAccounts.child("Account");
 
@@ -73,38 +74,17 @@ public class NavBar extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-    }
-
-    public void onStart(){
-        super.onStart();
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                showData(dataSnapshot);
-                setName();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-
-    /*------------------------------------------------------------------------------------------
+        /*------------------------------------------------------------------------------------------
             PROMPTING USER FOR WEEKLY/MONTHLY/YEARLY HIGHLIGHTS SELECTION
         ------------------------------------------------------------------------------------------*/
 
-    // I N I T I A L I Z I N G
+        // I N I T I A L I Z I N G
 
-    // assign ListView to a variable and create an ADS to hold the highlights
-    listViewHighlights = (ListView) findViewById(R.id.listViewHighlights);
-    highlights = new ArrayList<>();
+        // assign ListView to a variable and create an ADS to hold the highlights
+        listViewHighlights = (android.widget.ListView) findViewById(R.id.listViewHighlights);
+        highlights = new ArrayList<>();
 
-    currentDayOfWeek = Time.currentDayOfWeek();
+        currentDayOfWeek = Time.currentDayOfWeek();
 
 
 
@@ -113,12 +93,12 @@ public class NavBar extends AppCompatActivity
          */
 
 
-    // P R O M P T I N G  W E E K L Y
+        // P R O M P T I N G  W E E K L Y
         /*  Note: be careful of partial weeks (1st half of week can be the end of a month and 2nd
             half of week can be the start of a new month)
         */
 
-    // currentDay() < 8 means it's a partial week
+        // currentDay() < 8 means it's a partial week
 
         /*// if it's Sunday and last week's total submitted highlights > 3 (of the 21 max), prompt
         if ( currentDayOfWeek.equals("Sun") ) {
@@ -137,12 +117,26 @@ public class NavBar extends AppCompatActivity
 
 
 
-    // P R O M P T I N G  M O N T H L Y
+        // P R O M P T I N G  M O N T H L Y
 
 
-    // P R O M P T I N G  Y E A R L Y
+        // P R O M P T I N G  Y E A R L Y
 
-}
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+                setName();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
 
 
     /*==============================================================================================
@@ -265,11 +259,11 @@ public class NavBar extends AppCompatActivity
             startActivity(in);
         } else if (id == R.id.nav_logout) {
             //FirebaseAuth.getInstance().signOut();
-            Toast.makeText(this, "Logging out.", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(getApplicationContext(), AccountLogin.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(in);
             finish();
+            Toast.makeText(this, "Logged out.", Toast.LENGTH_SHORT).show();
         }  else if (id == R.id.nav_help) {
             Intent in = new Intent(getApplicationContext(), HelpHowToUse.class);
             startActivity(in);

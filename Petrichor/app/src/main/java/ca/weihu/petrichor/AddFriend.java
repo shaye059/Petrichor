@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -107,10 +108,16 @@ public class AddFriend extends AppCompatActivity {
                         }
                     }
                 }
+                if(accounts.size() == 0){
+                    Toast.makeText(AddFriend.this,
+                            "No results",
+                            Toast.LENGTH_SHORT).show();
+                }else {
 
-                accountAdapter = new AccountList(AddFriend.this, accounts);
-                listViewAccounts.setAdapter(accountAdapter);
-                listViewAccounts.setVisibility(View.VISIBLE);
+                    accountAdapter = new AccountList(AddFriend.this, accounts);
+                    listViewAccounts.setAdapter(accountAdapter);
+                    listViewAccounts.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

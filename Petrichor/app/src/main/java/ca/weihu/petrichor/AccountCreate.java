@@ -91,7 +91,7 @@ public class AccountCreate extends AppCompatActivity implements View.OnClickList
         final String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        account = new ca.weihu.petrichor.Account(username);
+        account = new ca.weihu.petrichor.Account(username, "");
 
         if (username.isEmpty()){
             editTextUsername.setError("Email is required");

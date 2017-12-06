@@ -100,8 +100,7 @@
             android:visibility="visible"
             tools:ignore="HardcodedText,InefficientWeight,MissingConstraints,ObsoleteLayoutParam"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="449dp"
-            tools:onClick="OnExploreButton" />
+            tools:layout_editor_absoluteY="449dp" />
 
         <Button
             android:id="@+id/btnAccCreate"

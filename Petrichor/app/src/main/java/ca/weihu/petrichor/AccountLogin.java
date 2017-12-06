@@ -126,8 +126,7 @@ public class AccountLogin extends AppCompatActivity {
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
                                 // if the user set a name then display it
-                                if (dataSnapshot.getValue(Account.class).getname()
-                                        != null) {
+                                if (!dataSnapshot.getValue(Account.class).getname().equals("")) {
 
                                     Toast.makeText(getApplicationContext(), "Welcome "
                                             + dataSnapshot.getValue(Account.class)

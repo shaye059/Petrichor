@@ -88,13 +88,13 @@ public class Friends extends AppCompatActivity {
                         friendAdapter = new FriendList(Friends.this, accounts);
                         listViewFriends.setAdapter(friendAdapter);
                         listViewFriends.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                            @Override
-                            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                Account account = accounts.get(i);
-                                showDeleteFriendDialogue(account);
-                                return true;
-                            }
-                        });
+                                @Override
+                                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    Account account = accounts.get(i);
+                                    showDeleteFriendDialogue(account);
+                                    return true;
+                                }
+                            });
 
                     }
                     @Override
