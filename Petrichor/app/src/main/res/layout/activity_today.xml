@@ -23,7 +23,7 @@
         tools:ignore="UselessParent">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textViewFriend"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,9 +67,9 @@
             android:id="@+id/editTextHighlightOne"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageButton5"
-            android:layout_marginEnd="19dp"
-            android:layout_toStartOf="@+id/imageButton5"
+            android:layout_below="@+id/textViewFriend"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
             android:ems="10"
             android:fontFamily="@font/raleway_thin"
             android:hint="HIGHLIGHT 1"
@@ -82,8 +82,9 @@
             android:id="@+id/editTextHighlightTwo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageButton3"
             android:layout_alignStart="@+id/editTextHighlightOne"
+            android:layout_below="@+id/editTextHighlightOne"
+            android:layout_marginTop="95dp"
             android:ems="10"
             android:fontFamily="@font/raleway_thin"
             android:hint="HIGHLIGHT 2"
@@ -96,8 +97,9 @@
             android:id="@+id/editTextHighlightThree"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageButton"
             android:layout_alignStart="@+id/editTextHighlightTwo"
+            android:layout_below="@+id/editTextHighlightTwo"
+            android:layout_marginTop="95dp"
             android:ems="10"
             android:fontFamily="@font/raleway_thin"
             android:hint="HIGHLIGHT 3"
@@ -105,47 +107,6 @@
             android:nextFocusForward="@id/btnSubmit"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@android:color/background_light" />
-
-        <ImageButton
-            android:id="@+id/imageButton5"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/textView5"
-            android:layout_marginTop="35dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:onClick="OnImageButton"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/friendsicon"
-            tools:ignore="ContentDescription,RtlHardcoded" />
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/imageButton5"
-            android:layout_centerVertical="true"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:onClick="OnImageButton"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/friendsicon"
-            tools:ignore="ContentDescription,RtlHardcoded" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btnSubmit"
-            android:layout_alignStart="@+id/imageButton3"
-            android:layout_marginBottom="29dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:onClick="OnImageButton"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/friendsicon"
-            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 

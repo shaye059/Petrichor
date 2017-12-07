@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/explore"
-    tools:context="ca.weihu.petrichor.Explore">
+    tools:context="ca.weihu.petrichor.HighlightActivity">
 
     <Button
         android:id="@+id/btnBack6"
@@ -20,7 +20,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textViewFriend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -45,11 +45,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView5"
+            android:layout_below="@+id/textViewFriend"
             android:layout_marginTop="42dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
-            android:onClick="onBtnThisWeek"
+            android:onClick="OnWeekButton"
             android:text="week"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
@@ -67,7 +67,7 @@
             android:layout_marginTop="65dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
-            android:onClick="onBtnThisMonth"
+            android:onClick="OnMonthButton"
             android:text="month"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
@@ -85,7 +85,7 @@
             android:layout_marginTop="71dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
-            android:onClick="onBtnThisYear"
+            android:onClick="OnYearButton"
             android:text="year"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"

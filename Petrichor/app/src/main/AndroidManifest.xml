@@ -46,10 +46,12 @@
         <activity android:name=".About" />
         <activity android:name=".MyProfile" />
         <activity android:name=".HelpHowToUse" />
-        <activity android:name=".AddFriend"/>
+        <activity android:name=".AddFriend" />
         <activity android:name=".HighlightList" />
         <activity android:name=".MissedADay" />
-        <activity android:name=".ScrollBack"></activity>
+        <activity android:name=".ScrollBack" />
+        <activity android:name=".ViewFriend" />
+        <activity android:name=".TagFriend"></activity>
     </application>
 
 </manifest>

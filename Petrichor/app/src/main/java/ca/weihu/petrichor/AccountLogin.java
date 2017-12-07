@@ -30,9 +30,9 @@ import java.util.List;
 public class AccountLogin extends AppCompatActivity {
 
     private RelativeLayout relLayout = null;
-    FirebaseAuth mAuth;
-    EditText editTextUsername, editTextPassword;
-    ProgressBar progressBar;
+    private FirebaseAuth mAuth;
+    private EditText editTextUsername, editTextPassword;
+    private ProgressBar progressBar;
 
 
     @Override

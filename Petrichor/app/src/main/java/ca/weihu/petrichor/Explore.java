@@ -7,6 +7,7 @@ import android.view.View;
 
 public class Explore extends AppCompatActivity {
 
+    private String thisEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,30 +16,39 @@ public class Explore extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
+        Bundle bundle = getIntent().getExtras();
+        thisEmail = bundle.getString("userEmail");
     }
 
     public void onBtnThisWeek(View view) {
         Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
+        in.putExtra("userEmail",thisEmail );
         startActivity(in);
     }
     public void onBtnThisMonth(View view) {
         Intent in = new Intent(getApplicationContext(), ExploreMonth.class);
+        in.putExtra("userEmail",thisEmail );
         startActivity(in);
     }
     public void onBtnThisYear(View view) {
         Intent in = new Intent(getApplicationContext(), ExploreYear.class);
+        in.putExtra("userEmail",thisEmail );
         startActivity(in);
     }
     public void onBtnScrollBack(View view) {
         Intent in = new Intent(getApplicationContext(), ScrollBack.class);
+        in.putExtra("userEmail",thisEmail );
         startActivity(in);
     }
     public void onBtnTodayInThePast(View view) {
         Intent in = new Intent(getApplicationContext(), ExploreTodayInThePast.class);
+        in.putExtra("userEmail",thisEmail );
         startActivity(in);
     }
     public void onRandomButton(View view) {
         Intent in = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
+        in.putExtra("userEmail",thisEmail );
         startActivity(in);
     }
     public void onBtnBack(View view) {

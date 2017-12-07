@@ -8,9 +8,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -27,6 +30,11 @@ public class ExploreWeek extends AppCompatActivity {
 
     private List<Highlight> highlights;
     private ListView listViewHighlights;
+    private DatabaseReference userRef;
+    private String thisEmail;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,13 @@ public class ExploreWeek extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
+        mAuth = FirebaseAuth.getInstance().getInstance();
+        user = mAuth.getCurrentUser();
+        userID = user.getEmail();
+
+        Bundle bundle = getIntent().getExtras();
+        thisEmail = bundle.getString("userEmail");
 
         ((TextView) findViewById(R.id.textViewWeek)).setText("Week " + Time.currentWeek());
 
@@ -60,37 +75,47 @@ public class ExploreWeek extends AppCompatActivity {
         Toast.makeText(ExploreWeek.this, "working", Toast.LENGTH_SHORT);
 
         // when have time implement database structure to use startAt(...).limitToFirst(21)
-        Account.getDbRefUserTPCs().child("weeks/" + Time.currentWeek() + "/highlights")
-                .orderByValue().addValueEventListener(new ValueEventListener() {
 
+        userRef = FirebaseDatabase.getInstance().getReference().child("Account");
+
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot accountSnap : dataSnapshot.getChildren()) {
 
-                highlights.clear();
+                    if (accountSnap.child("username").getValue().equals((thisEmail))) {
+                        DataSnapshot highlightSnap = accountSnap.child("timePeriodCollections")
+                                .child("weeks/").child(String.valueOf(Time.currentWeek())).child("highlights");
 
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        highlights.clear();
 
-                    Highlight highlight = postSnapshot.getValue(Highlight.class);
+                        for (DataSnapshot postSnapshot : highlightSnap.getChildren()) {
+
+                            Highlight highlight = postSnapshot.getValue(Highlight.class);
 
                     /*  show only highlights of this week
                         Note: would not have to use this for loop if Firebase was better implemented
                         but not enough time
                      */
-                    if ( (Time.currentYear().compareTo(
-                            Time.convertToYear(highlight.getId()) ) == 0)
+                            if ((Time.currentYear().compareTo(
+                                    Time.convertToYear(highlight.getId())) == 0)
 
-                            && (Time.currentWeek().compareTo(
-                                    Time.convertToWeek(highlight.getId())) == 0) ) {
+                                    && (Time.currentWeek().compareTo(
+                                    Time.convertToWeek(highlight.getId())) == 0)) {
 
-                        highlights.add(highlight);
+                                highlights.add(highlight);
+                            }
+                        }
+
+                        HighlightListAdapter highlightsAdapter =
+                                new HighlightListAdapter(ExploreWeek.this, highlights,
+                                        HighlightListAdapter.hListPurpose.WEEK, thisEmail,userID);
+
+                        listViewHighlights.setAdapter(highlightsAdapter);
                     }
                 }
 
-                HighlightListAdapter highlightsAdapter =
-                        new HighlightListAdapter(ExploreWeek.this, highlights,
-                                                    HighlightListAdapter.hListPurpose.WEEK);
-
-                listViewHighlights.setAdapter(highlightsAdapter);
             }
 
             @Override
@@ -106,30 +131,4 @@ public class ExploreWeek extends AppCompatActivity {
     }
 
 
-/*
-
-        ListView list = findViewById(R.id.highlightWeekList);
-
-        ArrayList<String> exploreWeek = new ArrayList<String>();
-
-        String n1 = getIntent().getExtras().getString("Highlight 1");
-        String n2 = getIntent().getExtras().getString("Highlight 2");
-        String n3 = getIntent().getExtras().getString("Highlight 3");
-
-        exploreWeek.add("Day 1" + "\n" + "\t" + n1 + "\n" + "\t" + n2 + "\n" +"\t" +n3);
-        exploreWeek.add("Day 2");
-        exploreWeek.add("Day 3");
-        exploreWeek.add("Day 4");
-        exploreWeek.add("Day 5");
-        exploreWeek.add("Day 6");
-        exploreWeek.add("Day 7");
-
-
-// Now create adapter
-
-        MyAdapter adapter = new MyAdapter(this, exploreWeek);
-
-// NOw Set This Adapter to listview
-        list.setAdapter(adapter);
-*/
 }

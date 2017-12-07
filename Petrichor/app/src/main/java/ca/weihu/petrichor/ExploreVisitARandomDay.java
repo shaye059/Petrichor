@@ -7,8 +7,12 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -19,6 +23,11 @@ public class ExploreVisitARandomDay extends AppCompatActivity {
 
     private List<Highlight> highlights;
     private ListView listViewHighlights;
+    private DatabaseReference userRef;
+    private String thisEmail;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,11 @@ public class ExploreVisitARandomDay extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
+        mAuth = FirebaseAuth.getInstance().getInstance();
+        user = mAuth.getCurrentUser();
+        userID = user.getUid();
+        Bundle bundle = getIntent().getExtras();
+        thisEmail = bundle.getString("userEmail");
         listViewHighlights = (ListView) findViewById(R.id.listViewVisitARandomDay);
 
         highlights = new ArrayList<>();
@@ -50,50 +64,53 @@ public class ExploreVisitARandomDay extends AppCompatActivity {
     */
     public void roll() {
 
-        Account.getDbRefUserHighlights()
-                .orderByValue().addValueEventListener(new ValueEventListener() {
+        userRef = FirebaseDatabase.getInstance().getReference().child("Account");
+
+        userRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                int counter = 0;
+                for (DataSnapshot accountSnap : dataSnapshot.getChildren()) {
 
-                Random r = new Random();
-                int rNum;
+                    if (accountSnap.child("username").getValue().equals((thisEmail))) {
+                        int counter = 0;
 
-                highlights.clear();
+                        Random r = new Random();
+                        int rNum;
 
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    counter++;
-                    Log.d("VisitARandomDay: 1", String.valueOf(counter));
-                }
+                        highlights.clear();
 
-                rNum = r.nextInt(counter + 1 - 1) + 1;
+                        for (DataSnapshot postSnapshot : accountSnap.child("highlights").getChildren()) {
+                            counter++;
+                            Log.d("VisitARandomDay: 1", String.valueOf(counter));
+                        }
 
-                counter = 0;
+                        rNum = r.nextInt(counter + 1 - 1) + 1;
 
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        counter = 0;
 
-                    Highlight highlight = postSnapshot.getValue(Highlight.class);
+                        for (DataSnapshot postSnapshot : accountSnap.child("highlights").getChildren()) {
 
-                    counter++;
+                            Highlight highlight = postSnapshot.getValue(Highlight.class);
 
-                    Log.d("VisitARandomDay: 2", String.valueOf(counter));
+                            counter++;
 
-                    if ( counter == rNum ) {
+                            Log.d("VisitARandomDay: 2", String.valueOf(counter));
 
-                        highlights.add(highlight);
+                            if (counter == rNum) {
+
+                                highlights.add(highlight);
+                            }
+                        }
+                        HighlightListAdapter highlightsAdapter =
+                                new HighlightListAdapter(ExploreVisitARandomDay.this, highlights,
+                                        HighlightListAdapter.hListPurpose.RANDOMDAY,thisEmail,userID);
+
+                        listViewHighlights.setAdapter(highlightsAdapter);
                     }
                 }
-
-                HighlightListAdapter highlightsAdapter =
-                        new HighlightListAdapter(ExploreVisitARandomDay.this, highlights,
-                                HighlightListAdapter.hListPurpose.RANDOMDAY);
-
-                listViewHighlights.setAdapter(highlightsAdapter);
-            }
-
-            @Override
+            }@Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(ExploreVisitARandomDay.this,
                         "Error retrieving highlights.", Toast.LENGTH_SHORT);

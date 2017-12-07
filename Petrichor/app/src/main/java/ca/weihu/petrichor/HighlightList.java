@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,6 +21,10 @@ public class HighlightList extends AppCompatActivity {
 
     private DatabaseReference dbRefUser;
     private DatabaseReference dbRefUserHighlights;
+    private String thisEmail;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private String userID;
 
 
     List<Highlight> highlights;
@@ -34,6 +40,13 @@ public class HighlightList extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
+        Bundle bundle = getIntent().getExtras();
+        thisEmail = bundle.getString("userEmail");
+
+        mAuth = FirebaseAuth.getInstance().getInstance();
+        user = mAuth.getCurrentUser();
+        userID = user.getUid();
 
         dbRefUser = Account.getDbRefUser();
         dbRefUserHighlights = Account.getDbRefUserHighlights();
@@ -70,7 +83,7 @@ public class HighlightList extends AppCompatActivity {
                 // create adapter
                 HighlightListAdapter highlightsAdapter =
                         new HighlightListAdapter(HighlightList.this, highlights,
-                                                    HighlightListAdapter.hListPurpose.WEEK);
+                                                    HighlightListAdapter.hListPurpose.WEEK, thisEmail,userID);
                 listViewHighlights.setAdapter(highlightsAdapter);
             }
 

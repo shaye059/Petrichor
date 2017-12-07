@@ -11,8 +11,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -22,6 +26,11 @@ public class ExploreMonth extends AppCompatActivity {
 
     private List<Highlight> highlights;
     private ListView listViewHighlights;
+    private DatabaseReference userRef;
+    private String thisEmail;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +43,13 @@ public class ExploreMonth extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
+        Bundle bundle = getIntent().getExtras();
+        thisEmail = bundle.getString("userEmail");
         ((TextView) findViewById(R.id.textViewMonth)).setText(Time.currentMonthFullName());
 
-
-/*  ??? -T.N.
-        ListView list = (ListView) findViewById(R.id.highlightMonthList);
-*/
-
+        mAuth = FirebaseAuth.getInstance().getInstance();
+        user = mAuth.getCurrentUser();
+        userID = user.getUid();
         listViewHighlights = (ListView) findViewById(R.id.listViewThisMonth);
 
         highlights = new ArrayList<>();
@@ -51,34 +60,43 @@ public class ExploreMonth extends AppCompatActivity {
 
         super.onStart();
 
-        Account.getDbRefUserTPCs().child("months/" + Time.currentMonth() + "/highlights")
-                .orderByValue().addValueEventListener(new ValueEventListener() {
+        userRef = FirebaseDatabase.getInstance().getReference().child("Account");
 
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot accountSnap : dataSnapshot.getChildren()) {
 
-                highlights.clear();
+                    if (accountSnap.child("username").getValue().equals((thisEmail))) {
+                        DataSnapshot highlightSnap = accountSnap.child("timePeriodCollections")
+                                .child("months").child(String.valueOf(Time.currentMonth())).child("highlights");
 
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        highlights.clear();
 
-                    Highlight highlight = postSnapshot.getValue(Highlight.class);
+                        for (DataSnapshot postSnapshot : highlightSnap.getChildren()) {
 
-                    // show only highlights of this month
-                    if ( (Time.currentYear().compareTo(
-                            Time.convertToYear(highlight.getId()) ) == 0)
+                            Highlight highlight = postSnapshot.getValue(Highlight.class);
 
-                            && (Time.currentMonth().compareTo(
-                            Time.convertToMonth(highlight.getId()) ) == 0) ) {
+                            //Show only highlights from this month
+                            if ((Time.currentYear().compareTo(
+                                    Time.convertToYear(highlight.getId())) == 0)
 
-                        highlights.add(highlight);
+                                    && (Time.currentMonth().compareTo(
+                                    Time.convertToMonth(highlight.getId())) == 0)) {
+
+                                highlights.add(highlight);
+                            }
+                        }
+
+                        HighlightListAdapter highlightsAdapter =
+                                new HighlightListAdapter(ExploreMonth.this, highlights,
+                                        HighlightListAdapter.hListPurpose.WEEK, thisEmail,userID);
+
+                        listViewHighlights.setAdapter(highlightsAdapter);
                     }
                 }
 
-                HighlightListAdapter highlightsAdapter =
-                        new HighlightListAdapter(ExploreMonth.this, highlights,
-                                HighlightListAdapter.hListPurpose.MONTH);
-
-                listViewHighlights.setAdapter(highlightsAdapter);
             }
 
             @Override
@@ -87,34 +105,11 @@ public class ExploreMonth extends AppCompatActivity {
                         Toast.LENGTH_SHORT);
             }
         });
+
     }
 
     public void onBtnBack(View view) {
         onBackPressed();
     }
 
-
-/*  ??? -T.N.
-        ArrayList<String> exploreMonth = new ArrayList<String>();
-
-        exploreMonth.add("Week 1");
-        exploreMonth.add("Week 2");
-        exploreMonth.add("Week 3");
-        exploreMonth.add("Week 4");
-
-// Now create adapter
-
-        MyAdapter adapter = new MyAdapter(this, exploreMonth);
-
-// NOw Set This Adapter to listview
-        list.setAdapter(adapter);
-
-    }
-
-
-    public void OnWeekButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
-        startActivity(in);
-    }
-*/
 }

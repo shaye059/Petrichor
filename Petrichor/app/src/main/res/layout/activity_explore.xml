@@ -23,7 +23,7 @@
         tools:layout_editor_absoluteY="0dp">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textViewFriend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -44,11 +44,11 @@
             tools:layout_constraintRight_creator="1" />
 
         <Button
-            android:id="@+id/weekButton3"
+            android:id="@+id/highlightsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView5"
+            android:layout_below="@+id/textViewFriend"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
@@ -63,11 +63,11 @@
             tools:layout_editor_absoluteY="190dp" />
 
         <Button
-            android:id="@+id/monthButton2"
+            android:id="@+id/topHighlightsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/weekButton3"
+            android:layout_below="@+id/highlightsButton"
             android:layout_marginTop="14dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/monthButton2"
+            android:layout_below="@+id/topHighlightsButton"
             android:layout_marginTop="18dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
@@ -101,7 +101,7 @@
             tools:layout_editor_absoluteY="207dp" />
 
         <Button
-            android:id="@+id/timeperiodButton"
+            android:id="@+id/scrollBackButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -120,11 +120,11 @@
             tools:layout_editor_absoluteY="207dp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonTodayInPast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/timeperiodButton"
+            android:layout_below="@+id/scrollBackButton"
             android:layout_marginTop="13dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
@@ -144,7 +144,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/button2"
+            android:layout_below="@+id/buttonTodayInPast"
             android:layout_marginTop="18dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"

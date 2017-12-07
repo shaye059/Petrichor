@@ -7,40 +7,35 @@ import android.view.View;
 
 public class HighlightActivity extends AppCompatActivity implements HighlightCollection {
 
-    /* What is this code? -T.N.
-    @Override
-    public Highlight[] returnHighlight() {
-        return null;
-    }*/
+    private String thisEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_highlight);getWindow().getDecorView().setSystemUiVisibility(
+        setContentView(R.layout.activity_highlight);
+        getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
+        Bundle bundle = getIntent().getExtras();
+        thisEmail = bundle.getString("userEmail");
     }
 
     public void OnWeekButton(View view) {
         Intent in = new Intent(getApplicationContext(), ExploreWeek.class);
+        in.putExtra("userEmail",thisEmail );
         startActivity(in);
     }
     public void OnMonthButton(View view) {
         Intent in = new Intent(getApplicationContext(), ExploreMonth.class);
+        in.putExtra("userEmail",thisEmail );
         startActivity(in);
     }
     public void OnYearButton(View view) {
         Intent in = new Intent(getApplicationContext(), ExploreYear.class);
-        startActivity(in);
-    }
-    public void OnSameDayInPastButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreTodayInThePast.class);
-        startActivity(in);
-    }
-    public void OnRandomButton(View view) {
-        Intent in = new Intent(getApplicationContext(), ExploreVisitARandomDay.class);
+        in.putExtra("userEmail",thisEmail );
         startActivity(in);
     }
 

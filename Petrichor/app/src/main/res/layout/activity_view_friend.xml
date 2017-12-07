@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/explore"
-    tools:context="ca.weihu.petrichor.Explore">
+    android:background="@drawable/view_friend"
+    tools:context="ca.weihu.petrichor.ViewFriend">
 
     <Button
-        android:id="@+id/btnBack6"
+        android:id="@+id/btnBack7"
         android:layout_width="89dp"
         android:layout_height="56dp"
         android:background="@android:color/transparent"
@@ -16,8 +16,12 @@
         android:visibility="visible" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayoutFriend"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/textViewFriend"
@@ -26,13 +30,12 @@
 
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="61dp"
+            android:layout_marginTop="58dp"
             android:layout_weight="0.34"
             android:fontFamily="@font/julius_sans"
-            android:text="Scroll Back"
             android:textAlignment="center"
             android:textColor="@android:color/holo_blue_light"
-            android:textSize="70sp"
+            android:textSize="40sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             tools:ignore="HardcodedText,InefficientWeight"
@@ -41,16 +44,17 @@
             tools:layout_constraintRight_creator="1" />
 
         <Button
-            android:id="@+id/weekButton2"
+            android:id="@+id/highlightsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textViewFriend"
-            android:layout_marginTop="54dp"
+            android:layout_marginTop="30dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
-            android:onClick="onBtnThisWeek"
-            android:text="week"
+            android:onClick="onBtnHighlights"
+            android:paddingBottom="12dp"
+            android:text="highlights"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="55sp"
@@ -59,34 +63,18 @@
             tools:layout_editor_absoluteY="190dp" />
 
         <Button
-            android:id="@+id/monthButton"
+            android:id="@+id/scrollBackButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/weekButton2"
-            android:layout_marginTop="14dp"
+            android:layout_below="@+id/highlightsButton"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="50dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/raleway_thin"
-            android:onClick="onBtnThisMonth"
-            android:text="month"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="55sp"
-            tools:ignore="HardcodedText"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="144dp" />
-
-        <Button
-            android:id="@+id/yearButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="35dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/raleway_thin"
-            android:onClick="onBtnThisYear"
-            android:text="year"
+            android:onClick="onBtnScrollBack"
+            android:paddingBottom="12dp"
+            android:text="scroll back "
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="55sp"
@@ -94,6 +82,43 @@
             tools:layout_editor_absoluteX="64dp"
             tools:layout_editor_absoluteY="207dp" />
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/buttonTodayInPast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/scrollBackButton"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/raleway_thin"
+            android:onClick="onBtnTodayInThePast"
+            android:paddingBottom="12dp"
+            android:text="today in past "
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="55sp"
+            tools:ignore="HardcodedText"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="207dp" />
 
+        <Button
+            android:id="@+id/randomDayButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/buttonTodayInPast"
+            android:layout_marginTop="40dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/raleway_thin"
+            android:onClick="onBtnRandomDay"
+            android:text="random day"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="55sp"
+            tools:ignore="HardcodedText"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="645dp" />
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

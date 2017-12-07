@@ -225,6 +225,7 @@ public class NavBar extends AppCompatActivity
 
     public void onExploreButton(View view) {
         Intent intent = new Intent(getApplicationContext(), Explore.class);
+        intent.putExtra("userEmail",account.getusername());
         startActivity(intent);
     }
 

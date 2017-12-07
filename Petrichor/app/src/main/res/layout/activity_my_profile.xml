@@ -15,6 +15,7 @@
         android:onClick="onBtnBack" />
 
     <RelativeLayout
+        android:id="@+id/my_profile_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +56,8 @@
             android:hint="Enter your name"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/nameBox"
@@ -69,17 +71,13 @@
         <TextView
             android:id="@+id/textViewEmail"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/nameBox"
-            android:layout_marginTop="25dp"
-            android:clickable="false"
-            android:paddingBottom="@dimen/nav_header_height"
+            android:layout_marginTop="31dp"
             android:textAlignment="center"
-            android:textColor="@android:color/background_light"
-            android:textColorLink="@color/common_google_signin_btn_text_dark_default"
-            android:textSize="24sp"
-            android:visibility="visible" />
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/emailBox"
@@ -87,7 +85,29 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewEmail"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
             android:text="Email"
+            android:textColor="@android:color/background_light" />
+
+        <TextView
+            android:id="@+id/textViewFriends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/emailBox"
+            android:layout_marginTop="30dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/friendsBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewFriends"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Friends"
             android:textColor="@android:color/background_light" />
 
         <Button

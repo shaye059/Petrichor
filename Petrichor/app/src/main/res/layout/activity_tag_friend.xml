@@ -2,11 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pageLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/friends"
-    tools:context="ca.weihu.petrichor.Friends">
+    android:background="@drawable/tag_friend"
+    tools:context="ca.weihu.petrichor.TagFriend">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,11 +28,11 @@
             android:layout_below="@+id/btnBack12"
             android:fontFamily="@font/julius_sans"
             android:gravity="center_horizontal"
-            android:text="friends"
+            android:text="Tag A Friend"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@android:color/holo_blue_light"
-            android:textSize="75sp"
+            android:textSize="50sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -86,5 +85,4 @@
         </ListView>
 
     </RelativeLayout>
-
 </android.support.constraint.ConstraintLayout>

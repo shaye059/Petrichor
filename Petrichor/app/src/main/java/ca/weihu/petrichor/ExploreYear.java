@@ -7,8 +7,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -18,6 +22,11 @@ public class ExploreYear extends AppCompatActivity {
 
     private List<Highlight> highlights;
     private ListView listViewHighlights;
+    private DatabaseReference userRef;
+    private String thisEmail;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,13 @@ public class ExploreYear extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
+        Bundle bundle = getIntent().getExtras();
+        thisEmail = bundle.getString("userEmail");
+
+        mAuth = FirebaseAuth.getInstance().getInstance();
+        user = mAuth.getCurrentUser();
+        userID = user.getUid();
 
         ((TextView) findViewById(R.id.textViewYear)).setText(Time.currentYear());
 
@@ -40,39 +56,49 @@ public class ExploreYear extends AppCompatActivity {
 
         super.onStart();
 
-        Account.getDbRefUserTPCs().child("years/" + Time.currentYear() + "/highlights")
-                .orderByValue().addValueEventListener(new ValueEventListener() {
+        userRef = FirebaseDatabase.getInstance().getReference().child("Account");
 
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot accountSnap : dataSnapshot.getChildren()) {
 
-                highlights.clear();
+                    if(accountSnap.child("username").getValue().equals((thisEmail))){
+                        DataSnapshot highlightSnap = accountSnap.child("timePeriodCollections")
+                                .child("years").child(String.valueOf(Time.currentYear())).child("highlights");
 
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        highlights.clear();
 
-                    Highlight highlight = postSnapshot.getValue(Highlight.class);
+                        for (DataSnapshot postSnapshot : highlightSnap.getChildren()) {
 
-                    // show only highlights of this year
-                    if ( (Time.currentYear().compareTo(
-                            Time.convertToYear(highlight.getId()) ) == 0) ) {
+                            Highlight highlight = postSnapshot.getValue(Highlight.class);
 
-                        highlights.add(highlight);
+
+                            // show only highlights of this year
+                            if ( (Time.currentYear().compareTo(
+                                    Time.convertToYear(highlight.getId()) ) == 0) ) {
+
+                                highlights.add(highlight);
+                            }
+                        }
+
+                        HighlightListAdapter highlightsAdapter =
+                                new HighlightListAdapter(ExploreYear.this, highlights,
+                                        HighlightListAdapter.hListPurpose.YEAR, thisEmail,userID);
+
+                        listViewHighlights.setAdapter(highlightsAdapter);
                     }
                 }
 
-                HighlightListAdapter highlightsAdapter =
-                        new HighlightListAdapter(ExploreYear.this, highlights,
-                                HighlightListAdapter.hListPurpose.YEAR);
-
-                listViewHighlights.setAdapter(highlightsAdapter);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(ExploreYear.this, "Error retrieving highlights.",
                         Toast.LENGTH_SHORT);
             }
         });
+
     }
 
     public void onBtnBack(View view) {
