@@ -42,7 +42,7 @@ public class ExploreYear extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance().getInstance();
         user = mAuth.getCurrentUser();
-        userID = user.getUid();
+        userID = user.getEmail();
 
         ((TextView) findViewById(R.id.textViewYear)).setText(Time.currentYear());
 

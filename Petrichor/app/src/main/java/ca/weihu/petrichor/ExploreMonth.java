@@ -49,7 +49,7 @@ public class ExploreMonth extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance().getInstance();
         user = mAuth.getCurrentUser();
-        userID = user.getUid();
+        userID = user.getEmail();
         listViewHighlights = (ListView) findViewById(R.id.listViewThisMonth);
 
         highlights = new ArrayList<>();

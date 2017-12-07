@@ -156,7 +156,7 @@ public class TagFriend extends AppCompatActivity {
                             //not already been tagged
 
                             if(singleAccount.getValue(Account.class).getusername().equals(account.getusername())
-                                    && !singleAccount.child("taggedhighlights").hasChild(highlightID)){
+                                    && !singleAccount.child("taggedhighlights").hasChild(highlightID+userID)){
                                 DatabaseReference dbRefTag = FirebaseDatabase.getInstance()
                                         .getReference( "Account/" + singleAccount.getKey() + "/taggedhighlights/" + highlightID + userID);
 
@@ -167,7 +167,7 @@ public class TagFriend extends AppCompatActivity {
                                 context.recreate();
                                 onBackPressed();
                             }
-                            if(singleAccount.child("taggedhighlights").hasChild(highlightID)){
+                            if(singleAccount.child("taggedhighlights").hasChild(highlightID+userID)){
                                 Toast.makeText(context, "Friend Already Tagged", Toast.LENGTH_LONG).show();
                             }
                         }
