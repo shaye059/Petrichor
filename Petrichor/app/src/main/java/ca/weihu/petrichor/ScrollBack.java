@@ -40,7 +40,7 @@ public class ScrollBack extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance().getInstance();
         user = mAuth.getCurrentUser();
-        userID = user.getUid();
+        userID = user.getEmail();
 
         Bundle bundle = getIntent().getExtras();
         thisEmail = bundle.getString("userEmail");

@@ -43,7 +43,7 @@ public class ExploreTodayInThePast extends AppCompatActivity  {
         listViewHighlights = (ListView) findViewById(R.id.listViewTodayInThePast);
         mAuth = FirebaseAuth.getInstance().getInstance();
         user = mAuth.getCurrentUser();
-        userID = user.getUid();
+        userID = user.getEmail();
         highlights = new ArrayList<>();
     }
 

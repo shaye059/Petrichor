@@ -114,7 +114,7 @@ public class HighlightListAdapter extends ArrayAdapter<Highlight> {
 
         textViewHighlight.setText(highlight.getDescription());
 
-        if(!currentUser.equals(thisEmail)){
+        if(!currentUser.equals(thisEmail) || textViewDate.getText().equals("No Highlights to display." )){
             share.setVisibility(View.GONE);
         }else {
             share.setOnClickListener(new View.OnClickListener() {
