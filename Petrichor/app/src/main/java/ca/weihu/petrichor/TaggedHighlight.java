@@ -5,7 +5,7 @@ import com.google.firebase.database.DatabaseReference;
 /**
  * Created by spenc on 2017-12-06.
  * In theory this should extend Highlight but it doesn't write to the database in that situation for
- * some reason so it'll just be a separate object with it's own adapter. Gotta love firebase.
+ * some reason so it'll just be a separate object with it's own adapter.
  */
 
 

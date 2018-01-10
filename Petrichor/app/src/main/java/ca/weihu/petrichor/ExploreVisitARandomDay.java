@@ -81,10 +81,11 @@ public class ExploreVisitARandomDay extends AppCompatActivity {
 
                         highlights.clear();
 
-                        for (DataSnapshot postSnapshot : accountSnap.child("highlights").getChildren()) {
+                        try{
+                            for (DataSnapshot postSnapshot : accountSnap.child("highlights").getChildren()) {
                             counter++;
                             Log.d("VisitARandomDay: 1", String.valueOf(counter));
-                        }
+                            }
 
                         rNum = r.nextInt(counter + 1 - 1) + 1;
 
@@ -102,12 +103,18 @@ public class ExploreVisitARandomDay extends AppCompatActivity {
 
                                 highlights.add(highlight);
                             }
+                        }}catch (java.lang.IllegalArgumentException exception){
+                            Highlight none = new Highlight(null, "Sorry, we couldn't find any highlights :(");
+
+                            highlights.add(none);
                         }
                         HighlightListAdapter highlightsAdapter =
                                 new HighlightListAdapter(ExploreVisitARandomDay.this, highlights,
                                         HighlightListAdapter.hListPurpose.RANDOMDAY,thisEmail,userID);
 
                         listViewHighlights.setAdapter(highlightsAdapter);
+
+
                     }
                 }
             }@Override

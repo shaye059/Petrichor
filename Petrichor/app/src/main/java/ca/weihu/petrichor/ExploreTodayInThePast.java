@@ -62,11 +62,20 @@ public class ExploreTodayInThePast extends AppCompatActivity  {
 
                     if (accountSnap.child("username").getValue().equals((thisEmail))) {
 
-                        Highlight none = new Highlight(null, "Submit your highlights today and"
-                                + " next year this section won't be empty!");
+                        Highlight none;
+
+                        if(thisEmail.equals(userID)) {
+                            none = new Highlight(null, "Submit your highlights today and"
+                                    + " next year this section won't be empty!");
+                        }
+                        else{
+                            none = new Highlight(null, "Tell your friend to submit a highlight today and"
+                                    + " next year this section won't be empty!");
+                        }
 
                         highlights.clear();
 
+                        try{
                         for (DataSnapshot postSnapshot : accountSnap.child("highlights").getChildren()) {
 
                             Highlight highlight = postSnapshot.getValue(Highlight.class);
@@ -82,12 +91,10 @@ public class ExploreTodayInThePast extends AppCompatActivity  {
                                     Time.convertToDay(highlight.getId())) == 0)) {
 
                                 highlights.add(highlight);
-                            }
-
-                            if (highlights.isEmpty()) {
+                            }}}
+                            catch(java.lang.IllegalArgumentException exception1){
                                 highlights.add(none);
                             }
-                        }
 
                         HighlightListAdapter highlightsAdapter =
                                 new HighlightListAdapter(ExploreTodayInThePast.this, highlights,

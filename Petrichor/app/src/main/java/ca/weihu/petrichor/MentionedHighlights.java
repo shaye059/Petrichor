@@ -64,6 +64,9 @@ public class MentionedHighlights extends AppCompatActivity implements HighlightC
                     TaggedHighlight highlight = postSnapshot.getValue(TaggedHighlight.class);
                     highlights.add(highlight);
                 }
+                if(highlights.size() == 0){
+                    highlights.add(new TaggedHighlight(null, "No tagged highlights to show :(", null));
+                }
 
                 final TaggedHighlightListAdapter highlightsAdapter =
                         new TaggedHighlightListAdapter(MentionedHighlights.this, highlights,user.getEmail(), userID);
