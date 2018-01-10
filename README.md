@@ -1,6 +1,6 @@
 # Petrichor
 
-A journal-keeping social media app aimed at encouraging users to reflect on the past. 
+A journal-keeping social media app aimed at encouraging users to reflect on memories. 
 
 This app was created for a class project and therefore we were under a very restricted timeline while creating it.
 For most of us it was our first android application and first time using a database. The whole development process 
