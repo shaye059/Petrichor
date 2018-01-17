@@ -96,6 +96,13 @@ public class ExploreTodayInThePast extends AppCompatActivity  {
                                 highlights.add(none);
                             }
 
+                        //This is a temporary fix to the page not displaying that there are no highlights. Not quite
+                        //sure why it isn't raising an exception but will look into it deeper in the future - Spencer
+
+                        if(highlights.size()==0){
+                                highlights.add(none);
+                        }
+
                         HighlightListAdapter highlightsAdapter =
                                 new HighlightListAdapter(ExploreTodayInThePast.this, highlights,
                                         HighlightListAdapter.hListPurpose.SCROLLBACK, thisEmail,userID);
