@@ -23,5 +23,7 @@ they get tagged in a highlight. This will be changed before the next version. Ot
 -reorganizing the Explore menu (group together time periods)
 -general improvements with fullscreen and flow while moving through the app
 
+Video of current functionalities:
+https://www.youtube.com/watch?v=yw5G4OJAkqo&t=21s
 
 
