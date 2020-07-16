@@ -3,14 +3,11 @@
 A journal-keeping social media app aimed at encouraging users to reflect on memories. 
 
 This app was created for a class project and therefore we were under a very restricted timeline while creating it.
-For most of us it was our first android application and first time using a database. The whole development process 
-was under 3 months and we were a team of 5. We plan on continuing work on the app even though the project has been 
-submitted.
+For most of us it was our first android application and first time using a database. The entire development process 
+was under 3 months.
 
-Version 1.0: This app is still in a beta version. Most parts work, however there are some crashes which are assumed
-to be due to lag between the database and the app. If this is the case, adding some simple try catch statements with
-a slight wait period should fix these issues. There are also some formatting issues with text on certain API's which
-will also be fixed.
+Version 1.0: This app is still in a beta version. Most parts work, however there are some formatting issues with text on 
+certain devices.
 
 It should also be noted that in the current version, adding a friend works as following someone. The person who has
 added the other can view their highlights, but the person who has been added cannot see who has added them unless
