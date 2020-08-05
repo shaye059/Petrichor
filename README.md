@@ -1,5 +1,9 @@
 # Petrichor
 
+Video of app features and databse interactions: https://www.youtube.com/watch?v=yw5G4OJAkqo&t=21s
+
+#### About the app
+
 A journal-keeping social media app aimed at encouraging users to reflect on memories. 
 
 This app was created for a class project and therefore we were under a very restricted timeline while creating it.
@@ -20,7 +24,5 @@ they get tagged in a highlight. This will be changed before the next version. Ot
 -reorganizing the Explore menu (group together time periods)
 -general improvements with fullscreen and flow while moving through the app
 
-Video of current functionalities:
-https://www.youtube.com/watch?v=yw5G4OJAkqo&t=21s
 
 
